@@ -17,6 +17,7 @@ const submit = (e) =>{
     e.preventDefault();
   
 }
+/*pruebadaniel */
 class Login extends Component {
 
   constructor(props){
