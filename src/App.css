@@ -1,0 +1,87 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  box-sizing: border-box;
+  position: relative;
+  padding-bottom: 3em;
+  min-height: 100vh;
+}
+
+/*Scroll personalizado*/
+body::-webkit-scrollbar {
+  width: 10px;
+  background-color: #1b2631;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: #f0ad4e;
+  border-radius: 5px;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+}
+
+.heroQ {
+  text-align: center;
+  background: #273746;
+  color: #fff;
+  padding-top: 25px;
+  padding-bottom: 10px;
+}
+.hero_paragraph {
+  margin-bottom: 20px;
+}
+
+.contenedor-principal {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
+
+.logoMenu {
+  width: 80%;
+}
+.iconMenu {
+  width: 50px;
+  height: 50px;
+  background-color: #eee;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 39px;
+}
+
+.featurette-divider {
+  margin: 5rem 0;
+}
+.hero-home {
+  background-image: linear-gradient(180deg, #0000008c 0%, #0000008c 100%),
+    url(./images/estudiando.jpg);
+  background-size: cover;
+  background-attachment: fixed;
+  height: 450px;
+  clip-path: polygon(0 0, 100% 0, 100% 80%, 50% 95%, 0 80%);
+}
+.mask {
+  background-color: rgba(0, 0, 0, 0.514);
+  position: relative;
+}
+.boton-home {
+  border-color: black;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.footercolor {
+  background-color: rgba(0, 0, 0, 0.2);
+}
