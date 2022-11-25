@@ -3,5 +3,5 @@
 
 Instrucciones:
 
-1. Clonar los repositorios indicados anteriormente en una misma carpeta.
+1. Una vez clonado este repositorio abrir el proyecto en su IDE.
 2. Instalar dependencias con el comando ```npm install```.
