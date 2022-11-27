@@ -45,7 +45,7 @@ function Menu() {
                             temario = "Álgebra y Funciones"
                             imagen = {algebra}
                             urlEnsayo = "error"
-                            score = "0"
+                            score = "error"
                             puntosTotal = "10"
                             estadoBoton = "disabled"
                         />
@@ -54,7 +54,7 @@ function Menu() {
                             temario = "Geometría"
                             imagen = {geometria}
                             urlEnsayo = "error"
-                            score = "0"
+                            score = "error"
                             puntosTotal = "10"
                             estadoBoton = "disabled"
                         />  
@@ -63,7 +63,7 @@ function Menu() {
                             temario = "Probabilidad y Estadística"
                             imagen = {probabilidad}
                             urlEnsayo = "error"
-                            score = "0"
+                            score = "error"
                             puntosTotal = "10"
                             estadoBoton = "disabled"
                         />  
