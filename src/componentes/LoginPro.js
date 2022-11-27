@@ -45,10 +45,11 @@ class LoginPro extends React.Component{
       }
 
     manejadorBoton=()=>{
+        if(estadoCaptcha==true){
         let url = Apiurl;
         axios .post(url,this.state.form)
         .then(response =>{
-            if(estadoCaptcha==true){
+            
                 if(response.data.status === "ok"){
                     console.log(response)
                     localStorage.setItem("token",response.data.token.refresh)
@@ -67,19 +68,34 @@ class LoginPro extends React.Component{
                         errorMsg : response.data.errors
                     })
                 }
-            }else{
-                console.log("error")
-                    this.setState({
-                        error : true,
-                        errorMsg : "Por favor acepte el captcha"
-                    })
-            }    
+                
         }).catch(error =>{
+           
+            console.log(error.response.data.errors)
+            if(error.response.data.errors === 'Email o contraseña invalidos')
             this.setState({
                 error : true,
-                errorMsg : "Usuario o contraseña incorrecta"
+                errorMsg : "Email o contraseña invalidos"
             })
+            if(error.response.data.errors.email[0] || error.response.data.password[0] === 'Este campo no puede estar en blanco.')
+            this.setState({
+                error : true,
+                errorMsg : "Rellene todos los campos"
+            })
+            if(error.response.data.errors.email[0] === 'Introduzca una dirección de correo electrónico válida.')
+            this.setState({
+                error : true,
+                errorMsg : "Introduzca una dirección de correo electrónico válida."
+            })
+            
         })
+        }else{
+            console.log("error")
+                this.setState({
+                    error : true,
+                    errorMsg : "Por favor acepte el captcha"
+                })
+        }
     }
 
     render(){

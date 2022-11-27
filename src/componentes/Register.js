@@ -21,7 +21,9 @@ class Register extends Component{
             username:'',
             password: '',
             password2:''
-        }
+        },
+        error:false,
+        errorMsg:""
     }
     manejadorSubmit=e=>{
         e.preventDefault();
@@ -38,25 +40,65 @@ class Register extends Component{
       
     }
      signUp = () => {  
-        return new Promise((resolve, reject) => {  
-            const instance = axios.create({  
-                baseURL: baseUrl,  
-                headers: {  
-                    'Content-Type': 'application/json'  
-                }  
-            });  
-            instance.post('register/', this.state.form)  
-            .then(r => {  
-                localStorage.setItem(tokenName, JSON.stringify(r.data.key));  
-                resolve(r.data);  
-                if(r.data){
-                    window.location.href = "./Login";
-                }
-            }).catch(e => {  
-                console.log(e);  
-                reject(e.response);  
+        if(this.state.form.username ===""){
+            this.setState({
+                error : true,
+                errorMsg : "El nombre de usuario es un campo obligatorio"
+            })
+        }
+        else{
+            return new Promise((resolve, reject) => {  
+                const instance = axios.create({  
+                    baseURL: baseUrl,  
+                    headers: {  
+                        'Content-Type': 'application/json'  
+                    }  
+                });  
+                instance.post('register/', this.state.form)  
+                .then(r => {  
+                    localStorage.setItem(tokenName, JSON.stringify(r.data.key));  
+                    resolve(r.data);  
+                    if(r.data){
+                        window.location.href = "./Login";
+                    
+                    }else
+                        console.log(r.data.password)
+                }).catch(e => {  
+                    console.log(e.response.data.password)
+                   /* if(e.response.data.email[0]==="Ya existe users con este email."){
+                        this.setState({
+                            error : true,
+                            errorMsg : "Ya existe usuarios con este email."
+                        })
+                    }
+                    if(e.response.data.email[0]==="Este campo no puede estar en blanco."){
+                        this.setState({
+                            error : true,
+                            errorMsg : "El email es un campo obligatorio"
+                        })
+                    }*/
+                    if(e.response.data.password==="Las contraseñas deben coincidir."){
+                        this.setState({
+                            error : true,
+                            errorMsg : "Las contraseñas no coinciden"
+                        })
+                    }
+                    if(e.response.data.email[0]==="Este campo no puede estar en blanco."){
+                        this.setState({
+                            error : true,
+                            errorMsg : "El email es un campo obligatorio"
+                        })
+                    }  
+                    if(e.response.data.email[0]==="Ya existe users con este email."){
+                        this.setState({
+                            error : true,
+                            errorMsg : "Ya existe usuarios con este email."
+                        })
+                    }
+                    
+                }); 
             }); 
-        }); 
+        }    
     };  
 
 
@@ -100,7 +142,7 @@ class Register extends Component{
         <div class="input-contenedor ">
            
            <FontAwesomeIcon className='icon' icon={ faUser} />
-           <input name="username" id="" type="text" onChange={this.manejadorChange} placeholder="Nombre" />
+           <input name="username" id="" type="text" onChange={this.manejadorChange} placeholder="Nombre de usuario" />
     
        </div>
             <div className="input-contenedor">
@@ -122,6 +164,11 @@ class Register extends Component{
             
             </div>
             <button type="button" id="login" className="button" onClick={this.signUp}>Registrate</button>
+            {this.state.error === true &&
+                                <div className="alert alert-danger mt-3" role="alert">
+                                    {this.state.errorMsg}
+                                </div>
+                            }
             <p className='pLogin'>Al registrarte, aceptas nuestras Condiciones de uso y Política de privacidad.</p>
             <p className='pLogin'>¿Ya tienes una cuenta? <a className="link" href='./Login' >Iniciar Sesion</a></p>
         </div>

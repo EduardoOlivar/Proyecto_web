@@ -64,11 +64,41 @@ function Menu() {
                             puntosTotal = "10"
                             estadoBoton = "disabled"
                         />  
-                   
-                </div>    
+                        
+                            <div className="col-md-4 mt-3">
+                                <div className='row  '>
+                                <div className="card p-3 mb-2">
+                                    <div className="d-flex justify-content-between">
+                                        <div className="d-flex flex-row align-items-center">
+                                            <div className="iconMenu"> <img className='logoMenu' src="" alt="" /> </div>
+                                            <div className="ms-2 c-details ">
+                                                <h3 className="mb-0 ">Crear Ensayo</h3> 
+                                            </div>
+                                        </div>
+                                    </div>        
+                                </div>
+                                </div>
+                                <div className='row mt-5 '>
+                                <div className="card p-3 mb-2">
+                                    <div className="d-flex justify-content-between">
+                                        <div className="d-flex flex-row align-items-center">
+                                            <div className="iconMenu"> <img className='logoMenu' src="" alt="" /> </div>
+                                            <div className="ms-2 c-details">
+                                                <h3 className="mb-0">Revisar Historial</h3> 
+                                            </div>
+                                        </div>
+                                    </div>        
+                                </div>
+                                </div>
+                            </div> 
+                               
+                        </div>   
+                        
+                 
             
             </main>
         </div>
+        
           
     );
 }
