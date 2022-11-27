@@ -51,7 +51,7 @@ class Login extends Component {
       axios.post(url,this.state.form)
       .then(response =>{
         if(estadoCaptcha==true){
-            if(response.data.status ==="status"){
+            if(response.token){
               localStorage.setItem("token,response.data.result.token");
               window.location.href = "./Menu";
             
@@ -131,7 +131,7 @@ class Login extends Component {
       
         <body className="cuerpoLogin">
          <NavbarHome/> 
-    <form className="formulario" id="formularioL" onSubmit={submit}>
+        <form className="formulario" id="formularioL" onSubmit={submit}>
         <h1 className="hero_register">Iniciar Sesión</h1>
         <div className="contenedor ">
         

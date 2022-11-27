@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, startTransition } from 'react';
 import '../hojas-de-estilo/Login.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -9,8 +9,8 @@ import NavbarHome from './NavbarHome';
 
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
-
-const baseUrl="http://127.0.0.1:8000/api/register/";
+const tokenName = 'user_uaeh_token';
+const baseUrl="http://127.0.0.1:8000/api/";
 
 
 class Register extends Component{ 
@@ -18,49 +18,60 @@ class Register extends Component{
     state={
         form:{
             email:'',
-            nombre:'',
+            username:'',
             password: '',
             password2:''
         }
     }
-    handleChange=async e=>{
-        await this.setState({
-            form:{
-                ...this.state.form,
-                [e.target.name]: e.target.value
-            }
-        });
-        console.log(this.state.form)
+    manejadorSubmit=e=>{
+        e.preventDefault();
     }
-
-
-    Registrarse=async()=>{
-        let usuario={
-            
-            username: this.state.form.nombre,
-            email: this.state.form.email,
-            password: this.state.form.password,
-            password2: this.state.form.password2,
-            score: 0
-          }
-        await axios.post(baseUrl, usuario)
-        window.location.href = "./Login"
-
-     } 
-
-    ComprobarRegistro=async()=>{
-        
-        await axios.post(baseUrl, {params: {mail: this.state.form.email}})
-        .then(response=>{
-            return response.data;
-        })
-        .then(response=>{
-            if(response.length>0){
-                alert('Este correo ya esta registrado');
-            }else{
-                this.Registrarse();
+    manejadorChange = async e=>{
+        await this.setState({
+            form: {
+              ...this.state.form,
+              [e.target.name]: e.target.value
             }
+            
         })
+        console.log(this.state.form)
+      
+    }
+     signUp = () => {  
+        return new Promise((resolve, reject) => {  
+            const instance = axios.create({  
+                baseURL: baseUrl,  
+                headers: {  
+                    'Content-Type': 'application/json'  
+                }  
+            });  
+            instance.post('register/', this.state.form)  
+            .then(r => {  
+                localStorage.setItem(tokenName, JSON.stringify(r.data.key));  
+                resolve(r.data);  
+                if(r.data){
+                    window.location.href = "./Login";
+                }
+            }).catch(e => {  
+                console.log(e);  
+                reject(e.response);  
+            }); 
+        }); 
+    };  
+
+
+
+     manejadorBoton=()=>{
+        
+         axios.post(baseUrl,this.state.form )
+        .then(response=>{
+            
+                console.log(response)
+            
+       
+            
+        })
+       
         .catch(error=>{
             console.log(error);
         })
@@ -89,28 +100,28 @@ class Register extends Component{
         <div class="input-contenedor ">
            
            <FontAwesomeIcon className='icon' icon={ faUser} />
-           <input name="nombre" id="" type="text" onChange={this.handleChange} placeholder="Nombre" />
+           <input name="username" id="" type="text" onChange={this.manejadorChange} placeholder="Nombre" />
     
        </div>
             <div className="input-contenedor">
             <FontAwesomeIcon className='icon' icon={ faEnvelope} />
-            <input name="email" id="emailL" type="text" onChange={this.handleChange} placeholder="Correo Electronico"/>
+            <input name="email" id="emailL" type="text" onChange={this.manejadorChange} placeholder="Correo Electronico"/>
             
             </div>
             
             
             <div className="input-contenedor">
             <FontAwesomeIcon className='icon' icon={ faKey} />
-            <input type="password" name="password" id="password1" onChange={this.handleChange} placeholder="Contraseña"/>
+            <input type="password" name="password" id="password1" onChange={this.manejadorChange} placeholder="Contraseña"/>
             
             </div>
 
             <div className="input-contenedor">
             <FontAwesomeIcon className='icon' icon={ faKey} />
-            <input type="password" name="password" id="password2" onChange={this.handleChange} placeholder="Confirma tu contraseña"/>
+            <input type="password" name="password2" id="password2" onChange={this.manejadorChange} placeholder="Confirma tu contraseña"/>
             
             </div>
-            <button type="button" id="login" className="button" onClick={()=>this.ComprobarRegistro()}>Registrate</button>
+            <button type="button" id="login" className="button" onClick={this.signUp}>Registrate</button>
             <p className='pLogin'>Al registrarte, aceptas nuestras Condiciones de uso y Política de privacidad.</p>
             <p className='pLogin'>¿Ya tienes una cuenta? <a className="link" href='./Login' >Iniciar Sesion</a></p>
         </div>

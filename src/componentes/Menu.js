@@ -2,7 +2,12 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Cookies from 'universal-cookie';
 import mate from '../images/matematicas.png'
+import numeros from '../images/numeros.png'
 import Navbar from './Navbar';
+import NombreEnsayo from './NombreEnsayo';
+import algebra from '../images/algebra.png';
+import geometria from '../images/geometria.png';
+import probabilidad from '../images/probabilidad.png';
 
 
 const cookies = new Cookies();
@@ -10,41 +15,60 @@ function Menu() {
 
     return (
         <div >
-            <Navbar/>
-        <main class="container" >
+            <Navbar
+      
+            />
+            <main class="container  mt-5 mb-3" >
+                <div className='row'>
+                    
+                        <NombreEnsayo
+                            temario = "Eje general"
+                            imagen = {mate}
+                            urlEnsayo = "Pregunta"
+                            score = "scoreGeneral"
+                            puntosTotal = "5"
+                        />
+                    
+                    
+                        <NombreEnsayo
+                            temario = "Números"
+                            imagen = {numeros}
+                            urlEnsayo = "EnsayoNumeros"
+                            score = "scoreNumeros"
+                            puntosTotal = "10"
+                        />
+
+                        <NombreEnsayo
+                            temario = "Álgebra y Funciones"
+                            imagen = {algebra}
+                            urlEnsayo = "error"
+                            score = "0"
+                            puntosTotal = "10"
+                            estadoBoton = "disabled"
+                        />
+
+                        <NombreEnsayo
+                            temario = "Geometría"
+                            imagen = {geometria}
+                            urlEnsayo = "error"
+                            score = "0"
+                            puntosTotal = "10"
+                            estadoBoton = "disabled"
+                        />  
+
+                        <NombreEnsayo
+                            temario = "Probabilidad y Estadística"
+                            imagen = {probabilidad}
+                            urlEnsayo = "error"
+                            score = "0"
+                            puntosTotal = "10"
+                            estadoBoton = "disabled"
+                        />  
+                   
+                </div>    
             
-        <div class="container mt-5 mb-3">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="card p-3 mb-2">
-                        <div class="d-flex justify-content-between">
-                            <div class="d-flex flex-row align-items-center">
-                                <div class="iconMenu"> <img className='logoMenu' src={mate} alt="" /> </div>
-                                 <div class="ms-2 c-details">
-                                     <h6 class="mb-0">Eje General</h6> <span>1 days ago</span>
-                                 </div>
-                            </div>
-                            <div class="badge"> <span>Ensayo</span> </div>
-                       </div>
-                        <div class="mt-4">
-                             <h3 class="heading">Matemática(M1)<br/>Eje General</h3> 
-                             <div class="mt-4"><a
-                                class="btn btn-dark btn-outline-secondary text-white btn-lg m-2"
-                                onClick={() => (window.location.href = "./Menu/Pregunta")}
-                            
-                                >Iniciar</a>
-                                </div>
-                          
-                      <div class="mt-4">
-                      
-                             
-                              <div class="mt-3"> <span class="text1">{cookies.get('scoree')  } Puntos <span class="text2">de 5 puntos</span></span> </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>    </div>    </div>
-      </main>
-      </div>
+            </main>
+        </div>
           
     );
 }

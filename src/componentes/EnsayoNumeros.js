@@ -1,6 +1,6 @@
 import React from "react";
 import "../hojas-de-estilo/Pregunta.css";
-import preguntas from "../preguntas";
+import preguntas from "../ensayoNumeros";
 import { useState, useEffect  } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.js';
@@ -22,9 +22,10 @@ import HeadEnsayo from "./HeadEnsayo";
 import Cookies from 'universal-cookie';
 import axios from 'axios';
 
+
 const Apiurl = "http://127.0.0.1:8000/questions_alternative/?subject=numeros";
 const cookies = new Cookies();
-function Pregunta(){
+function EnsayoNumeros(){
   
  
   const componentDidMount=()=>{
@@ -93,13 +94,13 @@ const preguntaCorrectaOrNot = (qna,j) =>{
     }, [tiempoRestante]);
 
   function handleAnswerSubmit( isCorrect, e,res,tituloP) {
-
+        
       setRespuesta(current => [...current, res]);
       
       if (isCorrect){ 
         setTituloPregunta(current => [...current, tituloP]);
         setPuntuacion(puntuación + 1);
-        cookies.set('scoreGeneral',puntuación + 1 , { path: '/' });
+        cookies.set('scoreNumeros',puntuación + 1 , { path: '/' });
       }
         else{
           setTituloPregunta(current => [...current, "mala"]);
@@ -165,7 +166,7 @@ const preguntaCorrectaOrNot = (qna,j) =>{
  
       
             <div>
-              {
+            {
                 preguntas.map((item,j)=>(
               <Accordion
                 disableGutters
@@ -175,10 +176,10 @@ const preguntaCorrectaOrNot = (qna,j) =>{
                 <AccordionSummary expandIcon={<ExpandCircleDownIcon
                   {...preguntaCorrectaOrNot(item,j)}/>}
                 >
-                  <Typography>{item.numeroPregunta}. {item.titulo}</Typography>
+                  <Typography>{item.numeroPregunta}. <InlineMath math={item.titulo}/></Typography>
                 </AccordionSummary>
                 <AccordionDetails >
-                  {DatosPreguntas.preguntas[j].opciones.map((respuesta,i) => (
+                  {preguntas[j].opciones.map((respuesta,i) => (
                     <Typography {...markCorrectOrNot(item, i,j)}>
                       <label  className="contenedor-alternativa-pregunta-respuesta "  disableRipple key={respuesta.textoRespuesta}  >
                         <b>{String.fromCharCode(65+i) +  " . "}</b><InlineMath math={respuesta.textoRespuesta}/>
@@ -192,7 +193,7 @@ const preguntaCorrectaOrNot = (qna,j) =>{
               </Accordion>))
               }
 
-    </div>
+            </div>
    
   
 </div>
@@ -200,7 +201,7 @@ const preguntaCorrectaOrNot = (qna,j) =>{
       </div>    
       <div className="row ">
         <div className="col-10">
-                <button onClick={() => (window.location.href = "./Pregunta")} type="button" className="botonQ btn btn-warning btn-lg m-3" id="bot">Otro intento</button>
+                <button onClick={() => (window.location.href = "./EnsayoNumeros")} type="button" className="botonQ btn btn-warning btn-lg m-3" id="bot">Otro intento</button>
         </div>
         <div className="col-2 ">
                 <button onClick={() => (window.location.href = "/menu")} type="button" className="botonQ btn btn-dark btn-lg m-3" id="bot">Inicio</button>
@@ -237,11 +238,11 @@ const preguntaCorrectaOrNot = (qna,j) =>{
           <Box className="mt-3 mb-3">
                 <LinearProgress  variant="determinate" value={(preguntaActual+1)*100/preguntas.length}/>
           </Box>
-          <h3 className="enunciado-pregunta mb-3">{preguntas[preguntaActual].titulo}</h3>
+          <h3 className="enunciado-pregunta mb-3">{<InlineMath math={preguntas[preguntaActual].titulo}/> }</h3>
           
           {preguntas[preguntaActual].opciones.map((respuesta,idk) => (
-            <button type="button" className="contenedor-alternativa-pregunta  " disabled={areDisabled} disableRipple key={respuesta.textoRespuesta} onClick={(e) => handleAnswerSubmit(respuesta.isCorrect, e,respuesta.textoRespuesta,preguntas[preguntaActual].titulo)}>
-              <b>{String.fromCharCode(65+idk) + " . "}</b>{respuesta.textoRespuesta}
+            <button type="button" className="contenedor-alternativa-pregunta  " disabled={areDisabled} disableRipple key={<InlineMath math={respuesta.textoRespuesta}/>} onClick={(e) => handleAnswerSubmit(respuesta.isCorrect, e,respuesta.textoRespuesta,preguntas[preguntaActual].titulo)}>
+              <b>{String.fromCharCode(65+idk) + " . "}</b>{<InlineMath math={respuesta.textoRespuesta}/>}
             </button>
           ))}
           <div >
@@ -269,4 +270,4 @@ const preguntaCorrectaOrNot = (qna,j) =>{
   
 }
 
-export default Pregunta;
+export default EnsayoNumeros;

@@ -19,18 +19,18 @@ function NavbarAdmin() {
   componentDidMount();
   return (
     <nav
-      class="navbar sticky-top navbar-expand-md navbar-dark bg-dark"
+      className="navbar sticky-top navbar-expand-md navbar-dark bg-dark"
       data-spy="affix"
       data-offset-top="30"
     >
-      <div class="container-md">
-        <a class="navbar-brand" href="#">
-          <i class="bi bi-calculator"></i>
-          <span class="text-warning">Pre-PAES</span>
+      <div className="container-md">
+        <a className="navbar-brand" href="#">
+          <i className="bi bi-calculator"></i>
+          <span className="text-warning">Pre-PAES</span>
         </a>
 
         <button
-          class="navbar-toggler"
+          className="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#menu"
@@ -38,13 +38,13 @@ function NavbarAdmin() {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span class="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="menu">
-          <ul class="navbar-nav me-auto">
-            <li class="nav-item">
+        <div className="collapse navbar-collapse" id="menu">
+          <ul className="navbar-nav me-auto">
+            <li className="nav-item">
               <a
-                class="nav-link active "
+                className="nav-link active "
                 aria-current="page"
                 href="#"
                 onClick={() => (window.location.href = "/Menu")}
@@ -54,30 +54,30 @@ function NavbarAdmin() {
             </li>
           </ul>
 
-          <ul class="navbar-nav  ">
-            <li class="nav-item dropdown">
+          <ul className="navbar-nav  ">
+            <li className="nav-item dropdown">
               <a
-                class="nav-link dropdown-toggle active"
+                className="nav-link dropdown-toggle active"
                 href="#"
                 id="navbarDropdown"
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                <i class="bi bi-person-fill "></i>
+                <i className="bi bi-person-fill "></i>
                 <span>Usuario</span>
               </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li>
-                  <a class="dropdown-item " href="#">
+                  <a className="dropdown-item " href="#">
                     {cookies.get("username")}
                   </a>
                 </li>
-                <div class="dropdown-divider"></div>
+                <div className="dropdown-divider"></div>
 
                 <li>
                   <a
-                    class="dropdown-item"
+                    className="dropdown-item"
                     href="#"
                     onClick={() => cerrarSesion()}
                   >
@@ -87,7 +87,7 @@ function NavbarAdmin() {
               </ul>
             </li>
           </ul>
-          <hr class="d-md-none text-white-50" />
+          <hr className="d-md-none text-white-50" />
         </div>
       </div>
     </nav>

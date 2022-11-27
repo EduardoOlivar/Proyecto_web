@@ -16,33 +16,33 @@ function NavbarHome(props) {
     }
     return (
        
-        <nav class="navbar sticky-top navbar-expand-md navbar-dark bg-dark" data-spy="affix" data-offset-top="30" >
-            <div class="container-md">
-                <a class="navbar-brand" href="#">
-                <FontAwesomeIcon className='mx-2' icon={ faCalculator} />
-                <span class="text-warning">Pre-PAES</span>
+        <nav className="navbar sticky-top navbar-expand-md navbar-dark bg-dark" data-spy="affix" data-offset-top="30" >
+            <div className="container-md">
+                <a className="navbar-brand " href="#">
+                <FontAwesomeIcon classNameName='mx-3' icon={ faCalculator} />
+                <span className="text-warning m-1">Pre-PAES</span>
                 </a>
 
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span className="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="menu">
-                    <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                            <a class="nav-link active " aria-current="page" href="/" >Inicio</a>
+                <div className="collapse navbar-collapse" id="menu">
+                    <ul className="navbar-nav me-auto">
+                        <li className="nav-item">
+                            <a className="nav-link active " aria-current="page" href="/" >Inicio</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link " href="#contacto">{props.contacto}</a>
+                        <li className="nav-item">
+                            <a className="nav-link " href="#contacto">{props.contacto}</a>
                         </li>
                     </ul>
 
-                    <ul class="navbar-nav  ">    
-                        <li class="nav-item ">
-                            <a class="nav-link active " aria-current="page" href="#" onClick={() => (window.location.href = "./Login")}>{props.iniciarSesion}</a>
+                    <ul className="navbar-nav  ">    
+                        <li className="nav-item ">
+                            <a className="nav-link active " aria-current="page" href="#" onClick={() => (window.location.href = "./Login")}>{props.iniciarSesion}</a>
                         </li>
  
                     </ul>
-                    <hr class="d-md-none text-white-50"/>
+                    <hr className="d-md-none text-white-50"/>
                 </div>
             </div>
         </nav>
