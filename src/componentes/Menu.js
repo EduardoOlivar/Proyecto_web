@@ -8,6 +8,9 @@ import NombreEnsayo from './NombreEnsayo';
 import algebra from '../images/algebra.png';
 import geometria from '../images/geometria.png';
 import probabilidad from '../images/probabilidad.png';
+import FuncionUsuario from './FuncionUsuario';
+import crearEnsayo from '../images/crearensayo.png';
+import historial from '../images/historial.png';
 
 
 const cookies = new Cookies();
@@ -65,34 +68,18 @@ function Menu() {
                             estadoBoton = "disabled"
                         />  
                         
-                            <div className="col-md-4 mt-3">
-                                <div className='row  '>
-                                <div className="card p-3 mb-2">
-                                    <div className="d-flex justify-content-between">
-                                        <div className="d-flex flex-row align-items-center">
-                                            <div className="iconMenu"> <img className='logoMenu' src="" alt="" /> </div>
-                                            <div className="ms-2 c-details ">
-                                                <h3 className="mb-0 ">Crear Ensayo</h3> 
-                                            </div>
-                                        </div>
-                                    </div>        
-                                </div>
-                                </div>
-                                <div className='row mt-5 '>
-                                <div className="card p-3 mb-2">
-                                    <div className="d-flex justify-content-between">
-                                        <div className="d-flex flex-row align-items-center">
-                                            <div className="iconMenu"> <img className='logoMenu' src="" alt="" /> </div>
-                                            <div className="ms-2 c-details">
-                                                <h3 className="mb-0">Revisar Historial</h3> 
-                                            </div>
-                                        </div>
-                                    </div>        
-                                </div>
-                                </div>
-                            </div> 
+                        <div className="col-md-4 mt-3">
+                            <FuncionUsuario
+                                funcion = "Crear Ensayo"
+                                logo = {crearEnsayo}
+                            />
+                            <FuncionUsuario
+                                funcion = "Revisar Historial"
+                                logo = {historial}
+                            />
+                        </div> 
                                
-                        </div>   
+                    </div>   
                         
                  
             
