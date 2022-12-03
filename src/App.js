@@ -9,6 +9,7 @@ import Footer from './componentes/Footer';
 import MenuAdmin from './componentes/MenuAdmin';
 import LoginPro from './componentes/LoginPro';
 import EnsayoNumeros from './componentes/EnsayoNumeros';
+import CrearEnsayo from './componentes/CrearEnsayo';
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
         <Route path='/Menu/Pregunta' element={<Pregunta/>} />
         <Route path='/MenuAdmin' element={<MenuAdmin/>} />
         <Route path='/Menu/EnsayoNumeros' element={<EnsayoNumeros/>} />
+        <Route path='/Menu/crearEnsayo' element={<CrearEnsayo/>} />
       </Routes>
       </BrowserRouter>
       <Footer/>

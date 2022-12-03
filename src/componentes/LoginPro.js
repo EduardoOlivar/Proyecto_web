@@ -72,21 +72,29 @@ class LoginPro extends React.Component{
         }).catch(error =>{
            
             console.log(error.response.data.errors)
-            if(error.response.data.errors === 'Email o contraseña invalidos')
+            if(error.response.data.errors.email){
+                if(error.response.data.errors.email[0] === 'Introduzca una dirección de correo electrónico válida.')
+                this.setState({
+                    error : true,
+                    errorMsg : "Introduzca una dirección de correo electrónico válida."
+                })
+                    else if(error.response.data.errors.email[0] || error.response.data.password[0] === 'Este campo no puede estar en blanco.')
+                this.setState({
+                    error : true,
+                    errorMsg : "Rellene todos los camhpos"
+                })
+                }    
+            else if(error.response.data.errors === 'Email o contraseña invalidos')
             this.setState({
                 error : true,
                 errorMsg : "Email o contraseña invalidos"
             })
-            if(error.response.data.errors.email[0] || error.response.data.password[0] === 'Este campo no puede estar en blanco.')
+            else if( error.response.data.errors.password[0] === 'Este campo no puede estar en blanco.')
             this.setState({
                 error : true,
-                errorMsg : "Rellene todos los campos"
+                errorMsg : "Rellene todos los camhpos"
             })
-            if(error.response.data.errors.email[0] === 'Introduzca una dirección de correo electrónico válida.')
-            this.setState({
-                error : true,
-                errorMsg : "Introduzca una dirección de correo electrónico válida."
-            })
+            
             
         })
         }else{

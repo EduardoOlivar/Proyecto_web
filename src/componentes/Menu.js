@@ -11,10 +11,13 @@ import probabilidad from '../images/probabilidad.png';
 import FuncionUsuario from './FuncionUsuario';
 import crearEnsayo from '../images/crearensayo.png';
 import historial from '../images/historial.png';
+import axios from 'axios';
 
 
 const cookies = new Cookies();
 function Menu() {
+
+
 
     return (
         <div >
@@ -72,10 +75,12 @@ function Menu() {
                             <FuncionUsuario
                                 funcion = "Crear Ensayo"
                                 logo = {crearEnsayo}
+                                urlEnsayo ="crearEnsayo"
                             />
                             <FuncionUsuario
                                 funcion = "Revisar Historial"
                                 logo = {historial}
+                                urlEnsayo ="revisarHistorial"
                             />
                         </div> 
                                
