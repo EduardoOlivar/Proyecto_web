@@ -13,8 +13,6 @@ import { Card, CardContent, CardMedia, CardHeader, List, ListItemButton, Typogra
 import { Accordion, AccordionDetails, AccordionSummary, Chip, ListItem } from '@mui/material';
 import ExpandCircleDownIcon from '@mui/icons-material/ExpandCircleDown';
 import $ from 'jquery';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import DatosPreguntas from '../datosPreguntas.json';
 import { InlineMath, BlockMath } from 'react-katex';
 import Loading from "./Loading";
 import Navbar from "./Navbar";
