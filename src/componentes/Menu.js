@@ -11,7 +11,6 @@ import probabilidad from '../images/probabilidad.png';
 import FuncionUsuario from './FuncionUsuario';
 import crearEnsayo from '../images/crearensayo.png';
 import historial from '../images/historial.png';
-import axios from 'axios';
 
 
 const cookies = new Cookies();
@@ -47,28 +46,27 @@ function Menu() {
                         <NombreEnsayo
                             temario = "Álgebra y Funciones"
                             imagen = {algebra}
-                            urlEnsayo = "error"
+                            urlEnsayo = "PruebaAlgebra"
                             score = "error"
-                            puntosTotal = "10"
-                            estadoBoton = "disabled"
+                            puntosTotal = "5"
+                          
                         />
 
                         <NombreEnsayo
                             temario = "Geometría"
                             imagen = {geometria}
-                            urlEnsayo = "error"
+                            urlEnsayo = "PruebaGeometria"
                             score = "error"
                             puntosTotal = "10"
-                            estadoBoton = "disabled"
                         />  
 
                         <NombreEnsayo
                             temario = "Probabilidad y Estadística"
                             imagen = {probabilidad}
-                            urlEnsayo = "error"
+                            urlEnsayo = "PruebaProbabilidades"
                             score = "error"
-                            puntosTotal = "10"
-                            estadoBoton = "disabled"
+                            puntosTotal = "5"
+                          
                         />  
                         
                         <div className="col-md-4 mt-3">

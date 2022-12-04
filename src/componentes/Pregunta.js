@@ -218,7 +218,11 @@ const preguntaCorrectaOrNot = (qna,j) =>{
     <Navbar
       usuario={cookies.get('username')}
     />
-    <HeadEnsayo/>
+    <HeadEnsayo
+      title = "TEMARIO GENERAL"
+      paragraph = "Ensayo Matematica"
+      color = "heroQ"
+    />
     <div className="contenedor-principal position-relative ">
         <div className="contenedor-pregunta">
           <div className="row">

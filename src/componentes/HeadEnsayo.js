@@ -1,10 +1,10 @@
 import React from "react";
 import "../hojas-de-estilo/Pregunta.css";
-function HeadEnsayo() {
+function HeadEnsayo(props) {
   return (
-    <section className="heroQ">
-      <h1 className="heroQ_title">ENSAYO MATEMÁTICAS</h1>
-      <p className="hero_paragraph">Eje General</p>
+    <section className={props.color}>
+      <h1 className="heroQ_title">{props.title}</h1>
+      <p className="hero_paragraph">{props.paragraph}</p>
     </section>
   );
 }

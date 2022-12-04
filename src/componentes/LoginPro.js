@@ -14,6 +14,7 @@ const cookies = new Cookies();
 let estadoCaptcha= false;
 const urlProfile = "http://127.0.0.1:8000/api/profile/";
 class LoginPro extends React.Component{
+    
 
     state = {
         form: {
@@ -50,11 +51,11 @@ class LoginPro extends React.Component{
         axios .post(url,this.state.form)
         .then(response =>{
             console.log(response.data.token.access);
-            axios.defaults.headers.common['Authorization'] = 'Bearer' + response.data.token.access;
+           
                 if(response.data.status === "ok"){
                     console.log(response)
                     localStorage.setItem("token",response.data.token.acccess)
-                    
+                    cookies.set('token', response.data.token, {path: "/"});
                     cookies.set('username', this.state.form.email, {path: "/"});
                     cookies.set('scoreGeneral', 0, {path: "/"});
                     cookies.set('scoreNumeros', 0, {path: "/"});

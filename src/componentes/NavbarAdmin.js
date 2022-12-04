@@ -12,8 +12,11 @@ function NavbarAdmin() {
     window.location.href = "/";
   };
   function componentDidMount() {
-    if (!cookies.get("username")) {
+    if (!cookies.get("username") )  {
       window.location.href = "/Login";
+    }
+    if(cookies.get("username") != "admin@gmail.com" ){
+      window.location.href = "/Menu";
     }
   }
   componentDidMount();
@@ -47,7 +50,7 @@ function NavbarAdmin() {
                 className="nav-link active "
                 aria-current="page"
                 href="#"
-                onClick={() => (window.location.href = "/Menu")}
+                onClick={() => (window.location.href = "/MenuAdmin")}
               >
                 Admin
               </a>

@@ -2,86 +2,81 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Cookies from 'universal-cookie';
 import mate from '../images/matematicas.png'
+import numeros from '../images/numeros.png'
+import Navbar from './Navbar';
+import NombreEnsayoAdmin from './NombreEnsayoAdmin';
 import NavbarAdmin from './NavbarAdmin';
+import algebra from '../images/algebra.png';
+import geometria from '../images/geometria.png';
+import probabilidad from '../images/probabilidad.png';
+import FuncionUsuario from './FuncionUsuario';
+import crearEnsayo from '../images/crearensayo.png';
+import historial from '../images/historial.png';
+
 
 
 const cookies = new Cookies();
 function MenuAdmin() {
 
     return (
-        <main>
+      <div >
             <NavbarAdmin
-
+      
             />
-        <div className="container mt-5 mb-5 accordion" id="accordionExample">
-            <div className="accordion-item ">
-              <h2 className="accordion-header" id="headingOne">
-                <button className="accordion-button collapsed" type="" data-bs-toggle="" data-bs-target="" aria-expanded="true" aria-controls="">
-                  Agregar preguntas
-                </button>
-              </h2>
-              <div id="collapseOne" className="accordion-collapse collapse show" aria-labelledby="headingOne" >
-                <div className="accordion-body">
-                    <div className="form-group">
-                        <label for="exampleFormControlSelect1">Seleccionar categoría.</label>
-                        <select className="form-control" id="exampleFormControlSelect1">
-                            <option>Geometría</option>        
-                            <option>Algebra</option>        
-                            <option>Probabilidad</option>        
-                            <option>Numeros</option>      
-                        </select>
+            <main class="container  mt-5 mb-3" >
+                <div className='row'>
+                                    
+                        <NombreEnsayoAdmin
+                            temario = "Números"
+                            imagen = {numeros}
+                            urlEnsayo = "PruebaNumeros"
+                            urlEnsayoModificar = "ModificarNumeros"
+                            urlEnsayoEliminar = "EliminarNumeros"
+                            score = "scoreNumeros"
+                            puntosTotal = "10"
+                        />
 
-                        <label for="enunciado">Ingresar enunciado del ejercicio.</label>
-                        <input className="form-control" type="text"id="enunciado" placeholder="Enunciado"/>
+                        <NombreEnsayoAdmin
+                            temario = "Álgebra y Funciones"
+                            imagen = {algebra}
+                            urlEnsayo = "PruebaAlgebra"
+                            urlEnsayoModificar = "ModificarAlgebra"
+                            urlEnsayoEliminar = "EliminarAlgebra"
+                            score = "error"
+                            puntosTotal = "5"
+                          
+                        />
 
-                        <label for="respuesta correcta">Ingresar respuesta correcta.</label>
-                        <input className="form-control" type="text"id="respuesta correcta" placeholder="Respuesta correcta"/>
+                        <NombreEnsayoAdmin
+                            temario = "Geometría"
+                            imagen = {geometria}
+                            urlEnsayo = "PruebaGeometria"
+                            urlEnsayoModificar = "ModificarGeometria"
+                            urlEnsayoEliminar = "EliminarGeometria"
+                            score = "error"
+                            puntosTotal = "10"
+                            
+                        />  
 
-                        <label for="respuesta incorrecta 1">Ingresar respuesta incorrecta 1.</label>
-                        <input className="form-control" type="text"id="respuesta incorrecta 1" placeholder="Respuesta incorrecta 1"/>
-
-                        <label for="respuesta incorrecta 2">Ingresar respuesta incorrecta 2.</label>
-                        <input className="form-control" type="text"id="respuesta incorrecta 2" placeholder="Respuesta incorrecta 2"/>
-
-                        <label for="respuesta incorrecta 3">Ingresar respuesta incorrecta 3.</label>
-                        <input className="form-control" type="text"id="respuesta incorrecta 3" placeholder="Respuesta incorrecta 3"/>
-
-                        <label for="respuesta incorrecta 3">Ingresar enlace a video explicativo.</label>
-                        <input className="form-control" type="link"id="respuesta incorrecta 3" placeholder="Enlace"/>
+                        <NombreEnsayoAdmin
+                            temario = "Probabilidad y Estadística"
+                            imagen = {probabilidad}
+                            urlEnsayo = "PruebaProbabilidades"
+                            urlEnsayoModificar = "ModificarProbabilidades"
+                            urlEnsayoEliminar = "EliminarProbabilidades"
+                            score = "error"
+                            puntosTotal = "5"
+                          
+                        />  
                         
-                        <button type="submit" className="btn btn-primary">Agregar</button>
-                    </div>
-                </div>
-              </div>
-            </div>
-            <div className="accordion-item mt-3">
-              <h2 className="accordion-header" id="headingTwo">
-                <button className="accordion-button collapsed" type="" data-bs-toggle="" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                  Eliminar preguntas
-                </button>
-              </h2>
-              <div id="collapseTwo" className="accordion-collapse collapse show" aria-labelledby="headingTwo" >
-                <div className="accordion-body">
-                    <div className="form-group">
-                        <label for="exampleFormControlSelect1">Seleccionar categoría.</label>
-                        <select className="form-control" id="exampleFormControlSelect1">
-                            <option>Geometría</option>        
-                            <option>Algebra</option>        
-                            <option>Probabilidad</option>        
-                            <option>Numeros</option>      
-                        </select>
-
-                        <label for="enunciado">Ingresar enunciado del ejercicio.</label>
-                        <input className="form-control" type="text"id="enunciado" placeholder="Enunciado"/>
+                       
+                               
+                    </div>   
                         
-                        <button type="submit" className="btn btn-primary">Eliminar</button>
-                    </div>
-                </div>
-              </div>
-            </div>
+                 
             
+            </main>
         </div>
-    </main>
           
     );
 }

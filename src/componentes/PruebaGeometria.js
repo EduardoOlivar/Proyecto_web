@@ -7,8 +7,8 @@ import axios from 'axios';
 import Ensayo from "./Ensayo";
 
 
-const Apiurl = "http://127.0.0.1:8000/questions_alternative/?subject=numeros";
-function PruebaNumeros(){
+const Apiurl = "http://127.0.0.1:8000/questions_alternative/?subject=Geometria";
+function PruebaGeometria(){
   
  
 
@@ -33,13 +33,13 @@ const [post, setPost] = React.useState(null);
         <div>
             <Ensayo
             ensayo= {post}
-            urlEnsayo="PruebaNumeros"
-            titleEnsayo = "Números"
+            urlEnsayo="PruebaGeometria"
+            titleEnsayo = "Geometría"
             paragraphEnsayo ="Matemática(M1)"
-            colorEnsayo = "heroNumeros"
+            colorEnsayo = "heroGeometria"
             />
         </div>
     ); 
 }
 
-export default PruebaNumeros;
+export default PruebaGeometria;

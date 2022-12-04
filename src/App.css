@@ -26,9 +26,37 @@ body::-webkit-scrollbar-thumb {
   display: flex;
 }
 
+.heroAlgebra {
+  text-align: center;
+  background: #2E86C1 ;
+  color: #fff;
+  padding-top: 25px;
+  padding-bottom: 10px;
+}
+.heroNumeros {
+  text-align: center;
+  background: #884EA0 ;
+  color: #fff;
+  padding-top: 25px;
+  padding-bottom: 10px;
+}
+.heroProbabilidades {
+  text-align: center;
+  background: #E67E22  ;
+  color: #fff;
+  padding-top: 25px;
+  padding-bottom: 10px;
+}
+.heroGeometria {
+  text-align: center;
+  background: #17A589  ;
+  color: #fff;
+  padding-top: 25px;
+  padding-bottom: 10px;
+}
 .heroQ {
   text-align: center;
-  background: #273746;
+  background: #273746  ;
   color: #fff;
   padding-top: 25px;
   padding-bottom: 10px;
