@@ -13,19 +13,18 @@ import { Card, CardContent, CardMedia, CardHeader, List, ListItemButton, Typogra
 import { Accordion, AccordionDetails, AccordionSummary, Chip, ListItem } from '@mui/material';
 import ExpandCircleDownIcon from '@mui/icons-material/ExpandCircleDown';
 import $ from 'jquery';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import DatosPreguntas from '../datosPreguntas.json';
 import { InlineMath, BlockMath } from 'react-katex';
 import Loading from "./Loading";
 import Navbar from "./Navbar";
 import HeadEnsayo from "./HeadEnsayo";
 import Cookies from 'universal-cookie';
 import axios from 'axios';
+import PruebaNumeros from "./PruebaNumeros"
 
 
-const Apiurl = "http://127.0.0.1:8000/questions_alternative/?subject=numeros";
+const Apiurl = "http://127.0.0.1:8000/questions_alternative/?subject=Numeros";
 const cookies = new Cookies();
-function EnsayoNumeros(){
+function EnsayoNumerosPro(props){
   
  
   const componentDidMount=()=>{
@@ -56,7 +55,7 @@ const preguntaCorrectaOrNot = (qna,j) =>{
 }
 
 
-
+ 
   const [preguntaActual, setPreguntaActual] = useState(0);
   const [puntuación, setPuntuacion] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
@@ -79,19 +78,28 @@ const preguntaCorrectaOrNot = (qna,j) =>{
   let timer; 
 
 
-    useEffect(() => {
-  
-       timer = setInterval(() => {
-        if (tiempoRestante > 0) setTiempoRestante((prev) => prev - 1);
-        if(tiempoRestante<=60) $(".tiempo").addClass("text-danger");
-        if (tiempoRestante === 0){
-         setAreDisabled(true);
-         setIsFinished(true);
-        } 
-      }, [1000]);
 
-      return () => clearInterval(timer);
-    }, [tiempoRestante]);
+
+
+  
+
+  useEffect(() => {
+  
+    timer = setInterval(() => {
+     if (tiempoRestante > 0) setTiempoRestante((prev) => prev - 1);
+     if(tiempoRestante<=60) $(".tiempo").addClass("text-danger");
+     if (tiempoRestante === 0){
+      setAreDisabled(true);
+      setIsFinished(true);
+     } 
+   }, [1000]);
+   
+   return () => clearInterval(timer);
+ }, [tiempoRestante]);
+    
+
+  
+
 
   function handleAnswerSubmit( isCorrect, e,res,tituloP) {
         
@@ -152,7 +160,7 @@ const preguntaCorrectaOrNot = (qna,j) =>{
                     <li  className="list-group-item">
                       <div className="row" /*style="margin: 0;"*/>
                         <div className="col"><h3>Puntos:</h3></div>
-                        <div className="col"><h3>{puntuación}/{preguntas.length}</h3></div>
+                       
                       </div>
                     </li>
                     
@@ -165,35 +173,7 @@ const preguntaCorrectaOrNot = (qna,j) =>{
             <div class="accordion mt-4" id="accordionExample">
  
       
-            <div>
-            {
-                preguntas.map((item,j)=>(
-              <Accordion
-                disableGutters
-                key={j}
-                expanded={expanded === j}
-                onChange={handleChange(j)}>
-                <AccordionSummary expandIcon={<ExpandCircleDownIcon
-                  {...preguntaCorrectaOrNot(item,j)}/>}
-                >
-                  <Typography>{item.numeroPregunta}. <InlineMath math={item.titulo}/></Typography>
-                </AccordionSummary>
-                <AccordionDetails >
-                  {preguntas[j].opciones.map((respuesta,i) => (
-                    <Typography {...markCorrectOrNot(item, i,j)}>
-                      <label  className="contenedor-alternativa-pregunta-respuesta "  disableRipple key={respuesta.textoRespuesta}  >
-                        <b>{String.fromCharCode(65+i) +  " . "}</b><InlineMath math={respuesta.textoRespuesta}/>
-                      </label>
-                    </Typography>
-                  ))}
-                </AccordionDetails>
-                <section>
-                <iframe className="video-respuesta" id="video03" width="560" height="315" src={item.videoRespuesta} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
-                </section>
-              </Accordion>))
-              }
-
-            </div>
+            
    
   
 </div>
@@ -224,7 +204,7 @@ const preguntaCorrectaOrNot = (qna,j) =>{
         <div className="contenedor-pregunta">
           <div className="row">
             <div className="col-md">
-              <h2>Pregunta {preguntaActual + 1} de {preguntas.length}</h2>
+              <h2>Pregunta {preguntaActual + 1} de {props.ensayo.length}</h2>
               
             </div>
             
@@ -236,9 +216,9 @@ const preguntaCorrectaOrNot = (qna,j) =>{
             
           </div>       
           <Box className="mt-3 mb-3">
-                <LinearProgress  variant="determinate" value={(preguntaActual+1)*100/preguntas.length}/>
+                <LinearProgress  variant="determinate" />
           </Box>
-          <h3 className="enunciado-pregunta mb-3">{<InlineMath math={preguntas[preguntaActual].titulo}/> }</h3>
+          <h3 className="enunciado-pregunta mb-3">{<InlineMath math={props.ensayo[preguntaActual].question}/> }</h3>
           
           {preguntas[preguntaActual].opciones.map((respuesta,idk) => (
             <button type="button" className="contenedor-alternativa-pregunta  " disabled={areDisabled} disableRipple key={<InlineMath math={respuesta.textoRespuesta}/>} onClick={(e) => handleAnswerSubmit(respuesta.isCorrect, e,respuesta.textoRespuesta,preguntas[preguntaActual].titulo)}>
@@ -270,4 +250,4 @@ const preguntaCorrectaOrNot = (qna,j) =>{
   
 }
 
-export default EnsayoNumeros;
+export default EnsayoNumerosPro;

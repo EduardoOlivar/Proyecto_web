@@ -1,7 +1,6 @@
 import './App.css';
 import Pregunta from './componentes/Pregunta';
 import {BrowserRouter, Routes , Route} from 'react-router-dom';
-import Login from './componentes/Login';
 import Menu from './componentes/Menu';
 import Home from './componentes/Home';
 import Register from './componentes/Register';
@@ -10,6 +9,8 @@ import MenuAdmin from './componentes/MenuAdmin';
 import LoginPro from './componentes/LoginPro';
 import EnsayoNumeros from './componentes/EnsayoNumeros';
 import CrearEnsayo from './componentes/CrearEnsayo';
+import EnsayoNumerosPro from './componentes/EnsayoNumerosPro';
+import PruebaNumeros from './componentes/PruebaNumeros';
 
 function App() {
 
@@ -25,7 +26,7 @@ function App() {
         <Route path='/Menu' element={<Menu/>} />
         <Route path='/Menu/Pregunta' element={<Pregunta/>} />
         <Route path='/MenuAdmin' element={<MenuAdmin/>} />
-        <Route path='/Menu/EnsayoNumeros' element={<EnsayoNumeros/>} />
+        <Route path='/Menu/PruebaNumeros' element={<PruebaNumeros/>} />
         <Route path='/Menu/crearEnsayo' element={<CrearEnsayo/>} />
       </Routes>
       </BrowserRouter>

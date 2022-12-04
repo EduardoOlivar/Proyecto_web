@@ -39,7 +39,7 @@ function Menu() {
                         <NombreEnsayo
                             temario = "Números"
                             imagen = {numeros}
-                            urlEnsayo = "EnsayoNumeros"
+                            urlEnsayo = "PruebaNumeros"
                             score = "scoreNumeros"
                             puntosTotal = "10"
                         />
