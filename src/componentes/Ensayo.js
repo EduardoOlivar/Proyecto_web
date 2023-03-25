@@ -18,7 +18,7 @@ import Loading from "./Loading";
 import Navbar from "./Navbar";
 import HeadEnsayo from "./HeadEnsayo";
 import Cookies from 'universal-cookie';
-
+import 'katex/dist/katex.min.css';
 
 
 
@@ -56,9 +56,12 @@ const preguntaCorrectaOrNot = (qna,j) =>{
   const [preguntaActual, setPreguntaActual] = useState(0);
   const [puntuación, setPuntuacion] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
-  const [tiempoRestante, setTiempoRestante] = useState((preguntas.length)*60*2);
-  const [areDisabled, setAreDisabled] = useState(false);
+  const [tiempoRestante, setTiempoRestante] = useState(
+    parseInt(localStorage.getItem("tiempoRestante")) || (preguntas.length)*60*2
+  );
 
+  const [areDisabled, setAreDisabled] = useState(false);
+  
   const [respuestaaa, setRespuesta] = useState([]);
   const [tituloPregunta, setTituloPregunta] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -93,14 +96,21 @@ const preguntaCorrectaOrNot = (qna,j) =>{
    
    return () => clearInterval(timer);
  }, [tiempoRestante]);
-    
-
+ const url = window.location.pathname; // Obtiene la parte de la URL que sigue después del nombre del servidor y el puerto
+ const pruebaName = url.split('/').pop(); // Obtiene la última parte de la URL después de la barra ("/")
+ if(pruebaName != localStorage.getItem("ensayoActivo"))
+  localStorage.setItem("tiempoRestante", 0);
+ localStorage.setItem("ensayoActivo", pruebaName);
+ 
+ useEffect(() => {
+  localStorage.setItem("tiempoRestante", tiempoRestante.toString());
   
-
+}, [tiempoRestante]);
+  
 
   function handleAnswerSubmit( isCorrect, e,res,tituloP) {
         
-      setRespuesta(current => [...current, res]);
+      setRespuesta(current => [...current, res]);  //actualiza el estado del componente agregando un nuevo valor (res) al final de un array (current) existente.
       
       if (isCorrect===1){ 
         setTituloPregunta(current => [...current, tituloP]);
@@ -125,6 +135,36 @@ const preguntaCorrectaOrNot = (qna,j) =>{
     
     
   }
+  function retrocederPregunta() {
+    setRespuesta(current => {
+      const newRespuestas = [...current];
+      newRespuestas.pop(); // Eliminar la última respuesta del array
+      return newRespuestas;
+    });
+    setTituloPregunta(current => {
+      const newTitulos = [...current];
+      newTitulos.pop(); // Eliminar el último título de pregunta del array
+      return newTitulos;
+    });
+    if (puntuación > 0) {
+      setPuntuacion(puntuación - 1); // Disminuir la puntuación en 1 si es mayor a 0
+      cookies.set('scoreNumeros', puntuación - 1, { path: '/' });
+    }
+    if(preguntaActual > 0)
+      setPreguntaActual(preguntaActual - 1); // Disminuir el número de pregunta en 1
+
+  }
+  function siguientePregunta() {
+
+    if(preguntaActual < props.ensayo.length -1){
+      setRespuesta(current => [...current, "nada"]); 
+      setPreguntaActual(preguntaActual + 1); // Disminuir el número de pregunta en 1
+    
+      setTituloPregunta(current => [...current, "mala"]);
+    }
+  }
+  
+  
   /*useEffect(() => {
     const intervalo = setInterval(() => {
       if (tiempoRestante > 0) setTiempoRestante((prev) => prev - 1);
@@ -246,29 +286,25 @@ const preguntaCorrectaOrNot = (qna,j) =>{
             
           </div>       
           <Box className="mt-3 mb-3">
-                <LinearProgress  variant="determinate" />
+                <LinearProgress  variant="determinate" value={(preguntaActual +1 )* 100/(props.ensayo.length)} />
           </Box>
-          <h3 className="enunciado-pregunta mb-3">{<InlineMath  math={props.ensayo[preguntaActual].question}/> }</h3>
+          <h3 className="enunciado-pregunta mb-3 katex">{<InlineMath  math={props.ensayo[preguntaActual].question}/> }</h3>
           
           {props.ensayo[preguntaActual].answer.map((respuesta,idk) => (
             <button type="button" className="contenedor-alternativa-pregunta  " disabled={areDisabled} disableRipple key={<InlineMath  math={respuesta.label}/>} onClick={(e) => handleAnswerSubmit(respuesta.right, e,respuesta.label,props.ensayo[preguntaActual].question)}>
               <b>{String.fromCharCode(65+idk) + " . "}</b>{<InlineMath math={respuesta.label}/>}
             </button>
           ))}
-          <div >
-          <button className="btn btn-outline-dark" 
-              onClick={() => {
-                setAreDisabled(false);
-                if (preguntaActual === props.ensayo.length - 1) {
-                  setIsFinished(true);
-                } else {
-                  setPreguntaActual(preguntaActual + 1);
-                }
-              }}
-            >
-              Omitir
-            </button>
-            </div>
+          <div className="sumaResta">
+          <a href="#" class="arrow left" onClick={retrocederPregunta}></a>
+          <a href="#" class="arrow right"onClick={siguientePregunta}></a>
+      
+           
+           
+          </div>
+
+
+           
         </div>
         
        

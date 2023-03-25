@@ -29,11 +29,20 @@ const [post, setPost] = React.useState(null);
     
   }, []);
   if (!post) return null;
+  function shuffleArray(array) {
+    const newArray = [...array];
+    newArray.sort(() => Math.random() - 0.5);
+    return newArray;
+  }
+ for (let i = 0; i < post.length; i++) {
+  post[i].answer = shuffleArray(post[i].answer);
+  
+ }
   
     return(
         <div>
             <Ensayo
-            ensayo= {post}
+            ensayo= {shuffleArray( post)}
             urlEnsayo="PruebaProbabilidades"
             titleEnsayo = "Probabilidad y Estadística"
             paragraphEnsayo ="Matemática(M1)"

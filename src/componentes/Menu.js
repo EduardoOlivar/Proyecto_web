@@ -14,6 +14,10 @@ import historial from '../images/historial.png';
 
 
 const cookies = new Cookies();
+const url = window.location.pathname; // Obtiene la parte de la URL que sigue después del nombre del servidor y el puerto
+ const pruebaName = url.split('/').pop(); // Obtiene la última parte de la URL después de la barra ("/")
+if(pruebaName === "Menu")
+localStorage.setItem("ensayoActivo","ninguno" );
 function Menu() {
 
 
@@ -23,7 +27,7 @@ function Menu() {
             <Navbar
       
             />
-            <main class="container  mt-5 mb-3" >
+            <main className="container  mt-5 mb-3" >
                 <div className='row'>
                     
                         <NombreEnsayo

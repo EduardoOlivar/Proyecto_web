@@ -6,7 +6,59 @@
   font-size: 25px;
   background-color: #f4f6f7;
 }
+/*suma y resta*/
+.sumaResta{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+ 
 
+
+}
+
+
+
+
+.arrow {
+	position: relative;
+  top: 20px;
+	width: 3.5vmin;
+	height: 3.5vmin;
+	background: transparent;
+	border-top: 1vmin solid #515676;
+	border-right: 1vmin solid #515676;
+  border-radius: 4px;
+	transition: all 200ms ease;
+  margin: 1rem;
+	
+}
+.left {
+  margin-right: 1em;
+  left: 0;
+  transform: translate3d(0,-50%,0) rotate(-135deg);
+}
+
+.right {
+  margin-left: 1em;
+  right: 0;
+  transform: translate3d(0,-50%,0) rotate(45deg);
+}
+
+.arrow:hover {
+  border-color: orange;
+  box-shadow: 0.5vmin -0.5vmin 0 #515676;
+}
+
+.arrow:before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-40%,-60%) rotate(45deg);
+  width: 200%;
+  height: 200%;
+}
 .contenedor-alternativa-pregunta {
   display: block;
   padding: 7px;
@@ -17,6 +69,9 @@
   margin-bottom: 5px;
   margin-top: 5px;
   background-color: white;
+}
+.btnRetroceder{
+  margin-right: 2rem;
 }
 .contenedor-alternativa-pregunta-respuesta {
   display: block;

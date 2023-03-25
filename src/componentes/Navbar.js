@@ -15,8 +15,9 @@ function Navbar() {
   function componentDidMount() {
     if (!cookies.get("username")) {
       window.location.href = "/Login";
-    }
+    } 
   }
+  
   componentDidMount();
   return (
     <nav

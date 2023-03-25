@@ -21,6 +21,7 @@ import EliminarGeometria from './componentes/EliminarGeometria';
 import EliminarProbabilidades from './componentes/EliminarProbabilidades';
 import EliminarNumeros from './componentes/EliminarNumeros';
 
+
 function App() {
 
   
@@ -33,6 +34,7 @@ function App() {
         <Route path='Login' element={<LoginPro/>} />
         <Route path='/Register' element={<Register/>} />
         <Route path='/Menu' element={<Menu/>} />
+
         <Route path='/Menu/Pregunta' element={<Pregunta/>} />
         <Route path='/MenuAdmin' element={<MenuAdmin/>} />
         <Route path='/Menu/PruebaNumeros' element={<PruebaNumeros/>} />
