@@ -1,6 +1,6 @@
 import React from 'react';
 import {Spinner} from 'reactstrap';
-import '../hojas-de-estilo/Pregunta.css';
+import '../../hojas-de-estilo/Pregunta.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Loading() {

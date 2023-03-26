@@ -1,13 +1,13 @@
 import React, { Component, useRef,useState }  from 'react';
-import '../hojas-de-estilo/Login.css';
+import '../../hojas-de-estilo/Login.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faKey,faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios';
 import ReCAPTCHA from "react-google-recaptcha";
-import NavbarHome from './NavbarHome';
+import NavbarHome from '../navbar/NavbarHome';
 //servicios
-import {Apiurl} from '../Services/apirest'
+import {Apiurl} from '../../Services/apirest'
 
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
@@ -30,7 +30,7 @@ class LoginPro extends React.Component{
     }
 
     manejadorChange = async e=>{
-        await this.setState({
+        this.setState({
             form: {
               ...this.state.form,
               [e.target.name]: e.target.value

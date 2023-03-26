@@ -1,7 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Cookies from 'universal-cookie';
-import NavbarAdmin from './NavbarAdmin';
+import NavbarAdmin from '../navbar/NavbarAdmin';
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Cookies from 'universal-cookie';
-import NavbarAdmin from './NavbarAdmin';
+import NavbarAdmin from '../navbar/NavbarAdmin';
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
 
@@ -9,7 +9,7 @@ const Apiurl = "http://127.0.0.1:8000/questions/";
 const cookies = new Cookies();
 
 
-class EliminarNumeros extends React.Component {
+class EliminarAlgebra extends React.Component {
 
 
     state = {
@@ -28,7 +28,7 @@ class EliminarNumeros extends React.Component {
         
     }
     manejadorChange = async e=>{
-        await this.setState({
+        this.setState({
             form: {
               ...this.state.form,
               [e.target.name]: e.target.value
@@ -41,7 +41,7 @@ class EliminarNumeros extends React.Component {
       
     }
     cargarListado=()=>{
-        let urlAll= Apiurl +"list/all/?subject=Numeros"
+        let urlAll= Apiurl +"list/all/?subject=Algebra"
         axios .get(urlAll)
         .then(response =>{
            
@@ -92,7 +92,7 @@ class EliminarNumeros extends React.Component {
 
                     />
                     <div className='container'>
-                        <h2 className='mt-3'>Eliminar pregunta de Números</h2>
+                        <h2 className='mt-3'>Eliminar pregunta de Álgebra y Funciones </h2>
                         <form className="form-horizontal" action="/action_page.php">
                             <div className="form-group">
                                 <label className="control-label col-sm-2" for="email">ID de la Pregunta:</label>
@@ -115,7 +115,7 @@ class EliminarNumeros extends React.Component {
                             </div>
                         </form>
                         <div>
-                <h1>Números</h1>
+                <h1>Álgebra y Funciones</h1>
                 <table className="table table-dark">
                     <thead className="thead-dark">
                         <tr>
@@ -153,4 +153,4 @@ class EliminarNumeros extends React.Component {
     }
 }
 
-export default EliminarNumeros
+export default EliminarAlgebra

@@ -1,17 +1,17 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Cookies from 'universal-cookie';
-import mate from '../images/matematicas.png'
-import numeros from '../images/numeros.png'
-import Navbar from './Navbar';
-import NombreEnsayoAdmin from './NombreEnsayoAdmin';
-import NavbarAdmin from './NavbarAdmin';
-import algebra from '../images/algebra.png';
-import geometria from '../images/geometria.png';
-import probabilidad from '../images/probabilidad.png';
-import FuncionUsuario from './FuncionUsuario';
-import crearEnsayo from '../images/crearensayo.png';
-import historial from '../images/historial.png';
+import mate from '../../images/matematicas.png'
+import numeros from '../../images/numeros.png'
+import Navbar from '../navbar/Navbar';
+import NombreEnsayoAdmin from '../NombreEnsayoAdmin';
+import NavbarAdmin from '../navbar/NavbarAdmin';
+import algebra from '../../images/algebra.png';
+import geometria from '../../images/geometria.png';
+import probabilidad from '../../images/probabilidad.png';
+import FuncionUsuario from '../FuncionUsuario';
+import crearEnsayo from '../../images/crearensayo.png';
+import historial from '../../images/historial.png';
 
 
 

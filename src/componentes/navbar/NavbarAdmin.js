@@ -15,7 +15,7 @@ function NavbarAdmin() {
     if (!cookies.get("username") )  {
       window.location.href = "/Login";
     }
-    if(cookies.get("username") != "admin@gmail.com" ){
+    if(cookies.get("username") !== "admin@gmail.com" ){
       window.location.href = "/Menu";
     }
   }
@@ -27,7 +27,7 @@ function NavbarAdmin() {
       data-offset-top="30"
     >
       <div className="container-md">
-        <a className="navbar-brand" href="#">
+        <a className="navbar-brand" >
           <i className="bi bi-calculator"></i>
           <span className="text-warning">Pre-PAES</span>
         </a>
@@ -49,7 +49,6 @@ function NavbarAdmin() {
               <a
                 className="nav-link active "
                 aria-current="page"
-                href="#"
                 onClick={() => (window.location.href = "/MenuAdmin")}
               >
                 Admin
@@ -61,7 +60,6 @@ function NavbarAdmin() {
             <li className="nav-item dropdown">
               <a
                 className="nav-link dropdown-toggle active"
-                href="#"
                 id="navbarDropdown"
                 role="button"
                 data-bs-toggle="dropdown"
@@ -81,7 +79,6 @@ function NavbarAdmin() {
                 <li>
                   <a
                     className="dropdown-item"
-                    href="#"
                     onClick={() => cerrarSesion()}
                   >
                     Cerrar Sesión

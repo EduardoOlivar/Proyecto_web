@@ -1,5 +1,5 @@
 import React from "react";
-import "../hojas-de-estilo/Pregunta.css";
+import "../../hojas-de-estilo/Pregunta.css";
 function HeadEnsayo(props) {
   return (
     <section className={props.color}>

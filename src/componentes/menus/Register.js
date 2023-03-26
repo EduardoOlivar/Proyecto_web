@@ -1,10 +1,10 @@
 import React, { Component, startTransition } from 'react';
-import '../hojas-de-estilo/Login.css';
+import '../../hojas-de-estilo/Login.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faKey,faEnvelope,faUser } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios';
-import NavbarHome from './NavbarHome';
+import NavbarHome from '../navbar/NavbarHome';
 
 
 import Cookies from 'universal-cookie';

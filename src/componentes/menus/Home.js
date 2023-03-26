@@ -1,10 +1,10 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Cookies from "universal-cookie";
-import usuariovista from "../images/usuariovista.png";
-import ensayovista from "../images/ensayoformato.png";
-import numerosI from "../images/numeros.jpg";
-import NavbarHome from "./NavbarHome";
+import usuariovista from "../../images/usuariovista.png";
+import ensayovista from "../../images/ensayoformato.png";
+import numerosI from "../../images/numeros.jpg";
+import NavbarHome from "../navbar/NavbarHome";
 
 /*hola mundo */
 const cookies = new Cookies();

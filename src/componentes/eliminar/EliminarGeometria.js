@@ -1,7 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Cookies from 'universal-cookie';
-import NavbarAdmin from './NavbarAdmin';
+import NavbarAdmin from '../navbar/NavbarAdmin';
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
 
@@ -9,7 +9,7 @@ const Apiurl = "http://127.0.0.1:8000/questions/";
 const cookies = new Cookies();
 
 
-class ModificarGeometria extends React.Component {
+class EliminarGeometria extends React.Component {
 
 
     state = {
@@ -60,12 +60,12 @@ class ModificarGeometria extends React.Component {
          
         let url = Apiurl+this.state.form.id+"/";
         
-        axios .put(url,this.state.form)
+        axios .delete(url,this.state.form)
         .then(response =>{
            console.log(response.data)
            this.setState({
             error : true,
-            errorMsg : "Cambio exitoso!"
+            errorMsg : "Pregunta eliminada!"
         })
            
                 
@@ -92,7 +92,7 @@ class ModificarGeometria extends React.Component {
 
                     />
                     <div className='container'>
-                        <h2 className='mt-3'>Modificar pregunta de Geometría</h2>
+                        <h2 className='mt-3'>Eliminar pregunta de Geometría</h2>
                         <form className="form-horizontal" action="/action_page.php">
                             <div className="form-group">
                                 <label className="control-label col-sm-2" for="email">ID de la Pregunta:</label>
@@ -102,14 +102,8 @@ class ModificarGeometria extends React.Component {
                             </div>
 
                             <div className="form-group">
-                                <label className="control-label col-sm-2" for="pwd">Enunciado de la Pregunta</label>
-                                <div className="col-sm-10">
-                                    <input type="text" name="question" className="form-control" id="pwd" onChange={this.manejadorChange} placeholder="Inserte Enunciado" />
-                                </div>
-                            </div>
-                            <div className="form-group">
                                 <div className="col-sm-offset-2 col-sm-10">
-                                    <button type="button" className="btn btn-dark mt-2" onClick={this.manejadorBoton} >Modificar</button>
+                                    <button type="button" className="btn btn-dark mt-2" onClick={this.manejadorBoton} >Eliminar</button>
                                     {this.state.error === true &&
                                 <div className="alert alert-success mt-3" role="alert">
                                     {this.state.errorMsg}
@@ -159,4 +153,4 @@ class ModificarGeometria extends React.Component {
     }
 }
 
-export default ModificarGeometria
+export default EliminarGeometria
