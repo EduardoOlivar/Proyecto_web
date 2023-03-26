@@ -28,28 +28,28 @@ body::-webkit-scrollbar-thumb {
 
 .heroAlgebra {
   text-align: center;
-  background: #2E86C1 ;
+  background: #273746 ;
   color: #fff;
   padding-top: 25px;
   padding-bottom: 10px;
 }
 .heroNumeros {
   text-align: center;
-  background: #884EA0 ;
+  background: #273746 ;
   color: #fff;
   padding-top: 25px;
   padding-bottom: 10px;
 }
 .heroProbabilidades {
   text-align: center;
-  background: #E67E22  ;
+  background: #273746  ;
   color: #fff;
   padding-top: 25px;
   padding-bottom: 10px;
 }
 .heroGeometria {
   text-align: center;
-  background: #17A589  ;
+  background: #273746  ;
   color: #fff;
   padding-top: 25px;
   padding-bottom: 10px;

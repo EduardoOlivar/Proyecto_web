@@ -1,22 +1,22 @@
 import React from "react";
-import "../hojas-de-estilo/Pregunta.css";
-import preguntas from "../ensayoNumeros";
+import "../../hojas-de-estilo/Pregunta.css";
+import preguntas from "../../ensayoNumeros";
 import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.js";
 import "katex/dist/katex.min.css";
 import Box from "@mui/material/Box";
 import { red, green } from "@mui/material/colors";
-import { getFormatedTime } from "../helper";
+import { getFormatedTime } from "../../helper";
 import LinearProgress from "@mui/material/LinearProgress";
 import { Typography } from "@mui/material";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import ExpandCircleDownIcon from "@mui/icons-material/ExpandCircleDown";
 import $ from "jquery";
 import { InlineMath } from "react-katex";
-import Loading from "./menus/Loading";
-import Navbar from "./navbar/Navbar";
-import HeadEnsayo from "./navbar/HeadEnsayo";
+import Loading from "../menus/Loading";
+import Navbar from "../navbar/Navbar";
+import HeadEnsayo from "../navbar/HeadEnsayo";
 import Cookies from "universal-cookie";
 import "katex/dist/katex.min.css";
 
@@ -49,7 +49,7 @@ function Ensayo(props) {
   const [isFinished, setIsFinished] = useState(false);
   const [tiempoRestante, setTiempoRestante] = useState(
     parseInt(localStorage.getItem("tiempoRestante")) ||
-      preguntas.length * 60 * 2
+      props.ensayo.length * 60 * 2
   );
 
   const [areDisabled, setAreDisabled] = useState(false);
@@ -89,7 +89,7 @@ function Ensayo(props) {
     localStorage.setItem("tiempoRestante", tiempoRestante.toString());
   }, [tiempoRestante]);
 
-  function handleAnswerSubmit(isCorrect, e, res, tituloP) {
+  function handleAnswerSubmit(isCorrect, e, res, tituloP) {  // FUNCION AL MARCAR ALTERNATIVA 
     setRespuesta((current) => [...current, res]); //actualiza el estado del componente agregando un nuevo valor (res) al final de un array (current) existente.
 
     if (isCorrect === 1) {

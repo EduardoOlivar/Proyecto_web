@@ -4,7 +4,7 @@ import Cookies from "universal-cookie";
 import mate from "../../images/matematicas.png";
 import numeros from "../../images/numeros.png";
 import Navbar from "../navbar/Navbar";
-import NombreEnsayo from "../NombreEnsayo";
+import NombreEnsayo from "./NombreEnsayo";
 import algebra from "../../images/algebra.png";
 import geometria from "../../images/geometria.png";
 import probabilidad from "../../images/probabilidad.png";

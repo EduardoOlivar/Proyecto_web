@@ -4,7 +4,7 @@ import Cookies from 'universal-cookie';
 import mate from '../../images/matematicas.png'
 import numeros from '../../images/numeros.png'
 import Navbar from '../navbar/Navbar';
-import NombreEnsayoAdmin from '../NombreEnsayoAdmin';
+import NombreEnsayoAdmin from './NombreEnsayoAdmin';
 import NavbarAdmin from '../navbar/NavbarAdmin';
 import algebra from '../../images/algebra.png';
 import geometria from '../../images/geometria.png';

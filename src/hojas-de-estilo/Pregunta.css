@@ -26,8 +26,8 @@
 	width: 3.5vmin;
 	height: 3.5vmin;
 	background: transparent;
-	border-top: 1vmin solid #515676;
-	border-right: 1vmin solid #515676;
+	border-top: 1vmin solid #273746;
+	border-right: 1vmin solid #273746;
   border-radius: 4px;
 	transition: all 200ms ease;
   margin: 1rem;
@@ -47,7 +47,7 @@
 
 .arrow:hover {
   border-color: orange;
-  box-shadow: 0.5vmin -0.5vmin 0 #515676;
+  box-shadow: 0.5vmin -0.5vmin 0 #273746;
 }
 
 .arrow:before {

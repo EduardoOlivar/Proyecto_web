@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.js";
 import "katex/dist/katex.min.css";
 import axios from "axios";
-import Ensayo from "../Ensayo";
+import Ensayo from "./Ensayo";
 import { useState, useEffect } from "react";
 
 const Apiurl = "http://127.0.0.1:8000/questions_alternative/?subject=numeros";
