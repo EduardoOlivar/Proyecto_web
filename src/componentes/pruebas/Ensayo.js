@@ -53,6 +53,7 @@ function Ensayo(props) {
   );
 
   const [areDisabled, setAreDisabled] = useState(false);
+const [selectedAnswers, setSelectedAnswers] = useState({});
 
   const [respuestaaa, setRespuesta] = useState([]);
   const [tituloPregunta, setTituloPregunta] = useState([]);
@@ -90,19 +91,19 @@ function Ensayo(props) {
   }, [tiempoRestante]);
 
   function handleAnswerSubmit(isCorrect, e, res, tituloP) {  // FUNCION AL MARCAR ALTERNATIVA 
-    setRespuesta((current) => [...current, res]); //actualiza el estado del componente agregando un nuevo valor (res) al final de un array (current) existente.
+    //setRespuesta((current) => [...current, res]); //actualiza el estado del componente agregando un nuevo valor (res) al final de un array (current) existente.
 
-    if (isCorrect === 1) {
-      setTituloPregunta((current) => [...current, tituloP]);
-      setPuntuacion(puntuación + 1);
-      cookies.set("scoreNumeros", puntuación + 1, { path: "/" });
-    } else {
-      setTituloPregunta((current) => [...current, "mala"]);
-    }
-    
-      setPreguntaActual(preguntaActual + 1);
+    //if (isCorrect === 1) {
+    //  setTituloPregunta((current) => [...current, tituloP]);
+    //  setPuntuacion(puntuación + 1);
+    //  cookies.set("scoreNumeros", puntuación + 1, { path: "/" });
+    //} else {
+      //setTituloPregunta((current) => [...current, "mala"]);
+    //}
+    //console.log(res);
+    //  setPreguntaActual(preguntaActual + 1);
 
-      setAreDisabled(false);
+     // setAreDisabled(false);
     
   }
   function finalizarEnsayo(){
@@ -303,26 +304,31 @@ function Ensayo(props) {
           <h3 className="enunciado-pregunta mb-3 katex">
             {<InlineMath math={props.ensayo[preguntaActual].question} />}
           </h3>
-
+        
           {props.ensayo[preguntaActual].answer.map((respuesta, idk) => (
             <button
-              type="button"
-              className="contenedor-alternativa-pregunta  "
-              disabled={areDisabled}
-              disableRipple
-              key={<InlineMath math={respuesta.label} />}
-              onClick={(e) =>
-                handleAnswerSubmit(
-                  respuesta.right,
-                  e,
-                  respuesta.label,
-                  props.ensayo[preguntaActual].question
-                )
-              }
-            >
-              <b>{String.fromCharCode(65 + idk) + " . "}</b>
-              {<InlineMath math={respuesta.label} />}
-            </button>
+            type="button"
+            className={`contenedor-alternativa-pregunta ${respuesta.label === selectedAnswers[preguntaActual] ? 'selected' : ''}`}
+            disabled={areDisabled}
+            disableRipple
+            key={<InlineMath math={respuesta.label} />}
+            onClick={(e) => {
+              setSelectedAnswers(prevAnswers => ({
+                ...prevAnswers,
+                [preguntaActual]: respuesta.label
+              }));
+         
+              handleAnswerSubmit(
+                respuesta.right,
+                e,
+                respuesta.label,
+                props.ensayo[preguntaActual].question
+              );
+            }}
+          >
+            <b>{String.fromCharCode(65 + idk) + " . "}</b>
+            {<InlineMath math={respuesta.label} />}
+          </button>
           ))}
           <div className="sumaResta">
             <a class="arrow left" onClick={retrocederPregunta}></a>
