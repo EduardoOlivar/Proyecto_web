@@ -99,15 +99,34 @@ function Ensayo(props) {
     } else {
       setTituloPregunta((current) => [...current, "mala"]);
     }
-    if (preguntaActual === props.ensayo.length - 1) {
-      cambiarEstado();
-      setIsFinished(true);
-    } else {
+    
       setPreguntaActual(preguntaActual + 1);
 
       setAreDisabled(false);
-    }
+    
   }
+  function finalizarEnsayo(){
+    cambiarEstado();
+    setIsFinished(true);
+  }
+  function volverAlEnsayo(){
+    setRespuesta((current) => {
+      const newRespuestas = [...current];
+      newRespuestas.pop(); // Eliminar la última respuesta del array
+      return newRespuestas;
+    });
+    setTituloPregunta((current) => {
+      const newTitulos = [...current];
+      newTitulos.pop(); // Eliminar el último título de pregunta del array
+      return newTitulos;
+    });
+    if (puntuación > 0) {
+      setPuntuacion(puntuación - 1); // Disminuir la puntuación en 1 si es mayor a 0
+      cookies.set("scoreNumeros", puntuación - 1, { path: "/" });
+    }
+    if (preguntaActual > 0) setPreguntaActual(preguntaActual - 1); // Disminuir el número de pregunta en 1
+  }
+
   function retrocederPregunta() {
     setRespuesta((current) => {
       const newRespuestas = [...current];
@@ -126,7 +145,7 @@ function Ensayo(props) {
     if (preguntaActual > 0) setPreguntaActual(preguntaActual - 1); // Disminuir el número de pregunta en 1
   }
   function siguientePregunta() {
-    if (preguntaActual < props.ensayo.length - 1) {
+    if (preguntaActual < props.ensayo.length) {
       setRespuesta((current) => [...current, "nada"]);
       setPreguntaActual(preguntaActual + 1); // Disminuir el número de pregunta en 1
 
@@ -250,7 +269,7 @@ function Ensayo(props) {
         </main>
       </div>
     );
-
+  
   return (
     <div>
       <Navbar usuario={cookies.get("username")} />
@@ -260,6 +279,7 @@ function Ensayo(props) {
         color={props.colorEnsayo}
       />
       <div className="contenedor-principal position-relative ">
+      {preguntaActual  < (props.ensayo.length)  && (
         <div className="contenedor-pregunta">
           <div className="row">
             <div className="col-md">
@@ -309,7 +329,18 @@ function Ensayo(props) {
             <a class="arrow right" onClick={siguientePregunta}></a>
           </div>
         </div>
+           )}
+            {preguntaActual === props.ensayo.length && (
+    <div  className="contenedor-pregunta" >
+      <h2 className="heroTerminar">¿Quiere terminar este ensayo?</h2>
+      <div className="contenedor-preguntaVolverTerminar  ">
+        <button onClick={volverAlEnsayo} className="btnVolverTerminar btn btn-dark">No, quiero volver</button>
+        <button onClick={finalizarEnsayo}className="btnVolverTerminar btn btn-dark">Si, quiero terminar el ensayo</button>
       </div>
+    </div>
+  )}
+      </div>
+   
     </div>
   );
 }
