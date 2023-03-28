@@ -67,7 +67,11 @@ const [selectedAnswers, setSelectedAnswers] = useState({});
   };
 
   let timer;
-
+  function reiniciarTiempo() {
+    let tiempoInicial =  props.ensayo.length * 60 * 2
+    setTiempoRestante( tiempoInicial);
+    localStorage.setItem("tiempoRestante", tiempoInicial.toString());
+  }
   useEffect(() => {
     timer = setInterval(() => {
       if (tiempoRestante > 0) setTiempoRestante((prev) => prev - 1);
@@ -91,15 +95,21 @@ const [selectedAnswers, setSelectedAnswers] = useState({});
   }, [tiempoRestante]);
 
   function handleAnswerSubmit(isCorrect, e, res, tituloP) {  // FUNCION AL MARCAR ALTERNATIVA 
-    //setRespuesta((current) => [...current, res]); //actualiza el estado del componente agregando un nuevo valor (res) al final de un array (current) existente.
+    setRespuesta((current) => {
+      const newRespuestas = [...current];
+      newRespuestas[preguntaActual] = res;
+      return newRespuestas;
+    });
+ //actualiza el estado del componente agregando un nuevo valor (res) al final de un array (current) existente.
+    console.log(respuestaaa)
+    setTituloPregunta((current) => {
+      const newTitulos = [...current];
+      newTitulos[preguntaActual] = isCorrect === 1 ? tituloP : "mala";
+      return newTitulos;
+    });
 
-    //if (isCorrect === 1) {
-    //  setTituloPregunta((current) => [...current, tituloP]);
-    //  setPuntuacion(puntuación + 1);
-    //  cookies.set("scoreNumeros", puntuación + 1, { path: "/" });
-    //} else {
-      //setTituloPregunta((current) => [...current, "mala"]);
-    //}
+
+  
     //console.log(res);
     //  setPreguntaActual(preguntaActual + 1);
 
@@ -107,6 +117,7 @@ const [selectedAnswers, setSelectedAnswers] = useState({});
     
   }
   function finalizarEnsayo(){
+  
     cambiarEstado();
     setIsFinished(true);
   }
@@ -129,16 +140,8 @@ const [selectedAnswers, setSelectedAnswers] = useState({});
   }
 
   function retrocederPregunta() {
-    setRespuesta((current) => {
-      const newRespuestas = [...current];
-      newRespuestas.pop(); // Eliminar la última respuesta del array
-      return newRespuestas;
-    });
-    setTituloPregunta((current) => {
-      const newTitulos = [...current];
-      newTitulos.pop(); // Eliminar el último título de pregunta del array
-      return newTitulos;
-    });
+
+ 
     if (puntuación > 0) {
       setPuntuacion(puntuación - 1); // Disminuir la puntuación en 1 si es mayor a 0
       cookies.set("scoreNumeros", puntuación - 1, { path: "/" });
@@ -147,10 +150,10 @@ const [selectedAnswers, setSelectedAnswers] = useState({});
   }
   function siguientePregunta() {
     if (preguntaActual < props.ensayo.length) {
-      setRespuesta((current) => [...current, "nada"]);
+      //setRespuesta((current) => [...current, "nada"]);
       setPreguntaActual(preguntaActual + 1); // Disminuir el número de pregunta en 1
 
-      setTituloPregunta((current) => [...current, "mala"]);
+     // setTituloPregunta((current) => [...current, "mala"]);
     }
   }
 
@@ -251,7 +254,7 @@ const [selectedAnswers, setSelectedAnswers] = useState({});
           </div>
 
           <button
-            onClick={() => (window.location.href = "./" + props.urlEnsayo)}
+            onClick={() => reiniciarTiempo() (window.location.href = "./" + props.urlEnsayo)}
             type="button"
             className="botonQ btn btn-warning btn-lg m-3"
             id="bot"
