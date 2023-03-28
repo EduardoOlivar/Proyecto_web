@@ -1,44 +1,29 @@
 .contenedor-pregunta {
-  border: 2.5px solid #34495e;
+  border: 2px solid #34495e;
   border-radius: 7px;
   padding: 10px;
   margin: 10px 0;
   font-size: 25px;
-  background-color: white;
-  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
-  transition: box-shadow 0.3s ease-in-out;
-}
-.heroTerminar{
-  display: flex;
-  justify-content: center;
-  text-align: center;
-
-  margin-top: 1rem;
-}
-.contenedor-preguntaVolverTerminar {
- 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
+  background-color: #f4f6f7;
 }
 /*suma y resta*/
 .sumaResta{
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   align-content: center;
- 
-
-
-}
-.selected {
-  background-color: #b3b6b7 !important;
+  margin-left: 23%;
 }
 
 
+button.btn.btn-secondary:hover{
+  background-color: orange;
+}
 
 
+.seleccionada{
+  background-color: blue !important;
+}
 .arrow {
 	position: relative;
   top: 20px;
@@ -63,14 +48,7 @@
   right: 0;
   transform: translate3d(0,-50%,0) rotate(45deg);
 }
-.btnVolverTerminar{
-  margin: 4rem;
-  margin-top: 4rem;
-  margin-bottom: 5rem;
-  display: flex;
-  padding: 15px !important;
-  font-weight: bold !important;
-}
+
 .arrow:hover {
   border-color: orange;
   box-shadow: 0.5vmin -0.5vmin 0 #273746;
