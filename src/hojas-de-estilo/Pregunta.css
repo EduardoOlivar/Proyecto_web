@@ -1,87 +1,29 @@
 .contenedor-pregunta {
-  border: 2.5px solid #34495e;
+  border: 2px solid #34495e;
   border-radius: 7px;
   padding: 10px;
   margin: 10px 0;
   font-size: 25px;
-  background-color: white;
-  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
-  transition: box-shadow 0.3s ease-in-out;
-}
-.heroTerminar{
-  display: flex;
-  justify-content: center;
-  text-align: center;
-
-  margin-top: 1rem;
-}
-.contenedor-preguntaVolverTerminar {
- 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
+  background-color: #f4f6f7;
 }
 /*suma y resta*/
 .sumaResta{
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   align-content: center;
- 
+  margin-left: 23%;
+}
+
 
 
 }
-
 .selected {
-  background-color: #ffc107 !important;
-  animation: apretar 0.2s;
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+  background-color: #b3b6b7 !important;
 }
 
-@keyframes apretar {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
 
-.timer-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100px !important;
-  height: 50px;
-  margin-right: 1rem;
-  background-color: #fff;
-  font-size: 24px;
-  border-radius: 10px;
-  font-weight: bold;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  border: 6px solid #ffc107;
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.6);
-}
 
-.MuiSvgIcon-root {
-  stroke-width: 4 !important;
-}
-.timer-container:hover {
-  background-color: #ccc;
-}
-
-.timer-container.hide {
- 
-  
-  background-color: #ffc107;
- 
-}
 
 .arrow {
 	position: relative;
@@ -107,14 +49,7 @@
   right: 0;
   transform: translate3d(0,-50%,0) rotate(45deg);
 }
-.btnVolverTerminar{
-  margin: 4rem;
-  margin-top: 4rem;
-  margin-bottom: 5rem;
-  display: flex;
-  padding: 15px !important;
-  font-weight: bold !important;
-}
+
 .arrow:hover {
   border-color: orange;
   box-shadow: 0.5vmin -0.5vmin 0 #273746;

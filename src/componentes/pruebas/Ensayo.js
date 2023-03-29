@@ -1,6 +1,6 @@
 import React from "react";
 import "../../hojas-de-estilo/Pregunta.css";
-import preguntas from "../../ensayoNumeros";
+// import preguntas from "../../ensayoNumeros";
 import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.js";
@@ -38,6 +38,9 @@ function Ensayo(props) {
       }
     }
   };
+  
+  // lo usaremos para una comparativa.
+  let largo = props.ensayo.length -1;
 
   const preguntaCorrectaOrNot = (qna, j) => {
     if (qna.question === tituloPregunta[j]) {
@@ -46,17 +49,15 @@ function Ensayo(props) {
       return { sx: { color: red[500] } };
     }
   };
-  let largo = props.ensayo.length -1;
-  const [preguntaActual, setPreguntaActual] = useState(0);
-  const [puntuación, setPuntuacion] = useState(0);
-  const [isFinished, setIsFinished] = useState(false);
-  const [tiempoRestante, setTiempoRestante] = useState(
-    parseInt(localStorage.getItem("tiempoRestante")) ||
-      props.ensayo.length * 60 * 2
-  );
 
+  const [preguntaActual, setPreguntaActual] = useState(0);
+  const [puntuación, setPuntuacion] = useState({});
+  const [isFinished, setIsFinished] = useState(false);
+
+  //se declara los segundos del examen dependiendo el largo del ensayo.
+  const [tiempoRestante, setTiempoRestante] = useState(
+    parseInt(localStorage.getItem("tiempoRestante")) || props.ensayo.length * 60 * 2);
   const [areDisabled, setAreDisabled] = useState(false);
-const [selectedAnswers, setSelectedAnswers] = useState({});
 
   const [respuestaaa, setRespuesta] = useState([]);
   const [tituloPregunta, setTituloPregunta] = useState([]);
@@ -77,11 +78,17 @@ const [selectedAnswers, setSelectedAnswers] = useState({});
     };
   
   let timer;
-  function reiniciarTiempo() {
-    let tiempoInicial =  props.ensayo.length * 60 * 2
-    setTiempoRestante( tiempoInicial);
-    localStorage.setItem("tiempoRestante", tiempoInicial.toString());
+
+  // lo que hace la funcion, es que cada respuesta de la pregunta actual se ira actualizando y guardando en el setrespuesta.
+  // esto quiere decir que cada vez que marques una respuesta se va a sobreescribir en si dependiendo la preguntaActual.
+  // con esto generamos que se guarden las respuestas al avanzar o retroceder.
+  const handleRespuestaSeleccionada =(respuesta) =>{
+    setRespuestaSeleccionado(respuestaPrevia =>({
+      ...respuestaPrevia,
+      [preguntaActual]:respuesta.label
+    }))
   }
+
   useEffect(() => {
     timer = setInterval(() => {
       if (tiempoRestante > 0) setTiempoRestante((prev) => prev - 1);
@@ -118,10 +125,7 @@ const [selectedAnswers, setSelectedAnswers] = useState({});
       return newTitulos;
     });
 
-    setPuntuacion ((current) => ({
-      ...current,
-      [preguntaActual]:isCorrect === 1 ? "Correcto": "Incorrecta"
-    }))
+
   
     //console.log(res);
     //  setPreguntaActual(preguntaActual + 1);
@@ -133,16 +137,6 @@ const [selectedAnswers, setSelectedAnswers] = useState({});
   
     cambiarEstado();
     setIsFinished(true);
-    
-  }
-  let puntajeFinal = 0;
-  // cuando la funcion terminar se ejecute que haga el conteo de la puntuacion.
-  if(setIsFinished){
-    for(let puntaje in puntuación){
-      if(puntuación[puntaje] === 'Correcto'){
-        puntajeFinal +=1;
-      }
-    }
   }
   function volverAlEnsayo(){
     setRespuesta((current) => {
@@ -163,23 +157,38 @@ const [selectedAnswers, setSelectedAnswers] = useState({});
   }
   function Terminar(){
 
-    setPreguntaActual(preguntaActual - 1)
- }
   function retrocederPregunta() {
-
- 
+    
     if (puntuación > 0) {
-      setPuntuacion(puntuación - 1); // Disminuir la puntuación en 1 si es mayor a 0
+      // setPuntuacion(puntuación - 1); // Disminuir la puntuación en 1 si es mayor a 0
       cookies.set("scoreNumeros", puntuación - 1, { path: "/" });
     }
     if (preguntaActual > 0) setPreguntaActual(preguntaActual - 1); // Disminuir el número de pregunta en 1
   }
+  
   function siguientePregunta() {
-    if (preguntaActual < props.ensayo.length) {
-      //setRespuesta((current) => [...current, "nada"]);
+    if (preguntaActual < props.ensayo.length - 1) {
+      // setRespuesta((current) => [...current, "nada"]);
       setPreguntaActual(preguntaActual + 1); // Disminuir el número de pregunta en 1
+      // setTituloPregunta((current) => [...current, "mala"]);
+    }
+  }
 
-     // setTituloPregunta((current) => [...current, "mala"]);
+  // funcion que termina y envia el examen.
+  function Terminar(){
+
+    cambiarEstado();
+    setIsFinished(true);
+  }
+
+  // declaro una variable para el puntaje
+  let puntajeFinal = 0;
+  // cuando la funcion terminar se ejecute que haga el conteo de la puntuacion.
+  if(setIsFinished){
+    for(let puntaje in puntuación){
+      if(puntuación[puntaje] === 'Correcto'){
+        puntajeFinal +=1;
+      }
     }
   }
 
@@ -198,6 +207,8 @@ const [selectedAnswers, setSelectedAnswers] = useState({});
 
   if (isFinished)
     return (
+
+      // la parte alta al finalizar el examen.
       <div>
         <Navbar />
         <main className="contenedor-principal">
@@ -216,7 +227,7 @@ const [selectedAnswers, setSelectedAnswers] = useState({});
                         </div>
                         <div className="col">
                           <h3>
-                          {puntajeFinal}/{props.ensayo.length}
+                            {puntuación}/{props.ensayo.length}
                           </h3>
                         </div>
                       </div>
@@ -225,9 +236,11 @@ const [selectedAnswers, setSelectedAnswers] = useState({});
                 </div>
               </div>
             </div>
-
+        {/*  */}
+          
             <div class="accordion mt-4" id="accordionExample">
               <div>
+                {/* son los iconos finales al finalizar el examen. como la respueata, video... */}
                 {props.ensayo.map((item, j) => (
                   <Accordion
                     disableGutters
@@ -278,9 +291,12 @@ const [selectedAnswers, setSelectedAnswers] = useState({});
               </div>
             </div>
           </div>
+          {/* hasta aqui */}
+          
+
 
           <button
-            onClick={() => reiniciarTiempo() (window.location.href = "./" + props.urlEnsayo)}
+            onClick={() => (window.location.href = "./" + props.urlEnsayo)}
             type="button"
             className="botonQ btn btn-warning btn-lg m-3"
             id="bot"
@@ -300,6 +316,8 @@ const [selectedAnswers, setSelectedAnswers] = useState({});
       </div>
     );
   
+
+  // de aqui hacia abajo es el examen, preguntas y respuestas.  
   return (
     <div>
       <Navbar usuario={cookies.get("username")} />
@@ -309,7 +327,6 @@ const [selectedAnswers, setSelectedAnswers] = useState({});
         color={props.colorEnsayo}
       />
       <div className="contenedor-principal position-relative ">
-      {preguntaActual  < (props.ensayo.length)  && (
         <div className="contenedor-pregunta">
           <div className="row">
             <div className="col-md">
@@ -344,43 +361,40 @@ const [selectedAnswers, setSelectedAnswers] = useState({});
           <h3 className="enunciado-pregunta mb-3 katex">
             {<InlineMath math={props.ensayo[preguntaActual].question} />}
           </h3>
-        
+
+
+          {/* las respuestas de la pregunta actual */}
           {props.ensayo[preguntaActual].answer.map((respuesta, idk) => (
             <button
-            type="button"
-            className={`contenedor-alternativa-pregunta ${respuesta.label === selectedAnswers[preguntaActual] ? 'selected' : ''}`}
-            disabled={areDisabled}
-            disableRipple
-            key={<InlineMath math={respuesta.label} />}
-            onClick={(e) => {
-              setSelectedAnswers(prevAnswers => ({
-                ...prevAnswers,
-                [preguntaActual]: respuesta.label
-              }));
-         
-              handleAnswerSubmit(
-                respuesta.right,
-                e,
-                respuesta.label,
-                props.ensayo[preguntaActual].question
-              );
-            }}
-          >
-            <b>{String.fromCharCode(65 + idk) + " . "}</b>
-            {<InlineMath math={respuesta.label} />}
-          </button>
+              type="button"
+              // si la respuesta.label es igual a la respuesta seleccionada de la pregunta actual, que coloque una classname al que fue seleccionado.
+              className={`contenedor-alternativa-pregunta ${respuesta.label === respuestaSeleccionada[preguntaActual] ? 'seleccionada' : ''}`}
+              
+              disabled={areDisabled}
+              disableRipple
+              // inlineMath para mostrar forumulas matematicas por katex.
+              key={<InlineMath math={respuesta.label} />}
+              onClick={(e) =>{
+                  handleRespuestaSeleccionada(respuesta)
+                  handleAnswerSubmit(
+                  respuesta.right,
+                  e,
+                  respuesta.label,
+                  props.ensayo[preguntaActual].question
+                )
+              }
+              }
+              
+            >
+              <b>{String.fromCharCode(65 + idk) + " . "}</b>
+              {<InlineMath math={respuesta.label} />}
+            </button>
           ))}
           <div className="sumaResta">
             <a class="arrow left" onClick={retrocederPregunta}></a>
             <a class="arrow right" onClick={siguientePregunta}></a>
-            
-  
-     
-     </div>
-
+          </div>
         </div>
-        
-        
            )}
             {preguntaActual === props.ensayo.length && (
     <div  className="contenedor-pregunta" >
@@ -389,10 +403,6 @@ const [selectedAnswers, setSelectedAnswers] = useState({});
         <button onClick={volverAlEnsayo} className="btnVolverTerminar btn btn-dark">No, quiero volver</button>
         <button onClick={finalizarEnsayo}className="btnVolverTerminar btn btn-dark">Si, quiero terminar el ensayo</button>
       </div>
-    </div>
-  )}
-      </div>
-   
     </div>
   );
 }
