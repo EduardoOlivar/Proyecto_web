@@ -32,12 +32,56 @@
 
 
 }
+
 .selected {
-  background-color: #b3b6b7 !important;
+  background-color: #ffc107 !important;
+  animation: apretar 0.2s;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
 }
 
+@keyframes apretar {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 
+.timer-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px !important;
+  height: 50px;
+  margin-right: 1rem;
+  background-color: #fff;
+  font-size: 24px;
+  border-radius: 10px;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  border: 6px solid #ffc107;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.6);
+}
 
+.MuiSvgIcon-root {
+  stroke-width: 4 !important;
+}
+.timer-container:hover {
+  background-color: #ccc;
+}
+
+.timer-container.hide {
+ 
+  
+  background-color: #ffc107;
+ 
+}
 
 .arrow {
 	position: relative;

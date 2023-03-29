@@ -20,6 +20,9 @@ import HeadEnsayo from "../navbar/HeadEnsayo";
 import Cookies from "universal-cookie";
 import "katex/dist/katex.min.css";
 
+import AccessTimeIcon from '@mui/icons-material/AccessTimeFilled';
+
+
 const cookies = new Cookies();
 function Ensayo(props) {
   const [expanded, setExpanded] = React.useState(false);
@@ -43,7 +46,7 @@ function Ensayo(props) {
       return { sx: { color: red[500] } };
     }
   };
-
+  let largo = props.ensayo.length -1;
   const [preguntaActual, setPreguntaActual] = useState(0);
   const [puntuación, setPuntuacion] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
@@ -65,7 +68,14 @@ const [selectedAnswers, setSelectedAnswers] = useState({});
       setLoading(false);
     }, 1000);
   };
-
+  const [isHidden, setIsHidden] = useState(false);
+  function handleClick() {
+    
+  
+   
+      setIsHidden(!isHidden);
+    };
+  
   let timer;
   function reiniciarTiempo() {
     let tiempoInicial =  props.ensayo.length * 60 * 2
@@ -108,7 +118,10 @@ const [selectedAnswers, setSelectedAnswers] = useState({});
       return newTitulos;
     });
 
-
+    setPuntuacion ((current) => ({
+      ...current,
+      [preguntaActual]:isCorrect === 1 ? "Correcto": "Incorrecta"
+    }))
   
     //console.log(res);
     //  setPreguntaActual(preguntaActual + 1);
@@ -120,6 +133,16 @@ const [selectedAnswers, setSelectedAnswers] = useState({});
   
     cambiarEstado();
     setIsFinished(true);
+    
+  }
+  let puntajeFinal = 0;
+  // cuando la funcion terminar se ejecute que haga el conteo de la puntuacion.
+  if(setIsFinished){
+    for(let puntaje in puntuación){
+      if(puntuación[puntaje] === 'Correcto'){
+        puntajeFinal +=1;
+      }
+    }
   }
   function volverAlEnsayo(){
     setRespuesta((current) => {
@@ -138,7 +161,10 @@ const [selectedAnswers, setSelectedAnswers] = useState({});
     }
     if (preguntaActual > 0) setPreguntaActual(preguntaActual - 1); // Disminuir el número de pregunta en 1
   }
+  function Terminar(){
 
+    setPreguntaActual(preguntaActual - 1)
+ }
   function retrocederPregunta() {
 
  
@@ -190,7 +216,7 @@ const [selectedAnswers, setSelectedAnswers] = useState({});
                         </div>
                         <div className="col">
                           <h3>
-                            {puntuación}/{props.ensayo.length}
+                          {puntajeFinal}/{props.ensayo.length}
                           </h3>
                         </div>
                       </div>
@@ -291,17 +317,28 @@ const [selectedAnswers, setSelectedAnswers] = useState({});
                 Pregunta {preguntaActual + 1} de {props.ensayo.length}
               </h2>
             </div>
-
-            <div className="align-items-center  col-md-2 ">
-              <h3 className="tiempo text-center ">
-                {getFormatedTime(tiempoRestante)}
-              </h3>
-            </div>
+            <div
+      className={`timer-container ${isHidden ? 'hide' : ''}`}
+      onClick={handleClick}
+    >
+      {isHidden ? (
+        <AccessTimeIcon  fontSize="large" style={{color:"white"}}/>
+      ) : (
+         <h3 className="tiempo text-center mt-2">
+        {getFormatedTime(tiempoRestante)}
+      </h3>
+      )}
+    </div>
+           
           </div>
           <Box className="mt-3 mb-3">
             <LinearProgress
               variant="determinate"
               value={((preguntaActual + 1) * 100) / props.ensayo.length}
+              color="warning"
+              style={{
+                boxShadow: '0px 2px 2px rgba(0, 0, 0, 0.2)',
+              }}
             />
           </Box>
           <h3 className="enunciado-pregunta mb-3 katex">
@@ -336,8 +373,14 @@ const [selectedAnswers, setSelectedAnswers] = useState({});
           <div className="sumaResta">
             <a class="arrow left" onClick={retrocederPregunta}></a>
             <a class="arrow right" onClick={siguientePregunta}></a>
-          </div>
+            
+  
+     
+     </div>
+
         </div>
+        
+        
            )}
             {preguntaActual === props.ensayo.length && (
     <div  className="contenedor-pregunta" >
