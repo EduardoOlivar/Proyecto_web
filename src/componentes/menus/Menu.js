@@ -24,7 +24,7 @@ function Menu() {
         <div className="row">
           <NombreEnsayo
             temario="Eje general"
-            imagen={mate}
+            imagen={numeros}
             urlEnsayo="Pregunta"
             score="scoreGeneral"
             puntosTotal="5"

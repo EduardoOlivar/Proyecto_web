@@ -1,4 +1,5 @@
 import React from "react";
+
 import "../../hojas-de-estilo/Pregunta.css";
 import preguntas from "../../ensayoNumeros";
 import { useState, useEffect } from "react";
@@ -19,6 +20,7 @@ import Navbar from "../navbar/Navbar";
 import HeadEnsayo from "../navbar/HeadEnsayo";
 import Cookies from "universal-cookie";
 import "katex/dist/katex.min.css";
+import replace from 'react-string-replace'; // Importa la biblioteca react-string-replace
 
 import AccessTimeIcon from '@mui/icons-material/AccessTimeFilled';
 
@@ -57,6 +59,13 @@ function Ensayo(props) {
 
   const [areDisabled, setAreDisabled] = useState(false);
 const [selectedAnswers, setSelectedAnswers] = useState({});
+
+const textoDesdeDB = "Cuanto es [\\frac{1}{2}], y ademas [\\int_{0}^{\\infty} e^{-x^2} dx = \\frac{\\sqrt{\\pi}}{2}\]";
+  const ecuacionRegex = /\[(.*?)\]/g; // Expresión regular para detectar partes de la cadena que contienen ecuaciones
+
+
+
+
 
   const [respuestaaa, setRespuesta] = useState([]);
   const [tituloPregunta, setTituloPregunta] = useState([]);
@@ -243,7 +252,9 @@ const [selectedAnswers, setSelectedAnswers] = useState({});
                       }
                     >
                       <Typography>
-                        {j + 1}. <InlineMath math={item.question} />
+                        {j + 1}. {replace((item.question).replace('Â', ''), ecuacionRegex, (match, i) => {
+         return <InlineMath key={i} math={match} />;
+      })} 
                       </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
@@ -342,7 +353,11 @@ const [selectedAnswers, setSelectedAnswers] = useState({});
             />
           </Box>
           <h3 className="enunciado-pregunta mb-3 katex">
-            {<InlineMath math={props.ensayo[preguntaActual].question} />}
+          <div>
+      {replace((props.ensayo[preguntaActual].question).replace('Â', ''), ecuacionRegex, (match, i) => {
+         return <InlineMath key={i} math={match} />;
+      })}
+    </div>
           </h3>
         
           {props.ensayo[preguntaActual].answer.map((respuesta, idk) => (
