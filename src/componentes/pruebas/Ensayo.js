@@ -49,6 +49,7 @@ function Ensayo(props) {
     }
   };
   let largo = props.ensayo.length -1;
+  const navigationItems = [...Array(30).keys()];
   const [preguntaActual, setPreguntaActual] = useState(0);
   const [puntuación, setPuntuacion] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
@@ -143,6 +144,9 @@ const textoDesdeDB = "Cuanto es [\\frac{1}{2}], y ademas [\\int_{0}^{\\infty} e^
     cambiarEstado();
     setIsFinished(true);
     
+  }
+  function handleClickNav(j){
+    setPreguntaActual(j);
   }
   let puntajeFinal = 0;
   // cuando la funcion terminar se ejecute que haga el conteo de la puntuacion.
@@ -266,7 +270,9 @@ const textoDesdeDB = "Cuanto es [\\frac{1}{2}], y ademas [\\int_{0}^{\\infty} e^
                             key={respuesta.label}
                           >
                             <b>{String.fromCharCode(65 + i) + " . "}</b>
-                            <InlineMath math={respuesta.label} />
+                           {replace((respuesta.label).replace('Â', ''), ecuacionRegex, (match, i) => {
+         return <InlineMath key={i} math={match} />;
+      })} 
                           </label>
                         </Typography>
                       ))}
@@ -322,14 +328,14 @@ const textoDesdeDB = "Cuanto es [\\frac{1}{2}], y ademas [\\int_{0}^{\\infty} e^
       <div className="contenedor-principal position-relative ">
       {preguntaActual  < (props.ensayo.length)  && (
         <div className="contenedor-pregunta">
-          <div className="row">
-            <div className="col-md">
+          <div className="row ">
+            <div className="col-md mt-3">
               <h2>
                 Pregunta {preguntaActual + 1} de {props.ensayo.length}
               </h2>
             </div>
             <div
-      className={`timer-container ${isHidden ? 'hide' : ''}`}
+      className={`timer-container col-7-md m-3  ${isHidden ? 'hide' : ''}`}
       onClick={handleClick}
     >
       {isHidden ? (
@@ -342,6 +348,8 @@ const textoDesdeDB = "Cuanto es [\\frac{1}{2}], y ademas [\\int_{0}^{\\infty} e^
     </div>
            
           </div>
+          
+         
           <Box className="mt-3 mb-3">
             <LinearProgress
               variant="determinate"
@@ -382,7 +390,9 @@ const textoDesdeDB = "Cuanto es [\\frac{1}{2}], y ademas [\\int_{0}^{\\infty} e^
             }}
           >
             <b>{String.fromCharCode(65 + idk) + " . "}</b>
-            {<InlineMath math={respuesta.label} />}
+            {replace((respuesta.label).replace('Â', ''), ecuacionRegex, (match, i) => {
+         return <InlineMath key={i} math={match} />;
+      })}
           </button>
           ))}
           <div className="sumaResta">
@@ -392,6 +402,7 @@ const textoDesdeDB = "Cuanto es [\\frac{1}{2}], y ademas [\\int_{0}^{\\infty} e^
   
      
      </div>
+     
 
         </div>
         
@@ -407,7 +418,16 @@ const textoDesdeDB = "Cuanto es [\\frac{1}{2}], y ademas [\\int_{0}^{\\infty} e^
     </div>
   )}
       </div>
-   
+      <div className="navigation-container">
+      <div className="navigation-items">
+        {props.ensayo.map((item,j) => (
+          <div className= {`navigation-item ${j === preguntaActual ? 'selected' : ''} ${selectedAnswers[j] ? 'answered' : ''} `} key={item}  onClick={() =>handleClickNav(j)}>
+            {j+1}
+          </div>
+        ))}
+        <div className="navigation-item" onClick={() =>setPreguntaActual(props.ensayo.length )}>!</div>
+      </div>
+    </div>
     </div>
   );
 }
