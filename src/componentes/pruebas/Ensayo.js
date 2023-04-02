@@ -421,11 +421,11 @@ const textoDesdeDB = "Cuanto es [\\frac{1}{2}], y ademas [\\int_{0}^{\\infty} e^
       <div className="navigation-container">
       <div className="navigation-items">
         {props.ensayo.map((item,j) => (
-          <div className= {`navigation-item ${j === preguntaActual ? 'selected' : ''} ${selectedAnswers[j] ? 'answered' : ''} `} key={item}  onClick={() =>handleClickNav(j)}>
+          <div className= {`navigation-item ${j === preguntaActual ? 'selected-nav' : ''} ${selectedAnswers[j] ? 'answered' : ''} `} key={item}  onClick={() =>handleClickNav(j)}>
             {j+1}
           </div>
         ))}
-        <div className="navigation-item" onClick={() =>setPreguntaActual(props.ensayo.length )}>!</div>
+        <div className={`navigation-item ${props.ensayo.length === preguntaActual ? 'selected-nav' : ''}`}  onClick={() =>setPreguntaActual(props.ensayo.length )} >!</div>
       </div>
     </div>
     </div>

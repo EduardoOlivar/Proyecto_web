@@ -11,7 +11,7 @@
 body {
     font-family: 'Poppins', sans-serif;
     box-sizing: border-box;
-    background: whitesmoke;
+    background: white;
     color:var(--color-fuente);
     background-size: cover;
     background-attachment: fixed;

@@ -2,7 +2,8 @@
   border: 2.5px solid #34495e;
   border-radius: 7px;
   padding: 10px;
-  margin: 10px 0;
+ 
+
   font-size: 25px;
   background-color: white;
   box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
@@ -41,7 +42,12 @@
   animation: apretar 0.2s;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
 }
-
+.selected-nav{
+  animation: apretar 0.2s;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+  border-bottom-color: #ffc107 !important;
+  border-bottom: 12px solid;
+}
 @keyframes apretar {
   0% {
     transform: scale(1);
@@ -66,6 +72,7 @@
   white-space: nowrap;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
   margin: auto; /* Agregado para centrar el contenedor */
+  margin-top: 0 !important;
   margin-bottom: 2rem !important;
 }
 
