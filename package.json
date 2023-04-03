@@ -23,6 +23,7 @@
     "react-bootstrap": "^2.7.2",
     "react-dom": "^18.2.0",
     "react-google-recaptcha": "^2.1.0",
+    "react-joyride": "^2.5.3",
     "react-katex": "^3.0.1",
     "react-mathjax2": "^0.0.2",
     "react-mathquill": "^1.0.3",

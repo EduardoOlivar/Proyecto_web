@@ -50,14 +50,14 @@ function NombreEnsayo(props) {
         <Modal.Header closeButton>
         
         </Modal.Header>
-        <Modal.Body  closeButton>
+        <Modal.Body  >
         <h2>{props.contentTitulo}</h2>
               
                 <p className="modal-bodyText">{props.contentBody}</p>
         
             
-              
-         <TipsPAES/>
+             <div className="contentTipPAES"> <TipsPAES/></div> 
+        
           <Button
             variant="dark"
             className={props.estadoBoton + " btn-lg m-2 "}

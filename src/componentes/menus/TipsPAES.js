@@ -4,8 +4,8 @@ import frases from "../../frases";
 function TipsPAES() {
     const numeroAleatorio = Math.floor(Math.random() * frases.length) ;
     return(
-    <div class="motivation-container">
-    <p class="motivation-text">"{frases[numeroAleatorio]}"</p>
+    <div className="motivation-container">
+    <p className="motivation-text">"{frases[numeroAleatorio]}"</p>
      </div>
     )
 }
