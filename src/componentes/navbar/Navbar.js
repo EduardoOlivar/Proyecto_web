@@ -49,7 +49,7 @@ function Navbar() {
                 className="nav-link active "
                 aria-current="page"
                 href="#"
-                onClick={() => (window.location.href = "/Menu")}
+                onClick={() => (window.location.href = "/Menu",localStorage.removeItem("ensayo"),localStorage.removeItem("selectedAnswers"),localStorage.removeItem("preguntaActual"))}
               >
                 Inicio
               </a>

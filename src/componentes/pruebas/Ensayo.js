@@ -50,16 +50,22 @@ function Ensayo(props) {
   };
   let largo = props.ensayo.length -1;
   const navigationItems = [...Array(30).keys()];
-  const [preguntaActual, setPreguntaActual] = useState(0);
+  
+  const [preguntaActual, setPreguntaActual] = useState(
+    parseInt(localStorage.getItem("preguntaActual"))||0);
   const [puntuación, setPuntuacion] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
+  const [ensayo, setEnsayo] = useState(
+    JSON.parse(localStorage.getItem("ensayo")) || props.ensayo
+  );
   const [tiempoRestante, setTiempoRestante] = useState(
     parseInt(localStorage.getItem("tiempoRestante")) ||
       props.ensayo.length * 60 * 2
   );
 
   const [areDisabled, setAreDisabled] = useState(false);
-const [selectedAnswers, setSelectedAnswers] = useState({});
+const [selectedAnswers, setSelectedAnswers] = useState(
+  JSON.parse(localStorage.getItem("selectedAnswers"))||{});
 
 const textoDesdeDB = "Cuanto es [\\frac{1}{2}], y ademas [\\int_{0}^{\\infty} e^{-x^2} dx = \\frac{\\sqrt{\\pi}}{2}\]";
   const ecuacionRegex = /\[(.*?)\]/g; // Expresión regular para detectar partes de la cadena que contienen ecuaciones
@@ -68,8 +74,12 @@ const textoDesdeDB = "Cuanto es [\\frac{1}{2}], y ademas [\\int_{0}^{\\infty} e^
 
 
 
-  const [respuestaaa, setRespuesta] = useState([]);
-  const [tituloPregunta, setTituloPregunta] = useState([]);
+  const [respuestaaa, setRespuesta] = useState(
+    JSON.parse(localStorage.getItem("respuesta"))||[]);
+
+  const [tituloPregunta, setTituloPregunta] = useState(
+    JSON.parse(localStorage.getItem("tituloPregunta"))||[]);
+
   const [loading, setLoading] = useState(false);
 
   const cambiarEstado = () => {
@@ -109,10 +119,24 @@ const textoDesdeDB = "Cuanto es [\\frac{1}{2}], y ademas [\\int_{0}^{\\infty} e^
   if (pruebaName !== localStorage.getItem("ensayoActivo"))
     localStorage.setItem("tiempoRestante", 0);
   localStorage.setItem("ensayoActivo", pruebaName);
-
+  useEffect(() =>{
+    localStorage.setItem("tituloPregunta", JSON.stringify(tituloPregunta));
+  },[tituloPregunta]);
+  useEffect(() =>{
+    localStorage.setItem("respuesta", JSON.stringify(respuestaaa));
+  },[respuestaaa]);
   useEffect(() => {
     localStorage.setItem("tiempoRestante", tiempoRestante.toString());
   }, [tiempoRestante]);
+  useEffect(() => {
+    localStorage.setItem("preguntaActual", preguntaActual.toString());
+  }, [preguntaActual]);
+  useEffect(() => {
+    localStorage.setItem("ensayo", JSON.stringify(ensayo));
+  }, [ensayo]);
+  useEffect(() => {
+    localStorage.setItem("selectedAnswers", JSON.stringify(selectedAnswers));
+  }, [selectedAnswers]);
 
   function handleAnswerSubmit(isCorrect, e, res, tituloP) {  // FUNCION AL MARCAR ALTERNATIVA 
     setRespuesta((current) => {
@@ -241,7 +265,7 @@ const textoDesdeDB = "Cuanto es [\\frac{1}{2}], y ademas [\\int_{0}^{\\infty} e^
 
             <div class="accordion mt-4" id="accordionExample">
               <div>
-                {props.ensayo.map((item, j) => (
+                {ensayo.map((item, j) => (
                   <Accordion
                     disableGutters
                     key={j}
@@ -262,7 +286,7 @@ const textoDesdeDB = "Cuanto es [\\frac{1}{2}], y ademas [\\int_{0}^{\\infty} e^
                       </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                      {props.ensayo[j].answer.map((respuesta, i) => (
+                      {ensayo[j].answer.map((respuesta, i) => (
                         <Typography {...markCorrectOrNot(item, i, j)}>
                           <label
                             className="contenedor-alternativa-pregunta-respuesta "
@@ -306,7 +330,7 @@ const textoDesdeDB = "Cuanto es [\\frac{1}{2}], y ademas [\\int_{0}^{\\infty} e^
           </button>
 
           <button
-            onClick={() => (window.location.href = "/menu")}
+            onClick={() => (window.location.href = "/menu",localStorage.removeItem("ensayo"),localStorage.removeItem("selectedAnswers"),localStorage.removeItem("preguntaActual"),localStorage.removeItem("respuesta"),localStorage.removeItem("tituloPregunta") )}
             type="button"
             className="botonQ btn btn-dark btn-lg m-3"
             id="bot"
@@ -362,13 +386,13 @@ const textoDesdeDB = "Cuanto es [\\frac{1}{2}], y ademas [\\int_{0}^{\\infty} e^
           </Box>
           <h3 className="enunciado-pregunta mb-3 katex">
           <div>
-      {replace((props.ensayo[preguntaActual].question).replace('Â', ''), ecuacionRegex, (match, i) => {
+      {replace((ensayo[preguntaActual].question).replace('Â', ''), ecuacionRegex, (match, i) => {
          return <InlineMath key={i} math={match} />;
       })}
     </div>
           </h3>
         
-          {props.ensayo[preguntaActual].answer.map((respuesta, idk) => (
+          {ensayo[preguntaActual].answer.map((respuesta, idk) => (
             <button
             type="button"
             className={`contenedor-alternativa-pregunta ${respuesta.label === selectedAnswers[preguntaActual] ? 'selected' : ''}`}
@@ -385,7 +409,7 @@ const textoDesdeDB = "Cuanto es [\\frac{1}{2}], y ademas [\\int_{0}^{\\infty} e^
                 respuesta.right,
                 e,
                 respuesta.label,
-                props.ensayo[preguntaActual].question
+                ensayo[preguntaActual].question
               );
             }}
           >
@@ -420,12 +444,12 @@ const textoDesdeDB = "Cuanto es [\\frac{1}{2}], y ademas [\\int_{0}^{\\infty} e^
       </div>
       <div className="navigation-container">
       <div className="navigation-items">
-        {props.ensayo.map((item,j) => (
+        {ensayo.map((item,j) => (
           <div className= {`navigation-item ${j === preguntaActual ? 'selected-nav' : ''} ${selectedAnswers[j] ? 'answered' : ''} `} key={item}  onClick={() =>handleClickNav(j)}>
             {j+1}
           </div>
         ))}
-        <div className={`navigation-item ${props.ensayo.length === preguntaActual ? 'selected-nav' : ''}`}  onClick={() =>setPreguntaActual(props.ensayo.length )} >!</div>
+        <div className={`navigation-item ${ensayo.length === preguntaActual ? 'selected-nav' : ''}`}  onClick={() =>setPreguntaActual(ensayo.length )} >!</div>
       </div>
     </div>
     </div>
