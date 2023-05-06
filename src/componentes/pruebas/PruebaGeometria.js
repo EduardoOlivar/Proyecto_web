@@ -6,6 +6,7 @@ import "katex/dist/katex.min.css";
 import axios from "axios";
 import Ensayo from "./Ensayo";
 
+
 const Apiurl = "http://127.0.0.1:8000/questions_alternative/?subject=Geometria";
 function PruebaGeometria() {
   const [post, setPost] = React.useState(null);

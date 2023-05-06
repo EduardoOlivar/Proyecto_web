@@ -1,7 +1,7 @@
 .sidebar {
     max-width: 300px;
     width: 100%;
-    background-color: #f7f7f7;
+    background-color: white;
     padding: 20px;
     border-radius: 5px;
     max-height: auto;
@@ -27,6 +27,9 @@
     .sidebar li {
     margin-bottom: 20px;
     }
+    .sidebar li .active {
+      background-color: rgb(236, 180, 27);
+    }
     
     .sidebar a {
     color: #333;
@@ -37,7 +40,7 @@
     display: block;
     padding: 12px;
     border-radius: 5px;
-    background-color: #f2f2f2;
+    background-color: white;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.165) !important;
     }
     .pikachu{
@@ -88,6 +91,22 @@
     box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     width: 400px;
+
+}
+.cardGame:hover{
+  transform: translateY(-5px);
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+}
+.cardGame{
+  background-image: url(../images/Fondo\ de\ Pantalla\ Escritorio\ PC\ Abstracto\ Moderno\ Degradado\ Negro.png);
+  background-size: cover;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  width: 400px;
+  margin: 0;
+  cursor:pointer;
 }
 .logo{
     width: 150px;
@@ -115,13 +134,14 @@
     background-color: #fff;
     padding: 20px;
     border-radius: 5px;
-    max-width: 900px;
+    max-width: 700px;
     max-height: 50%;
     overflow-y: auto;
     margin-bottom: 0 !important;
     overflow-y: hidden;
     display: flex;
     margin: 0 !important;
+
   
     
   }
@@ -130,9 +150,14 @@
     /* position: relative; */
     /* width: auto; */
     margin-top:0; 
-    width: 750px !important;
+    width: 100%;
+    height: 700px;
     border: none;
     margin-bottom: 0;
+    display: flex;
+    
+    justify-content: center;
+   
     max-width: none !important;
     
     /* pointer-events: none; */
@@ -141,6 +166,7 @@
   .modal-header {
     display: flex;
     justify-content: flex-end;
+    width: 100% !important;
     align-items: center;
     margin-bottom: 0px;
     border: none;
@@ -153,7 +179,9 @@
     margin-top: 0;
     color: black;
     border: none;
-    margin: 0;
+    margin: 0 !important;
+    width: 80% !important;
+    
     
     
   }
@@ -161,6 +189,7 @@
     width: 100% !important;
     text-align: center;
     padding: 1px;
+    
 
   }
   .modal-bodyText{
@@ -199,7 +228,43 @@
     font-size: 20px;
     font-weight: bold;
   }
+  .container-universidades {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    background-color:rgb(241, 199, 84) ;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
   
+  
+  
+  .container-universidades label {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .container-universidades select,
+  input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-bottom: 0px;
+    width: 100%;
+    box-sizing: border-box;
+    cursor: pointer;
+  }
+  
+  .container-universidades select:focus,
+  input[type="text"]:focus {
+    outline: none;
+    border-color: #0077ff;
+    box-shadow: 0 0 4px rgba(0, 119, 255, 0.4);
+    
+  }
 @media screen and (max-width: 1193px) {
     /* Establecemos flexbox para que los elementos se muestren en columna */
     .section-menu {

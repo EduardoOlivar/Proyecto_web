@@ -1,7 +1,5 @@
 import React from "react";
-
 import "../../hojas-de-estilo/Pregunta.css";
-import preguntas from "../../ensayoNumeros";
 import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.js";
@@ -21,8 +19,8 @@ import HeadEnsayo from "../navbar/HeadEnsayo";
 import Cookies from "universal-cookie";
 import "katex/dist/katex.min.css";
 import replace from 'react-string-replace'; // Importa la biblioteca react-string-replace
-
 import AccessTimeIcon from '@mui/icons-material/AccessTimeFilled';
+import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
 
 
 const cookies = new Cookies();
@@ -53,7 +51,9 @@ function Ensayo(props) {
   
   const [preguntaActual, setPreguntaActual] = useState(
     parseInt(localStorage.getItem("preguntaActual"))||0);
-  const [puntuación, setPuntuacion] = useState(0);
+  const [puntuación, setPuntuacion] = useState(
+    JSON.parse(localStorage.getItem("puntuacion"))||""
+  );
   const [isFinished, setIsFinished] = useState(false);
   const [ensayo, setEnsayo] = useState(
     JSON.parse(localStorage.getItem("ensayo")) || props.ensayo
@@ -62,14 +62,14 @@ function Ensayo(props) {
     parseInt(localStorage.getItem("tiempoRestante")) ||
       props.ensayo.length * 60 * 2
   );
-
   const [areDisabled, setAreDisabled] = useState(false);
-const [selectedAnswers, setSelectedAnswers] = useState(
+  const [fechaActual, setFechaActual] = useState("")
+  const [selectedAnswers, setSelectedAnswers] = useState(
   JSON.parse(localStorage.getItem("selectedAnswers"))||{});
 
-const textoDesdeDB = "Cuanto es [\\frac{1}{2}], y ademas [\\int_{0}^{\\infty} e^{-x^2} dx = \\frac{\\sqrt{\\pi}}{2}\]";
+  const textoDesdeDB = "Cuanto es [\\frac{1}{2}], y ademas [\\int_{0}^{\\infty} e^{-x^2} dx = \\frac{\\sqrt{\\pi}}{2}\]";
   const ecuacionRegex = /\[(.*?)\]/g; // Expresión regular para detectar partes de la cadena que contienen ecuaciones
-
+  const [tiempoUsuario, setTiempoUsuario] = useState(0);
 
 
 
@@ -137,7 +137,13 @@ const textoDesdeDB = "Cuanto es [\\frac{1}{2}], y ademas [\\int_{0}^{\\infty} e^
   useEffect(() => {
     localStorage.setItem("selectedAnswers", JSON.stringify(selectedAnswers));
   }, [selectedAnswers]);
-
+  useEffect(() => {
+    localStorage.setItem("puntuacion", JSON.stringify(puntuación));
+  }, [puntuación]);
+  useEffect(() => {
+    const fecha = new Date();
+    setFechaActual(fecha.toLocaleDateString());
+  }, []);
   function handleAnswerSubmit(isCorrect, e, res, tituloP) {  // FUNCION AL MARCAR ALTERNATIVA 
     setRespuesta((current) => {
       const newRespuestas = [...current];
@@ -163,8 +169,9 @@ const textoDesdeDB = "Cuanto es [\\frac{1}{2}], y ademas [\\int_{0}^{\\infty} e^
      // setAreDisabled(false);
     
   }
-  function finalizarEnsayo(){
   
+  function finalizarEnsayo(){
+    setTiempoUsuario(getFormatedTime(props.ensayo.length * 60 * 2 - tiempoRestante));
     cambiarEstado();
     setIsFinished(true);
     
@@ -173,13 +180,19 @@ const textoDesdeDB = "Cuanto es [\\frac{1}{2}], y ademas [\\int_{0}^{\\infty} e^
     setPreguntaActual(j);
   }
   let puntajeFinal = 0;
+  let errores=0;
+  let puntajePAES = 0;
   // cuando la funcion terminar se ejecute que haga el conteo de la puntuacion.
   if(setIsFinished){
     for(let puntaje in puntuación){
       if(puntuación[puntaje] === 'Correcto'){
         puntajeFinal +=1;
+      }else if(puntuación[puntaje] === 'Incorrecta'){
+        errores +=1;
       }
     }
+    puntajePAES= (puntajeFinal * 1000) / props.ensayo.length;
+
   }
   function volverAlEnsayo(){
     setRespuesta((current) => {
@@ -228,7 +241,38 @@ const textoDesdeDB = "Cuanto es [\\frac{1}{2}], y ademas [\\int_{0}^{\\infty} e^
 
     return () => clearInterval(intervalo);
   }, [tiempoRestante]); */
-
+  function calcularPuntaje(nPreguntas, preguntasCorrectas) {
+    const maxPreguntasCorrectas = 60;
+    const maxPuntaje = 1000;
+  
+    if (preguntasCorrectas > nPreguntas || preguntasCorrectas < 0 || nPreguntas < 1) {
+      return 0;
+    }
+  
+    const scoreTable = [];
+    let puntaje = 0;
+  
+    for (let i = 0; i <= nPreguntas; i++) {
+      scoreTable.push([i, Math.round((i / nPreguntas) * maxPuntaje)]);
+    }
+  
+    for (let i = 0; i < scoreTable.length; i++) {
+      if (scoreTable[i][0] >= preguntasCorrectas) {
+        const puntajeAnterior = i > 0 ? scoreTable[i - 1][1] : 0;
+        const puntajeSiguiente = scoreTable[i][1];
+        const preguntasAnterior = i > 0 ? scoreTable[i - 1][0] : 0;
+        const preguntasSiguiente = scoreTable[i][0];
+        puntaje = Math.round(
+          ((puntajeSiguiente - puntajeAnterior) / (preguntasSiguiente - preguntasAnterior)) *
+            (preguntasCorrectas - preguntasAnterior) +
+            puntajeAnterior
+        );
+        break;
+      }
+    }
+  
+    return puntaje;
+  }
   if (loading) {
     return <Loading />;
   }
@@ -240,25 +284,49 @@ const textoDesdeDB = "Cuanto es [\\frac{1}{2}], y ademas [\\int_{0}^{\\infty} e^
         <main className="contenedor-principal">
           <div className="resultado">
             <div
-              className="mask" /*style="background-color: rgba(0, 0, 0, 0.8);border-radius:7px;"*/
+              className="mask-resultado" /*style="background-color: rgba(0, 0, 0, 0.8);border-radius:7px;"*/
             >
-              <div className="d-flex justify-content-center align-items-center h-100">
-                <div className="text-white text-center">
-                  <h1 className="mb-3">Resultado</h1>
-                  <ul className="list-group m-3">
-                    <li className="list-group-item">
-                      <div className="row" /*style="margin: 0;"*/>
-                        <div className="col">
-                          <h3>Puntos:</h3>
-                        </div>
-                        <div className="col">
-                          <h3>
-                          {puntajeFinal}/{props.ensayo.length}
-                          </h3>
-                        </div>
-                      </div>
+              <div className="d-flex  align-items-center h-100 ">
+                <div className="text-white  p-3 w-100">
+
+                   <h1 className="mb-3 text-success " style={{fontSize: "1.8rem"}}><PlaylistAddCheckIcon style={{color: "green", fontSize: "3rem"}}/> Obtuviste {puntajePAES} puntos</h1>
+                 
+                  <ul className="list-answers">
+                    <li>
+                        <p>Realizado el {fechaActual}</p>
+                    </li>
+                    <li>    
+                      <p >{puntajeFinal} respuestas correctas</p>
+                    </li>
+                    <li>
+                    
+                      <p >{props.ensayo.length} ejercicios en total</p>
+                    </li>
+                    <li>
+                     
+                      <p>Tardaste {tiempoUsuario} en terminar el ensayo</p>
                     </li>
                   </ul>
+                  <div className="d-flex justify-content-end widht-100 ">
+                  <button
+                    onClick={() => (window.location.href = "/menu",localStorage.removeItem("ensayo"),localStorage.removeItem("puntajeFinal"),localStorage.removeItem("puntuacion"),localStorage.removeItem("puntajeFinal"),localStorage.removeItem("puntajeFinal"),localStorage.removeItem("puntajeFinal"),localStorage.removeItem("puntajeFinal"),localStorage.removeItem("puntajeFinal"),localStorage.removeItem("selectedAnswers"),localStorage.removeItem("preguntaActual"),localStorage.removeItem("respuesta"),localStorage.removeItem("tituloPregunta"), localStorage.removeItem("tiempoRestante") )}
+                    type="button"
+                    className="botonQ btn btn-outline-dark btn-lg m-2"
+                    id="bot"
+                  >
+                    Continuar
+                  </button>
+                  <button
+                    onClick={() => reiniciarTiempo() (window.location.href = "./" + props.urlEnsayo,localStorage.removeItem("ensayo"),localStorage.removeItem("puntajeFinal"),localStorage.removeItem("puntuacion"),localStorage.removeItem("puntajeFinal"),localStorage.removeItem("puntajeFinal"),localStorage.removeItem("puntajeFinal"),localStorage.removeItem("puntajeFinal"),localStorage.removeItem("puntajeFinal"),localStorage.removeItem("selectedAnswers"),localStorage.removeItem("preguntaActual"),localStorage.removeItem("respuesta"),localStorage.removeItem("tituloPregunta"), localStorage.removeItem("tiempoRestante")) }
+                    type="button"
+                    className="botonQ btn btn-warning btn-lg m-2 "
+                    id="bot"
+                  >
+                    Reintentar
+                  </button>
+
+                  
+                  </div>
                 </div>
               </div>
             </div>
@@ -320,23 +388,7 @@ const textoDesdeDB = "Cuanto es [\\frac{1}{2}], y ademas [\\int_{0}^{\\infty} e^
             </div>
           </div>
 
-          <button
-            onClick={() => reiniciarTiempo() (window.location.href = "./" + props.urlEnsayo)}
-            type="button"
-            className="botonQ btn btn-warning btn-lg m-3"
-            id="bot"
-          >
-            Otro intento
-          </button>
-
-          <button
-            onClick={() => (window.location.href = "/menu",localStorage.removeItem("ensayo"),localStorage.removeItem("selectedAnswers"),localStorage.removeItem("preguntaActual"),localStorage.removeItem("respuesta"),localStorage.removeItem("tituloPregunta") )}
-            type="button"
-            className="botonQ btn btn-dark btn-lg m-3"
-            id="bot"
-          >
-            Inicio
-          </button>
+          
         </main>
       </div>
     );

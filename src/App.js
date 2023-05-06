@@ -7,7 +7,7 @@ import Register from "./componentes/menus/Register";
 import Footer from "./componentes/footer/Footer";
 import MenuAdmin from "./componentes/menus/MenuAdmin";
 import LoginPro from "./componentes/menus/LoginPro";
-import CrearEnsayo from "./componentes/CrearEnsayo";
+import CrearEnsayo from "./componentes/menus/CrearEnsayo";
 import PruebaNumeros from "./componentes/pruebas/PruebaNumeros";
 import PruebaProbabilidades from "./componentes/pruebas/PruebaProbabilidades";
 import PruebaAlgebra from "./componentes/pruebas/PruebaAlgebra";

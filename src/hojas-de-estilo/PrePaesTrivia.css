@@ -1,0 +1,126 @@
+/*
+h2 {
+    text-align: left;
+    font-size: 29px;
+    font-weight: bold;
+    margin: 10px 0 0 10px;
+  }
+  @font-face {
+    font-family: 'MyCustomFont';
+    src: url('../images/KgTenThousandReasons-R1ll.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+
+  
+  .container {
+   
+    padding: 100px;
+    text-align: center;
+    width: 1090px;
+    height: 700px;
+    background-image: url(../images/pizarra.jpg);
+    background-size: cover;
+    color: #fff;
+    font-family: 'MyCustomFont', sans-serif;
+    border-radius: 10px;
+    margin: 0;
+   
+   
+  }
+  
+  .time-bar {
+    height: 16px;
+    background-color: #009688;
+    border-radius: 5px;
+    border: 2px solid white !important;
+    margin-top: 5px !important;
+    margin: 20px auto 50px;
+    transition: width 1s linear;
+    box-shadow: 3px 3px 0px rgba(0, 0, 0, 1);
+  }
+  
+  
+  
+  h1 {
+    text-align: center;
+    font-size: 36px;
+    font-weight: bold;
+    margin: 10px;
+  }
+  
+  p {
+    text-align: center;
+    font-size: 24px;
+  }
+  
+  p.message {
+    font-size: 24px;
+    font-weight: bold;
+    color: #009688;
+    text-align: center;
+  }
+  
+  input {
+    margin-top: 70px !important;
+    margin: 10px;
+    padding: 10px;
+    font-size: 24px;
+    text-align: center;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  }
+  
+  button {
+    padding: 10px 20px;
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 10px;
+    border: none;
+    background-color: #009688;
+  
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  }
+  .imgTrivia{
+    filter: invert(1);
+    border-radius: 50%;
+    border: 3px solid black;
+    padding: 10px;
+    width: 60px;
+    margin: 3rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  .imgTrivia:hover{
+    transform: scale(1.2);
+  }
+  
+  form > div,
+  form > p {
+    animation: fadeInDown 0.4s ease-in-out both;
+  }
+  
+  @keyframes fadeInDown {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @media only screen and (max-width: 1000px) {
+    .container {
+    width: 100%;
+    font-size: 20px;
+    height: 100% !important;
+    }
+  }  
+  */
+
+
+

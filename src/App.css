@@ -97,7 +97,7 @@ body::-webkit-scrollbar-thumb {
   clip-path: polygon(0 0, 100% 0, 100% 80%, 50% 95%, 0 80%);
 }
 .mask {
-  background-color: rgba(0, 0, 0, 0.514);
+  background-color: rgba(0, 0, 0, 0.514) !important;
   position: relative;
 }
 .boton-home {
