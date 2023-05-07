@@ -1,5 +1,5 @@
 # Frontend Pre-PAES
-## Integrantes: Daniel Duran/José Olivar/Luis Romero
+## Integrantes: Daniel Duran/José Olivar/Luis Romero/Bryan Ramírez
 
 Instrucciones:
 
