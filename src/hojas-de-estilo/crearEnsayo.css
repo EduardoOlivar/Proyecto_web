@@ -3,61 +3,68 @@
 .Contenedor{
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 20px;
+     
+    margin: 2rem;
     width: 100%;
-    margin: auto;
-    height: 85vh; /* 85 porciento de la pantalla*/
+    /* 85 porciento de la pantalla*/
     /* background-color: #ffffff; */
-    position:relative;
-    bottom: 10px;
-    top: -89px;
+   
+   
+ 
    
 }
 
+ 
+.form-check-input:checked{
+    background-color: #ffc107;
+    border-color: #ccc;
+}
 .contenedorFormulario{
     height: 70%;
-    border-radius: 20px;
+    border-radius: 5px;
     display: flex;
     flex-direction: column;
     padding: 30px;
     gap: 15px;
     position: relative;
     bottom: 10px;
-    top: 80px;
-    height: 80%;
+    
+
     background-color: white;
     /* background-color: #F1F416; */
-    width: 40%;
-    -webkit-box-shadow: -39px 34px 18px -22px rgba(0,0,0,0.35);
-    -moz-box-shadow: -39px 34px 18px -22px rgba(0,0,0,0.35);
-    box-shadow: -39px 34px 18px -22px rgba(0,0,0,0.35);
+    width: 100%;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.165) !important;
 }
 
 .Contenedor1{
-    margin: auto;
+    width: 95%;
+    margin-bottom: 0px;
     position: relative;
     top: 0;
     display: flex;
     flex-direction: column;
+    margin: 1REM;
 }
 
 
 
 .formulario1{
     top: 0;
-    width: 60%;
-    margin: auto;
+    width: 80%;
+
 }
 
 .formCheck{
     display: flex;
     flex-direction: column;
+    cursor: pointer;
+    width: 100%;
+    
 }
 
 .form-control{
     width: 100%;
+    padding: 10px;
 }
 
 .form{
@@ -68,17 +75,17 @@
 
 .Contenedor p{
     display: flex;
-    justify-content: center;
-    font-size: large;
-    font-weight: 700;
+    
+    font-size:large;
+    
 }
 
 .boton{
-    margin-top: 2rem;
+   
     display: flex;
     width: 100%;
     justify-content: center;
-    bottom: 20px;
+    
 }
 
 .boton .btn{ 
@@ -136,11 +143,17 @@
     margin-right: 5px;
     cursor: pointer;
   }
+  .form-check-input-cantidadPreguntas {
+    margin-right: 5px;
+    cursor: pointer;
+  }
   
   .form-check-label {
     font-weight: normal;
     margin-left: 1rem;
     cursor: pointer;
+    
+    
   }
   
   .checkbox-container {
@@ -154,9 +167,52 @@
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
     
     }
+    .checkbox-categoria{
+        padding: 15px !important;
+    }
   
   .checkbox-container .form-check-input {
     margin: 0;
   }
   
+  .cantidadPreguntasInput{
+    border-radius: 50% !important;
+  }
+
+  .cantidadPreguntas {
+    display: flex;
+    flex-direction: column;
+    
+    
+  }
   
+  .cantidadPreguntas label:first-child {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+ .separator{
+    border-right: 2px solid #ccc;
+    height: 30px;
+    margin: 0 30px;
+    position: relative;
+    display: flex;
+    align-self: center;
+ }
+ .formCheck .checkbox-container label {
+    /* Estilos para las etiquetas label */
+    width: 80%;
+    display: flex;
+  }
+  .cantidadPreguntas-container{
+    margin-top: 1rem;
+    width: 90%;
+  }
+
+  .sub-title{
+    width: 100%;
+    border-bottom: 3px solid rgb(236, 180, 27);
+    font-size: 20px !important;
+    color: #4e5457;
+    
+  }

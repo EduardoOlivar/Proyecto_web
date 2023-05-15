@@ -6,7 +6,7 @@
 body {
   box-sizing: border-box;
   position: relative;
-  padding-bottom: 3em;
+  padding-bottom: 4rem; /* Ajusta el valor según el tamaño de tu pie de página */
   min-height: 100vh;
 }
 
@@ -107,6 +107,10 @@ body::-webkit-scrollbar-thumb {
 footer {
   position: absolute;
   bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+ 
   width: 100%;
 }
 

@@ -21,7 +21,10 @@ import "katex/dist/katex.min.css";
 import replace from 'react-string-replace'; // Importa la biblioteca react-string-replace
 import AccessTimeIcon from '@mui/icons-material/AccessTimeFilled';
 import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
+import axios from "axios";
+import regression from 'regression';
 
+const UrlSubmitAnswers  = "http://127.0.0.1:8000/submit_answers/";
 
 const cookies = new Cookies();
 function Ensayo(props) {
@@ -73,7 +76,7 @@ function Ensayo(props) {
 
 
 
-
+  const [respuestaId, setRespuestaId] = useState([]);
   const [respuestaaa, setRespuesta] = useState(
     JSON.parse(localStorage.getItem("respuesta"))||[]);
 
@@ -89,6 +92,13 @@ function Ensayo(props) {
     }, 1000);
   };
   const [isHidden, setIsHidden] = useState(false);
+  const a = 16.67;
+  const b = 100;
+
+  const calcularPuntaje = (numPreguntas, numRespuestasCorrectas) => {
+    const puntaje = 100 + (900 / numPreguntas) * numRespuestasCorrectas;
+    return Math.round(puntaje);
+  };
   function handleClick() {
     
   
@@ -144,13 +154,33 @@ function Ensayo(props) {
     const fecha = new Date();
     setFechaActual(fecha.toLocaleDateString());
   }, []);
-  function handleAnswerSubmit(isCorrect, e, res, tituloP) {  // FUNCION AL MARCAR ALTERNATIVA 
+  function enviarDatos(respuestasId, essayId, tiempoUsuario) {
+    axios.post(UrlSubmitAnswers, {
+      answer_ids: respuestasId,
+      essay_id: essayId
+    })
+    .then(response => {
+      console.log(response.data);
+    })
+    .catch(error => {
+      console.log(error);
+    });
+  }
+  
+  function handleAnswerSubmit(isCorrect, e, res,id, tituloP) {  // FUNCION AL MARCAR ALTERNATIVA 
     setRespuesta((current) => {
       const newRespuestas = [...current];
       newRespuestas[preguntaActual] = res;
       return newRespuestas;
     });
+    
  //actualiza el estado del componente agregando un nuevo valor (res) al final de un array (current) existente.
+ setRespuestaId((current) => {
+  const newRespuestasId = [...current];
+  newRespuestasId[preguntaActual] = id;
+  return newRespuestasId;
+});
+    console.log(respuestaId)
     console.log(respuestaaa)
     setTituloPregunta((current) => {
       const newTitulos = [...current];
@@ -170,10 +200,26 @@ function Ensayo(props) {
     
   }
   
-  function finalizarEnsayo(){
+  async function finalizarEnsayo(){
     setTiempoUsuario(getFormatedTime(props.ensayo.length * 60 * 2 - tiempoRestante));
     cambiarEstado();
     setIsFinished(true);
+    const essayId = "138"; // Reemplaza con el ID del ensayo
+    const token = localStorage.getItem("token");
+    console.log("hola")
+    try {
+      const response = await axios.post(UrlSubmitAnswers, {
+        answer_ids: respuestaId,
+        essay_id: essayId
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
     
   }
   function handleClickNav(j){
@@ -241,38 +287,7 @@ function Ensayo(props) {
 
     return () => clearInterval(intervalo);
   }, [tiempoRestante]); */
-  function calcularPuntaje(nPreguntas, preguntasCorrectas) {
-    const maxPreguntasCorrectas = 60;
-    const maxPuntaje = 1000;
   
-    if (preguntasCorrectas > nPreguntas || preguntasCorrectas < 0 || nPreguntas < 1) {
-      return 0;
-    }
-  
-    const scoreTable = [];
-    let puntaje = 0;
-  
-    for (let i = 0; i <= nPreguntas; i++) {
-      scoreTable.push([i, Math.round((i / nPreguntas) * maxPuntaje)]);
-    }
-  
-    for (let i = 0; i < scoreTable.length; i++) {
-      if (scoreTable[i][0] >= preguntasCorrectas) {
-        const puntajeAnterior = i > 0 ? scoreTable[i - 1][1] : 0;
-        const puntajeSiguiente = scoreTable[i][1];
-        const preguntasAnterior = i > 0 ? scoreTable[i - 1][0] : 0;
-        const preguntasSiguiente = scoreTable[i][0];
-        puntaje = Math.round(
-          ((puntajeSiguiente - puntajeAnterior) / (preguntasSiguiente - preguntasAnterior)) *
-            (preguntasCorrectas - preguntasAnterior) +
-            puntajeAnterior
-        );
-        break;
-      }
-    }
-  
-    return puntaje;
-  }
   if (loading) {
     return <Loading />;
   }
@@ -281,7 +296,8 @@ function Ensayo(props) {
     return (
       <div>
         <Navbar />
-        <main className="contenedor-principal">
+        
+        <main className="contenedor-principal min-vh-100">
           <div className="resultado">
             <div
               className="mask-resultado" /*style="background-color: rgba(0, 0, 0, 0.8);border-radius:7px;"*/
@@ -289,7 +305,7 @@ function Ensayo(props) {
               <div className="d-flex  align-items-center h-100 ">
                 <div className="text-white  p-3 w-100">
 
-                   <h1 className="mb-3 text-success " style={{fontSize: "1.8rem"}}><PlaylistAddCheckIcon style={{color: "green", fontSize: "3rem"}}/> Obtuviste {puntajePAES} puntos</h1>
+                   <h1 className="mb-3 text-success " style={{fontSize: "1.8rem"}}><PlaylistAddCheckIcon style={{color: "green", fontSize: "3rem"}}/> Obtuviste {calcularPuntaje(props.ensayo.length, puntajeFinal)} puntos</h1>
                  
                   <ul className="list-answers">
                     <li>
@@ -443,7 +459,6 @@ function Ensayo(props) {
       })}
     </div>
           </h3>
-        
           {ensayo[preguntaActual].answer.map((respuesta, idk) => (
             <button
             type="button"
@@ -461,6 +476,7 @@ function Ensayo(props) {
                 respuesta.right,
                 e,
                 respuesta.label,
+                respuesta.id,
                 ensayo[preguntaActual].question
               );
             }}

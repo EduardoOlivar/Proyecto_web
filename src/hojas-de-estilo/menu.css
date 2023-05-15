@@ -4,8 +4,9 @@
     background-color: white;
     padding: 20px;
     border-radius: 5px;
+    height: 100%;
     max-height: auto;
-    margin-bottom: 4rem;
+    margin-bottom: 1rem !important;
     }
     
     .sidebar h3 {
@@ -47,21 +48,18 @@
       width: 100px;
      
     }
-    .sidebar a:hover {
-    
-    background-color: rgb(236, 180, 27);
-    border-radius: 5px;
-}
+
 .content {
-    max-width: 800px;
-    width: 100%;
+    width: 70%;
+    
     
 }
 .section-menu{
     display: flex;
-    justify-content: space-between !important;
-    max-width: 1200px;
-    width: 100%;
+    justify-content: center;
+    
+    
+    width: 90%;
     
   
 }
@@ -70,16 +68,17 @@
     justify-content: center;
     margin-top: 50px;
 }
-.categories {
+.container-ensayos{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important;
     grid-gap: 30px;
+    margin-left: 3rem;
     margin-top: 30px;
     padding: 0;
     margin-bottom: 3rem;
     list-style: none;
 }
-.categories .card:hover {
+ .card:hover {
   transform: translateY(-5px);
   box-shadow: 0 5px 10px rgba(0,0,0,0.2);
 
@@ -90,7 +89,9 @@
     overflow: hidden;
     box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
-    width: 400px;
+    width: 370px;
+    height: 300px;
+  
 
 }
 .cardGame:hover{
@@ -104,16 +105,17 @@
   overflow: hidden;
   box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
-  width: 400px;
+  width: 370px;
   margin: 0;
   cursor:pointer;
 }
 .logo{
-    width: 150px;
-     margin-bottom: 1rem;
+    width: 200px;
+    
 }
 .content-logo{
     display: flex;justify-content: center;align-items: center;
+    margin: 0;
 }
 .modal-wrapper {
     display: none;
@@ -223,7 +225,44 @@
     text-align: center;
     width: 500px;
   }
+  .container-enunciados {
+    display: flex;
+    justify-content: center;
   
+  }
+  .enunciados{
+    width: 50%;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+  }
+  h4{
+    margin-right: 2rem;
+    padding: 10px;
+    margin-bottom: 0;
+  }
+
+
+  .toggle-button button {
+    background-color: #fff;
+    border: none;
+    position: relative;
+    color: #333;
+    cursor: pointer;
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 5px;
+    margin: 10px;
+    flex: 1;
+  
+ 
+  }
+  
+  .toggle-button button.active {
+    background-color: #333;
+    color: #fff;
+  }
+ 
   .motivation-text {
     font-size: 20px;
     font-weight: bold;

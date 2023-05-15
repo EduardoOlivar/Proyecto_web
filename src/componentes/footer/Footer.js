@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 function Footer() {
   return (
-    <div>
+  
       <footer className="bg-dark text-center text-lg-start">
         <div className="footercolor text-center p-3 text-white-50">
           © 2022 Copyright:
@@ -12,7 +12,7 @@ function Footer() {
           </a>
         </div>
       </footer>
-    </div>
+   
   );
 }
 

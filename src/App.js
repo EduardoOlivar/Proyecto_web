@@ -20,6 +20,7 @@ import EliminarAlgebra from "./componentes/eliminar/EliminarAlgebra";
 import EliminarGeometria from "./componentes/eliminar/EliminarGeometria";
 import EliminarProbabilidades from "./componentes/eliminar/EliminarProbabilidades";
 import EliminarNumeros from "./componentes/eliminar/EliminarNumeros";
+import EnsayoCustom from "./componentes/pruebas/EnsayoCustom";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           <Route path="/Menu/Pregunta" element={<Pregunta />} />
           <Route path="/MenuAdmin" element={<MenuAdmin />} />
           <Route path="/Menu/PruebaNumeros" element={<PruebaNumeros />} />
+          <Route path="/Menu/EnsayoCustom" element={<EnsayoCustom />} />
           <Route
             path="/Menu/PruebaProbabilidades"
             element={<PruebaProbabilidades />}
@@ -68,7 +70,8 @@ function App() {
           <Route path="/Admin/EliminarNumeros" element={<EliminarNumeros />} />
         </Routes>
       </BrowserRouter>
-      <Footer />
+      <div className="footer d-flex justify-content-center align-items-center fixed-bottom"><Footer /></div>
+      
     </div>
   );
 }

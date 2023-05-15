@@ -48,31 +48,31 @@ class LoginPro extends React.Component{
     manejadorBoton=()=>{
         if(estadoCaptcha===true){
         let url = Apiurl;
-        axios .post(url,this.state.form)
-        .then(response =>{
-            console.log(response.data.token.access);
-           
-                if(response.data.status === "ok"){
-                    console.log(response)
-                    localStorage.setItem("token",response.data.token.acccess)
-                    cookies.set('token', response.data.token, {path: "/"});
-                    cookies.set('username', this.state.form.email, {path: "/"});
-                    cookies.set('scoreGeneral', 0, {path: "/"});
-                    cookies.set('scoreNumeros', 0, {path: "/"});
-                    cookies.set('error', 0, {path: "/"});
-                    if(this.state.form.email === "admin@gmail.com")
-                        window.location.href="./MenuAdmin";
-                    else    
-                        window.location.href = "./Menu";
-                }else{
-                    console.log("error")
-                    this.setState({
-                        error : true,
-                        errorMsg : response.data.errors
-                    })
+        axios.post(url, this.state.form)
+            .then(response => {
+                console.log(response.data.token.access);
+                if (response.data.status === "ok") {
+                console.log(response);
+                localStorage.setItem("token", response.data.token.access);
+                axios.defaults.headers.common["Authorization"] = `Bearer ${response.data.token.access}`;
+                cookies.set('token', response.data.token, {path: "/"});
+                cookies.set('username', this.state.form.email, {path: "/"});
+                cookies.set('scoreGeneral', 0, {path: "/"});
+                cookies.set('scoreNumeros', 0, {path: "/"});
+                cookies.set('error', 0, {path: "/"});
+                if (this.state.form.email === "admin@gmail.com") {
+                    window.location.href="./MenuAdmin";
+                } else {
+                    window.location.href = "./Menu";
                 }
-                
-        }).catch(error =>{
+                } else {
+                console.log("error");
+                this.setState({
+                    error : true,
+                    errorMsg : response.data.errors
+                });
+                }
+            }).catch(error =>{
            
            
             if(error.response.data.errors.email){
