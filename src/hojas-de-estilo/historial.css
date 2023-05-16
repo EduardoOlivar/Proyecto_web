@@ -1,0 +1,98 @@
+.contenedorPrincipal{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    
+    flex-direction: column;
+    /* align-items: center; */
+    margin-left: 2rem;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0px 4px 20px -5px rgba(0, 0, 0, 0.44);
+    border-radius: 2px;
+    gap: 60px;
+    /* font-weight: 700; */
+  
+}
+
+.contenedorNav{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    top: 20px;
+    /* border: solid 1px; */
+    /* box-shadow: 0px 4px 20px -5px rgba(0, 0, 0, 0.44); */
+    border-radius: 20px;
+}
+
+.contenedorNav .form-control{
+    width: 13%;
+    position: relative;
+    left: 50px;
+}
+
+.contenedorNav h5{
+    position: relative;
+    right: 50px;
+}
+
+.contenedorHistorial{
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    height: 85%;
+   
+
+    border-radius: 2px;
+    gap: 30px;
+    background-color: #fff;
+}
+
+.contenedorHistorial h2{
+    position: relative;
+    left: 50px;
+    top: 20px;
+}
+
+.informacion{
+    display: flex;
+    /* border: solid 1px; */
+    /* box-shadow: 0px 4px 20px -5px rgba(0, 0, 0, 0.44); */
+    border-radius: 20px;
+    position: relative;
+    left: 20px;
+    justify-content: space-around;
+    width: 95%;
+    height: 95%;
+}
+
+.info{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.label{
+    display: flex;
+    justify-content: space-around;
+   
+    width: 100%;
+}
+
+.label h5{
+    border-bottom: 3.2px solid rgb(236, 180, 27);
+    
+}
+
+.info > div {
+    width: calc(100% / 15);
+  }
+
+
+.Botones{
+    display: flex;
+    justify-content: end;
+    margin-top: 30px;
+}
+
