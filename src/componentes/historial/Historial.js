@@ -21,22 +21,22 @@ function Historial(props) {
                     {/* <h2>Historial</h2> */}
                     <div className='label'>
                         <h5>Nombre</h5>
-                        <h5>Tema</h5>
+                        <h5>Puntaje</h5>
                         <h5>Personalizado</h5>
                         <h5>Fecha</h5>
-                        <h5>Tiempo</h5>
+                    
                         <h5>N° preguntas</h5>
                         <h5>Acciones</h5>
                     </div>
 
                     {props.items.map((ensayo, index) => (
                         <div className='info' key={index}>
-                            <div className=''>{ensayo.nombre}</div>
-                            <div className=''>{ensayo.tema}</div>
-                            <div className=''>{ensayo.personalizado ? 'SI' : 'NO'}</div>
-                            <div className=''>{ensayo.fecha}</div>
-                            <div className=''>{ensayo.tiempo}</div>
-                            <div className=''>{ensayo.preguntas}</div>
+                            <div className=''>{ensayo.name}</div>
+                            <div className=''>{ensayo.puntaje}</div>
+                            <div className=''>{ensayo.is_custom }</div>
+                            <div className=''>{ensayo.date}</div>
+
+                            <div className=''>{ensayo.questions}</div>
                             <div className=''>{ensayo.tiempo}</div>
                         </div>))
                     }

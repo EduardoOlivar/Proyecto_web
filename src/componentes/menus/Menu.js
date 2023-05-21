@@ -182,21 +182,21 @@ function Menu() {
           
             
             <ul>
-            <motion.li whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    transition={{ duration: 0.2 }}><a className={showEnsayos ? "active": ""} href="#" onClick={() =>handleSidebar("ensayos")  } >Ensayos</a></motion.li>
-              <motion.li whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    transition={{ duration: 0.2 }}><a className={showCrearEnsayo ? "active": ""} href="#" onClick={() =>handleSidebar("crearEnsayos")  } >Crear ensayo</a></motion.li>
-              <motion.li whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    transition={{ duration: 0.2 }}><a className={showhistorial ? "active": ""} href="#" onClick={() =>handleSidebar("historial")  }>Ver historial</a></motion.li>
-              <motion.li whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    transition={{ duration: 0.2 }}><a href="#" onClick={startTour}>¿Cómo usar PRE-PAES?</a></motion.li>
-              <motion.li whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    transition={{ duration: 0.2 }}><a className={showPuntaje ? "active": ""}  href="#" onClick={()=>setShowPuntaje(!showPuntaje)}>Puntajes de corte 2023</a></motion.li>
+            <motion.li whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ duration: 0.15 }}><a className={showEnsayos ? "active": ""} href="#" onClick={() =>handleSidebar("ensayos")  } >Ensayos</a></motion.li>
+              <motion.li whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ duration: 0.15 }}><a className={showCrearEnsayo ? "active": ""} href="#" onClick={() =>handleSidebar("crearEnsayos")  } >Crear ensayo</a></motion.li>
+              <motion.li whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ duration: 0.15 }}><a className={showhistorial ? "active": ""} href="#" onClick={() =>handleSidebar("historial")  }>Ver historial</a></motion.li>
+              <motion.li whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ duration: 0.15 }}><a href="#" onClick={startTour}>¿Cómo usar PRE-PAES?</a></motion.li>
+              <motion.li whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ duration: 0.15 }}><a className={showPuntaje ? "active": ""}  href="#" onClick={()=>setShowPuntaje(!showPuntaje)}>Puntajes de corte 2023</a></motion.li>
             
             
             </ul>
@@ -238,9 +238,7 @@ function Menu() {
             
             
             </div>
-            {showCrearEnsayo && (
-           
-                
+            {showCrearEnsayo && (          
                 <div className="content" >
                   <div className="ml-3">
                     <h2  style={{color:"#4e5457", fontWeight:"bold", marginLeft:"2rem"}}>Crear Ensayo</h2>
@@ -257,8 +255,7 @@ function Menu() {
                 <div className="content" >
                   <div className="ml-3">
                     <h2  style={{color:"#4e5457", fontWeight:"bold", marginLeft:"2rem"}}>Historial</h2>
-                  </div>
-                  
+                  </div>           
                   <PaginacionHistorial/>
                 </div>
        
@@ -267,7 +264,7 @@ function Menu() {
             {!showCrearEnsayo && !showhistorial && (
               
               <div className="content">
-                  
+              
        
               <div className="container-enunciados">
                 <div className="toggle-button">
@@ -333,6 +330,7 @@ function Menu() {
                   puntosTotal="10"
                   contentTitulo="Ensayo Numeros"
                   contentBody="Tendrá a su disposición 20 minutos para contestar el ensayo, podrá navegar entre preguntas y/o omitirlas."
+                  idEnsayo= {2}
                 />
       
                 <NombreEnsayo
@@ -355,6 +353,7 @@ function Menu() {
        
                     </div>
                   )}
+                  idEnsayo= {1}
                 />
       
                 <NombreEnsayo
@@ -371,6 +370,7 @@ function Menu() {
                       </ul>
                     </div>
                   )}
+                  idEnsayo= {4}
                 />
                 
       
@@ -380,6 +380,7 @@ function Menu() {
                   urlEnsayo="PruebaProbabilidades"
                   score="error"
                   puntosTotal="5"
+                  idEnsayo= {3}
                   
                 />
                 

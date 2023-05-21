@@ -4,13 +4,40 @@ import Navbar from '../navbar/Navbar'
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../hojas-de-estilo/historial.css"
 import Historial from './Historial';
+import axios from 'axios';
 
 function PaginacionHistorial() {
-
+    const [items, setItems] = React.useState([]);
+    const [historial, setHistorial] = useState([]);
+    const user_id = localStorage.getItem('user_id');
+    const token = localStorage.getItem("token");
+    useEffect(() => {
+        axios.get("http://127.0.0.1:8000/history/" + user_id, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then(res => {
+            const historialArray = Object.values(res.data);
+            setHistorial(historialArray.reverse());
+            
+        })
+        .catch(error => {
+            console.log(error);
+        });
+      }, []);
+      
+      useEffect(() => {
+        if (historial.length > 0) {
+       
+          // Realiza las operaciones que deseas hacer con historial lleno
+        }
+      }, [historial]);
+    
     const Ensayos = [ 
         {
-            nombre:"geometria",
-            tema:"geometria",
+            nombre:"Geometria",
+            tema:"600",
             puntaje:"5",
             fecha:"25-01-23",
             personalizado:false,
@@ -91,47 +118,45 @@ function PaginacionHistorial() {
             preguntas:"2"  
         },
     ]
-
-    const itemsPorPagina = 6; // numero de cuantos muestro por pagina.
-
-    // const [datos, setDatos] = React.useState(Ensayos);
-    const [items, setItems] = React.useState([...Ensayos].splice(0, itemsPorPagina)) // mostrara desde 0 hasta 4.
-    const [paginaActual, setPaginaActual] = React.useState(0);
-
-
-    const nextPage = () =>{
-        const LargoDatos = Ensayos.length;
-
+    const itemsPorPagina = 4; 
+    React.useEffect(() => {
+        // Define la cantidad de elementos por página
+        const itemsMostrados = historial.slice(0, itemsPorPagina); // Obtiene la porción de elementos de historial
+        setItems(itemsMostrados); // Asigna los elementos a items
+      }, [historial]);
+      console.log(items)
+      const [paginaActual, setPaginaActual] = React.useState(0);
+      const nextPage = () => {
+        const largoDatos = historial.length;
         const siguientePagina = paginaActual + 1;
-
-        // la siguiente pagina empezara con el valor dependiedno la pagina. ejemplo= 1 * 4, 2*4, 3*4. 
         const indexPaginaSiguiente = siguientePagina * itemsPorPagina;
-
-        if(LargoDatos <= indexPaginaSiguiente) return;
-
-        setItems([...Ensayos].splice(indexPaginaSiguiente, itemsPorPagina))
+      
+        if (largoDatos <= indexPaginaSiguiente) return;
+      
+        const itemsMostrados = historial.slice(indexPaginaSiguiente, indexPaginaSiguiente + itemsPorPagina);
+        setItems(itemsMostrados);
         setPaginaActual(siguientePagina);
-
-    }
-
-    const previousPage = () =>{
-        
+      }
+      
+      const previousPage = () => {
         const paginaAnterior = paginaActual - 1;
-
-        if( paginaActual === 0) return
-        
-        const indexPaginaAnterior = paginaAnterior * itemsPorPagina
-
-        setItems([...Ensayos].splice(indexPaginaAnterior, itemsPorPagina))
-        setPaginaActual(paginaAnterior)
-    }
+      
+        if (paginaActual === 0) return;
+      
+        const indexPaginaAnterior = paginaAnterior * itemsPorPagina;
+        const itemsMostrados = historial.slice(indexPaginaAnterior, indexPaginaAnterior + itemsPorPagina);
+        setItems(itemsMostrados);
+        setPaginaActual(paginaAnterior);
+      }
 
   return (
+    <div className='contenedor'>
     <Historial paginaActual = {paginaActual}
                 items= {items}
                 next = {nextPage}
                 prev = {previousPage}>
     </Historial>
+    </div>
   )
 }
 

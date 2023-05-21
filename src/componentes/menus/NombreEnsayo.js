@@ -3,14 +3,35 @@ import { Modal, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Cookies from "universal-cookie";
 import TipsPAES from "./TipsPAES";
+import axios from "axios";
 
 
 const cookies = new Cookies();
+const ApiurlGetIdEssayUser = "http://127.0.0.1:8000/submit_essay_user/";
 function NombreEnsayo(props) {
   const [showModal, setShowModal] = useState(false);
 
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
+  async function IniciarEnsayo(){
+    const token = localStorage.getItem("token");
+    console.log("hola")
+    try {
+      const response = await axios.post(ApiurlGetIdEssayUser, {
+        essay_id: props.idEnsayo
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      localStorage.setItem("new_id",response.data.new_id);
+      console.log(response.data);
+      window.location.href = "./Menu/" + props.urlEnsayo;
+    } catch (error) {
+      console.log(error);
+    }
+    
+  }
 
   return (
     <div className="card p-3 mb-2">
@@ -61,9 +82,7 @@ function NombreEnsayo(props) {
           <Button
             variant="dark"
             className={props.estadoBoton + " btn-lg m-2 "}
-            onClick={() =>
-              (window.location.href = "./Menu/" + props.urlEnsayo)
-            }
+            onClick={IniciarEnsayo }
           >
             Iniciar
           </Button>

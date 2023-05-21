@@ -23,6 +23,7 @@ import AccessTimeIcon from '@mui/icons-material/AccessTimeFilled';
 import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
 import axios from "axios";
 import regression from 'regression';
+import { parse } from "@fortawesome/fontawesome-svg-core";
 
 const UrlSubmitAnswers  = "http://127.0.0.1:8000/submit_answers/";
 
@@ -202,15 +203,19 @@ function Ensayo(props) {
   
   async function finalizarEnsayo(){
     setTiempoUsuario(getFormatedTime(props.ensayo.length * 60 * 2 - tiempoRestante));
+  
+    let tiempoUser=props.ensayo.length * 60 * 2 - tiempoRestante;
     cambiarEstado();
     setIsFinished(true);
-    const essayId = "138"; // Reemplaza con el ID del ensayo
+    const essayId = parseInt(localStorage.getItem("new_id")) ; // Reemplaza con el ID del ensayo
+    console.log(essayId)
     const token = localStorage.getItem("token");
     console.log("hola")
     try {
       const response = await axios.post(UrlSubmitAnswers, {
         answer_ids: respuestaId,
-        essay_id: essayId
+        user_essay_id: essayId,
+        time_essay: tiempoUser.toString()
       }, {
         headers: {
           Authorization: `Bearer ${token}`

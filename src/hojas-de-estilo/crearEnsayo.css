@@ -13,11 +13,6 @@
  
    
 }
-
-.custom-checkbox input[type="checkbox"]:focus + .custom-control-label::before {
-    box-shadow: none;
-    border-color: #adb5bd;
-  }
  
 .form-check-input:checked{
     background-color: #ffc107;
