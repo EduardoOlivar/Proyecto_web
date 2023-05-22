@@ -14,6 +14,7 @@ import Swal from "sweetalert2";
 import ListIcon from '@mui/icons-material/List';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { json } from "react-router-dom";
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 const Apiurl = `http://127.0.0.1:8000/questions_alternative/?subject=`;
 
@@ -114,7 +115,7 @@ function CrearEnsayo() {
               <div className="d-flex justify-content-center flex-column align-items-center text-align-start">
               
                   <div className="cantidadPreguntas-container">
-                    <p>Cantidad de preguntas y tiempo</p>
+                    <p><ArrowForwardIcon className="arrow-forward-icon"/>Cantidad de preguntas y tiempo</p>
                   <div className="formCheck">
                     <div class="checkbox-container">
                       <input
@@ -239,7 +240,7 @@ function CrearEnsayo() {
               <p className="sub-title">Personalizar</p>
               <div className="d-flex justify-content-center flex-column align-items-center">               
                 <div className="Contenedor1">
-                  <p>Elige eje PAES</p>
+                  <p><ArrowForwardIcon className="arrow-forward-icon"/>Elige eje PAES</p>
                   <div className="formCheck">
                     <div class="checkbox-container checkbox-categoria">
                       <input
