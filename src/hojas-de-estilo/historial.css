@@ -75,7 +75,16 @@
     width: 100%;
     text-align: center;
 }
-
+.accion{
+    background-color: rgb(236, 180, 27);
+    border-radius: 5px;
+    width: 100px;
+    padding: 5px;
+    cursor: pointer;
+}
+.accion:hover{
+    background-color: rgb(255, 213, 97);
+}
 .label{
     display: flex;
     justify-content: space-around;

@@ -24,6 +24,7 @@ import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
 import axios from "axios";
 import regression from 'regression';
 import { parse } from "@fortawesome/fontawesome-svg-core";
+import StarIcon from '@mui/icons-material/Star';
 
 const UrlSubmitAnswers  = "http://127.0.0.1:8000/submit_answers/";
 
@@ -417,12 +418,16 @@ function Ensayo(props) {
   return (
     <div>
       <Navbar usuario={cookies.get("username")} />
+      {/*
       <HeadEnsayo
         title={props.titleEnsayo}
         paragraph={props.paragraphEnsayo}
         color={props.colorEnsayo}
       />
+  */}
+      
       <div className="contenedor-principal position-relative ">
+      <h3  className="titleEnsayo" style={{color:"#4e5457", fontWeight:"500",marginTop:"2rem"}}>{props.titleEnsayo}</h3>
       {preguntaActual  < (props.ensayo.length)  && (
         <div className="contenedor-pregunta">
           <div className="row ">
@@ -457,7 +462,7 @@ function Ensayo(props) {
               }}
             />
           </Box>
-          <h3 className="enunciado-pregunta mb-3 katex">
+          <h3 className="enunciado-pregunta  ">
           <div>
       {replace((ensayo[preguntaActual].question).replace('Â', ''), ecuacionRegex, (match, i) => {
          return <InlineMath key={i} math={match} />;
@@ -509,22 +514,23 @@ function Ensayo(props) {
     <div  className="contenedor-pregunta" >
       <h2 className="heroTerminar">¿Quiere terminar este ensayo?</h2>
       <div className="contenedor-preguntaVolverTerminar  ">
-        <button onClick={volverAlEnsayo} className="btnVolverTerminar btn btn-dark">No, quiero volver</button>
-        <button onClick={finalizarEnsayo}className="btnVolverTerminar btn btn-dark">Si, quiero terminar el ensayo</button>
+        <button onClick={volverAlEnsayo} className="btnVolverTerminar btn btn-lg btn-warning">No, quiero volver</button>
+        <button onClick={finalizarEnsayo}className="btnVolverTerminar btn btn-lg btn-dark">Si, quiero terminar el ensayo</button>
       </div>
     </div>
   )}
-      </div>
-      <div className="navigation-container">
+  <div className="navigation-container">
       <div className="navigation-items">
         {ensayo.map((item,j) => (
           <div className= {`navigation-item ${j === preguntaActual ? 'selected-nav' : ''} ${selectedAnswers[j] ? 'answered' : ''} `} key={item}  onClick={() =>handleClickNav(j)}>
             {j+1}
           </div>
         ))}
-        <div className={`navigation-item ${ensayo.length === preguntaActual ? 'selected-nav' : ''}`}  onClick={() =>setPreguntaActual(ensayo.length )} >!</div>
+        <div className={`navigation-item ${ensayo.length === preguntaActual ? 'selected-nav' : ''}`}  onClick={() =>setPreguntaActual(ensayo.length )} ><StarIcon className="starIcon"/></div>
       </div>
     </div>
+      </div>
+      
     </div>
   );
 }

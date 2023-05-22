@@ -3,7 +3,8 @@ import { useState, useEffect } from 'react'
 import Navbar from '../navbar/Navbar'
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../hojas-de-estilo/historial.css"
-
+import moment from 'moment';
+import SearchIcon from '@mui/icons-material/Search';
 
 function Historial(props) {
 
@@ -22,6 +23,15 @@ function Historial(props) {
         setSearch(target.value);
       };
 
+    const fechaFormateada = (fecha) => {
+        const newFecha = moment(fecha).calendar(null, {
+            sameDay: '[hoy]',
+            lastDay: '[ayer]',
+            lastWeek: '[hace 1 semana] ',
+            sameElse: 'DD/MM/YYYY'
+          });
+        return newFecha;
+    }
     return (
 
         <>
@@ -65,10 +75,10 @@ function Historial(props) {
                             <div className=''>{ensayo.name.slice(7)}</div>
                             <div className=''>{ensayo.puntaje}</div>
                             <div className=''>{ensayo.is_custom }</div>
-                            <div className=''>{ensayo.date}</div>
+                            <div className=''>{fechaFormateada(ensayo.date)}</div>
 
                             <div className=''>{ensayo.questions}</div>
-                            <div className=''>{ensayo.tiempo}</div>
+                            <div className='' style={{display:'flex', justifyContent:'center', alignContent:'center', alignItems:'center'}}><div className='accion'><SearchIcon></SearchIcon>Ver</div></div>
                         </div>))
                     }
                     
