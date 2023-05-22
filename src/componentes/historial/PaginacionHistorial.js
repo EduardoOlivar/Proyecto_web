@@ -9,6 +9,7 @@ import axios from 'axios';
 function PaginacionHistorial() {
     const [items, setItems] = React.useState([]);
     const [historial, setHistorial] = useState([]);
+
     const user_id = localStorage.getItem('user_id');
     const token = localStorage.getItem("token");
     useEffect(() => {
@@ -26,106 +27,18 @@ function PaginacionHistorial() {
             console.log(error);
         });
       }, []);
-      
-      useEffect(() => {
-        if (historial.length > 0) {
-       
-          // Realiza las operaciones que deseas hacer con historial lleno
-        }
-      }, [historial]);
     
-    const Ensayos = [ 
-        {
-            nombre:"Geometria",
-            tema:"600",
-            puntaje:"5",
-            fecha:"25-01-23",
-            personalizado:false,
-            tiempo:"20",
-            preguntas:"10"  
-        },
-        {
-            nombre:"Algebra",
-            tema:"Algebra",
-            puntaje:"1",
-            fecha:"25-01-23",
-            personalizado:false,
-            tiempo:"40",
-            preguntas:"50"  
-        },
-        {
-            nombre:"Numeros",
-            tema:"geometria",
-            puntaje:"8",
-            fecha:"25-01-23",
-            personalizado:true,
-            tiempo:"20",
-            preguntas:"2"  
-        },
-        {
-            nombre:"123456789123456",
-            tema:"NUmeros",
-            puntaje:"5",
-            fecha:"25-01-23",
-            personalizado:true,
-            tiempo:"60",
-            preguntas:"90"  
-        },
-        {
-            nombre:"123456789123456",
-            tema:"NUmeros",
-            puntaje:"5",
-            fecha:"25-01-23",
-            personalizado:true,
-            tiempo:"60",
-            preguntas:"90"  
-        },
-        {
-            nombre:"123456789123456",
-            tema:"NUmeros",
-            puntaje:"5",
-            fecha:"25-01-23",
-            personalizado:true,
-            tiempo:"60",
-            preguntas:"90"  
-        },
-
-        {
-            nombre:"123456789123456",
-            tema:"NUmeros",
-            puntaje:"5",
-            fecha:"25-01-23",
-            personalizado:true,
-            tiempo:"60",
-            preguntas:"90" 
-        },
-        {
-            nombre:"Numeros",
-            tema:"geometria",
-            puntaje:"8",
-            fecha:"25-01-23",
-            personalizado:true,
-            tiempo:"20",
-            preguntas:"2"  
-        },
-        {
-            nombre:"Numeros",
-            tema:"geometria",
-            puntaje:"8",
-            fecha:"25-01-23",
-            personalizado:true,
-            tiempo:"20",
-            preguntas:"2"  
-        },
-    ]
     const itemsPorPagina = 4; 
     React.useEffect(() => {
         // Define la cantidad de elementos por página
         const itemsMostrados = historial.slice(0, itemsPorPagina); // Obtiene la porción de elementos de historial
         setItems(itemsMostrados); // Asigna los elementos a items
       }, [historial]);
+      
       console.log(items)
+
       const [paginaActual, setPaginaActual] = React.useState(0);
+
       const nextPage = () => {
         const largoDatos = historial.length;
         const siguientePagina = paginaActual + 1;
