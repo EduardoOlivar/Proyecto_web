@@ -7,7 +7,6 @@ import Historial from './Historial';
 import axios from 'axios';
 
 function PaginacionHistorial() {
-    const [items, setItems] = React.useState([]);
     const [historial, setHistorial] = useState([]);
 
     const user_id = localStorage.getItem('user_id');
@@ -27,47 +26,33 @@ function PaginacionHistorial() {
             console.log(error);
         });
       }, []);
-    
-    const itemsPorPagina = 4; 
-    React.useEffect(() => {
-        // Define la cantidad de elementos por página
-        const itemsMostrados = historial.slice(0, itemsPorPagina); // Obtiene la porción de elementos de historial
-        setItems(itemsMostrados); // Asigna los elementos a items
-      }, [historial]);
+      // const nextPage = () => {
+      //   const largoDatos = historial.length;
+      //   const siguientePagina = paginaActual + 1;
+      //   const indexPaginaSiguiente = siguientePagina * itemsPorPagina;
       
-      console.log(items)
-
-      const [paginaActual, setPaginaActual] = React.useState(0);
-
-      const nextPage = () => {
-        const largoDatos = historial.length;
-        const siguientePagina = paginaActual + 1;
-        const indexPaginaSiguiente = siguientePagina * itemsPorPagina;
+      //   if (largoDatos <= indexPaginaSiguiente) return;
       
-        if (largoDatos <= indexPaginaSiguiente) return;
+      //   const itemsMostrados = historial.slice(indexPaginaSiguiente, indexPaginaSiguiente + itemsPorPagina);
+      //   setItems(itemsMostrados);
+      //   setPaginaActual(siguientePagina);
+      // }
       
-        const itemsMostrados = historial.slice(indexPaginaSiguiente, indexPaginaSiguiente + itemsPorPagina);
-        setItems(itemsMostrados);
-        setPaginaActual(siguientePagina);
-      }
+      // const previousPage = () => {
+      //   const paginaAnterior = paginaActual - 1;
       
-      const previousPage = () => {
-        const paginaAnterior = paginaActual - 1;
+      //   if (paginaActual === 0) return;
       
-        if (paginaActual === 0) return;
-      
-        const indexPaginaAnterior = paginaAnterior * itemsPorPagina;
-        const itemsMostrados = historial.slice(indexPaginaAnterior, indexPaginaAnterior + itemsPorPagina);
-        setItems(itemsMostrados);
-        setPaginaActual(paginaAnterior);
-      }
+      //   const indexPaginaAnterior = paginaAnterior * itemsPorPagina;
+      //   const itemsMostrados = historial.slice(indexPaginaAnterior, indexPaginaAnterior + itemsPorPagina);
+      //   setItems(itemsMostrados);
+      //   setPaginaActual(paginaAnterior);
+      // }
 
   return (
     <div className='contenedor'>
-    <Historial paginaActual = {paginaActual}
-                items= {items}
-                next = {nextPage}
-                prev = {previousPage}>
+    <Historial 
+                items= {historial}>
     </Historial>
     </div>
   )

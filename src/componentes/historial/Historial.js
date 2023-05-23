@@ -6,23 +6,64 @@ import "../../hojas-de-estilo/historial.css"
 import moment from 'moment';
 import SearchIcon from '@mui/icons-material/Search';
 
-function Historial(props) {
+function Historial({items}) {
+
+
 
     const [search , setSearch] = React.useState('');
+    const [paginaActual, setPaginaActual] = React.useState(0);
+    const itemsPorPagina = 4;
 
+    // funcion que busca por nombre y envia los datos al historial filtrados por nombre.
     const BusquedaNombre = () =>{
-        if( search === 0)
-            return props.items
+        if( !search)
+        {
+            const indexInicio = paginaActual * itemsPorPagina
+            return items.slice(indexInicio, indexInicio + itemsPorPagina)
+        }
 
-        const filtrado = props.items.filter(ensayo => ensayo.name.includes(search))
-        return filtrado
+            const minusculas = search.toLowerCase();
+            const filtrado = items.filter(ensayo =>
+              ensayo.name.toLowerCase().includes(minusculas)
+            ) 
+            const indexInicio = paginaActual * itemsPorPagina;
+            const itemsPagina = filtrado.slice(indexInicio, indexInicio + itemsPorPagina);
+
+            return itemsPagina;
     }
 
+    const largoBusqueda = () =>{
+        if(!search) return items.length
+        
+        const minusculas = search.toLocaleLowerCase();
+        const filtrado = items.filter(ensayo => ensayo.name.toLowerCase().includes(minusculas))
+        return filtrado.length;
+    }
 
+    //guardamos el valor del search que pone el usuario.
     const onSearchChange = ({ target }) => {
         setSearch(target.value);
+        setPaginaActual(0);
       };
 
+
+      const nextPage = () => {
+        const totalPaginas = largoBusqueda();
+        if ((paginaActual + 1) * itemsPorPagina < totalPaginas) {
+            setPaginaActual(paginaActual + 1);
+        }
+      }
+      
+      const previousPage = () => {
+        if (paginaActual > 0) {
+            setPaginaActual(paginaActual - 1);
+            console.log(paginaActual)
+        }
+      }
+
+
+
+    
     const fechaFormateada = (fecha) => {
         const newFecha = moment(fecha).calendar(null, {
             sameDay: '[hoy]',
@@ -32,6 +73,7 @@ function Historial(props) {
           });
         return newFecha;
     }
+
     return (
 
         <>
@@ -85,9 +127,9 @@ function Historial(props) {
                 </div>
                 <div className='Botones'>
                          <ul class="pagination">
-                            <li onClick={props.prev} class="page-item"><a class="page-link" href="#">Retroceder</a></li>
-                            <li class="page-item"><a class="page-link" href="#">{props.paginaActual + 1}</a></li>
-                            <li onClick={props.next} class="page-item"><a class="page-link" href="#">Avanzar</a></li>
+                            <li onClick={previousPage} class="page-item"><a class="page-link" href="#">Retroceder</a></li>
+                            <li class="page-item"><a class="page-link" href="#">{paginaActual + 1}</a></li>
+                            <li onClick={nextPage} class="page-item"><a class="page-link" href="#">Avanzar</a></li>
                         </ul>
                     </div>
             </div>
