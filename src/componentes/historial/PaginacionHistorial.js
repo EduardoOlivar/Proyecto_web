@@ -26,29 +26,7 @@ function PaginacionHistorial() {
             console.log(error);
         });
       }, []);
-      // const nextPage = () => {
-      //   const largoDatos = historial.length;
-      //   const siguientePagina = paginaActual + 1;
-      //   const indexPaginaSiguiente = siguientePagina * itemsPorPagina;
-      
-      //   if (largoDatos <= indexPaginaSiguiente) return;
-      
-      //   const itemsMostrados = historial.slice(indexPaginaSiguiente, indexPaginaSiguiente + itemsPorPagina);
-      //   setItems(itemsMostrados);
-      //   setPaginaActual(siguientePagina);
-      // }
-      
-      // const previousPage = () => {
-      //   const paginaAnterior = paginaActual - 1;
-      
-      //   if (paginaActual === 0) return;
-      
-      //   const indexPaginaAnterior = paginaAnterior * itemsPorPagina;
-      //   const itemsMostrados = historial.slice(indexPaginaAnterior, indexPaginaAnterior + itemsPorPagina);
-      //   setItems(itemsMostrados);
-      //   setPaginaActual(paginaAnterior);
-      // }
-
+     
   return (
     <div className='contenedor'>
     <Historial 

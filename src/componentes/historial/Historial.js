@@ -9,29 +9,75 @@ import SearchIcon from '@mui/icons-material/Search';
 function Historial({items}) {
 
 
-
     const [search , setSearch] = React.useState('');
+    const [selectFiltro, setSelectFiltro] = React.useState('');
     const [paginaActual, setPaginaActual] = React.useState(0);
     const itemsPorPagina = 4;
 
     // funcion que busca por nombre y envia los datos al historial filtrados por nombre.
     const BusquedaNombre = () =>{
+        // si no han ingresado una busqueda, enviamos la lista completa.
         if( !search)
-        {
+        {   
+            const datosHistorial = items;
             const indexInicio = paginaActual * itemsPorPagina
-            return items.slice(indexInicio, indexInicio + itemsPorPagina)
+                if(selectFiltro){
+                    FiltroSelect(datosHistorial);
+                }
+            return datosHistorial.slice(indexInicio, indexInicio + itemsPorPagina)
         }
-
+            // creamos una variable y pasamos la busqueda a minusculas
             const minusculas = search.toLowerCase();
             const filtrado = items.filter(ensayo =>
               ensayo.name.toLowerCase().includes(minusculas)
-            ) 
+            )
+            
+            if(selectFiltro){
+                FiltroSelect(filtrado);
+            }
+
             const indexInicio = paginaActual * itemsPorPagina;
             const itemsPagina = filtrado.slice(indexInicio, indexInicio + itemsPorPagina);
 
             return itemsPagina;
     }
 
+    const FiltroSelect = (ensayo) =>{
+        // ordena nombre ascendentemente.
+        if (selectFiltro === '1') {
+            return ensayo = ensayo.sort((a, b) => a.name.charAt(7).localeCompare(b.name.charAt(7)));
+          }
+          // ordena puntaje de menor a mayor
+          else if (selectFiltro === '2'){
+            return ensayo = ensayo.sort((a, b) => a.puntaje - b.puntaje);
+          }
+          // ordena puntaje de mayor a menor
+          else if (selectFiltro === '3') {
+            return ensayo = ensayo.sort((a, b) => b.puntaje - a.puntaje);
+          }
+          //ordena fecha ascendentemente
+          else if (selectFiltro === '4') {
+            return ensayo = ensayo.sort(
+              (a, b) => new Date(b.date) - new Date(a.date)
+            );
+          }
+          //ordena fecha descedentemente
+          else if (selectFiltro === '5') {
+            return ensayo = ensayo.sort(
+              (a, b) => new Date(a.date) - new Date(b.date)
+            );
+          }
+          // ordena las preguntas de menor a mayor
+          else if (selectFiltro === '6') {
+            return ensayo = ensayo.sort((a, b) => a.questions - b.questions);
+          }
+          // ordena preguntas de mayor a menor.
+          else if (selectFiltro === '7') {
+            return ensayo = ensayo.sort((a, b) => b.questions - a.questions);
+          }
+    }
+
+    //funcion que envia el tamaño de la busqueda ingresada.
     const largoBusqueda = () =>{
         if(!search) return items.length
         
@@ -43,21 +89,27 @@ function Historial({items}) {
     //guardamos el valor del search que pone el usuario.
     const onSearchChange = ({ target }) => {
         setSearch(target.value);
+        //cada vez que haya una busqueda se ira automaticamente a la primera pagina.
         setPaginaActual(0);
       };
 
+    // guardamos valor del filtro select.
+    const onSelectChange = ({target}) =>{
+        setSelectFiltro(target.value);
+    }
 
-      const nextPage = () => {
+    //funcion para avanzar de pagina.
+    const nextPage = () => {
         const totalPaginas = largoBusqueda();
         if ((paginaActual + 1) * itemsPorPagina < totalPaginas) {
             setPaginaActual(paginaActual + 1);
         }
       }
-      
-      const previousPage = () => {
+    
+    // funcion para retroceder de pagina.
+    const previousPage = () => {
         if (paginaActual > 0) {
             setPaginaActual(paginaActual - 1);
-            console.log(paginaActual)
         }
       }
 
@@ -90,14 +142,19 @@ function Historial({items}) {
                     >
                     </input>
 
-                    <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                        <option selected>Filtrar por:</option>
-                        <option value="1">Nombre</option>
-                        <option value="2">Puntaje de menor a mayor</option>
-                        <option value="3">Puntaje de mayor a menor</option>
-                        <option value="4">Fechas mas recientes</option>
-                        <option value="5">Fechas mas antiguas</option>
-                        <option value="6">Preguntas de menor a mayor</option>
+                    <select 
+                        class="form-select form-select-sm" 
+                        aria-label=".form-select-sm example"
+                        onChange={onSelectChange}                        
+                    >
+                        <option selected value="" >Filtrar por:</option>
+                        <option className='optionFilter' value="1">Nombre</option>
+                        <option className='optionFilter' value="2">Puntaje de menor a mayor</option>
+                        <option className='optionFilter' value="3">Puntaje de mayor a menor</option>
+                        <option className='optionFilter' value="4">Fechas mas recientes</option>
+                        <option className='optionFilter' value="5">Fechas mas antiguas</option>
+                        <option className='optionFilter' value="6">Preguntas de menor a mayor</option>
+                        <option className='optionFilter' value="7">Preguntas de mayor a menor</option>
                     </select>
                 </div>
                 <div className='contenedorHistorial'>
@@ -114,7 +171,7 @@ function Historial({items}) {
 
                     {BusquedaNombre().map((ensayo, index) => (
                         <div className='info' key={index}>
-                            <div className=''>{ensayo.name.slice(7)}</div>
+                            <div className=''>{ensayo.name.charAt(7).toUpperCase() + ensayo.name.slice(8)}</div>
                             <div className=''>{ensayo.puntaje}</div>
                             <div className=''>{ensayo.is_custom }</div>
                             <div className=''>{fechaFormateada(ensayo.date)}</div>
