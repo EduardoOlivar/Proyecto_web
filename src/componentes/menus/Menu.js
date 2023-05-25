@@ -23,6 +23,8 @@ import { motion, AnimatePresence } from "framer-motion"
 import puntajes from "../../helper/puntajes";
 import Historial from "../historial/Historial";
 import PaginacionHistorial from "../historial/PaginacionHistorial";
+import Estadisticas from "../estadisticas/Estadisticas";
+
 
 const cookies = new Cookies();
 const url = window.location.pathname; // Obtiene la parte de la URL que sigue después del nombre del servidor y el puerto
@@ -40,6 +42,7 @@ function Menu() {
   const [selectedButton, setSelectedButton] = useState('predeterminados');
   const [showEnsayos, setShowEnsayos] = useState(true);
   const [showhistorial, setShowHistorial] = useState(false);
+  const [showEstadisticas, setShowEstadisticas] = useState(false);
   const handleButtonClick = (button) => {
     setSelectedButton(button);
   }
@@ -90,15 +93,24 @@ function Menu() {
       setShowEnsayos(true);
       setShowCrearEnsayo(false);
       setShowHistorial(false);
+      setShowEstadisticas(false);
     }else if(option === "crearEnsayos"){
       setShowCrearEnsayo(true);
       setShowEnsayos(false);
       setShowHistorial(false);
+      setShowEstadisticas(false);
     }
     else if(option === "historial"){
       setShowHistorial(true);
       setShowCrearEnsayo(false);
       setShowEnsayos(false);
+      setShowEstadisticas(false);
+    }
+    else if(option === "estadisticas"){
+      setShowHistorial(false);
+      setShowCrearEnsayo(false);
+      setShowEnsayos(false);
+      setShowEstadisticas(true);
     }
   };
   const handleGame = () => {
@@ -193,6 +205,9 @@ function Menu() {
                     transition={{ duration: 0.15 }}><a className={showhistorial ? "active": ""} href="#" onClick={() =>handleSidebar("historial")  }>Ver historial</a></motion.li>
               <motion.li whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
+                    transition={{ duration: 0.15 }}><a className={showEstadisticas ? "active": ""} href="#" onClick={() =>handleSidebar("estadisticas")  }>Estadísticas</a></motion.li>
+              <motion.li whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                     transition={{ duration: 0.15 }}><a href="#" onClick={startTour}>¿Cómo usar PRE-PAES?</a></motion.li>
               <motion.li whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
@@ -261,7 +276,19 @@ function Menu() {
        
     
             )}  
-            {!showCrearEnsayo && !showhistorial && (
+             {showEstadisticas && (
+           
+                
+           <div className="content" >
+             <div className="ml-3">
+               <h2  style={{color:"#4e5457", fontWeight:"bold", marginLeft:"2rem"}}>Estadísticas</h2>
+             </div>           
+             <Estadisticas/>
+           </div>
+  
+
+       )}  
+            {!showCrearEnsayo && !showhistorial && !showEstadisticas &&  (
               
               <div className="content">
               

@@ -21,11 +21,13 @@ import EliminarGeometria from "./componentes/eliminar/EliminarGeometria";
 import EliminarProbabilidades from "./componentes/eliminar/EliminarProbabilidades";
 import EliminarNumeros from "./componentes/eliminar/EliminarNumeros";
 import EnsayoCustom from "./componentes/pruebas/EnsayoCustom";
+import RenewTokenModal from "./componentes/RenewTokenModal";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
+     
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="Login" element={<LoginPro />} />
