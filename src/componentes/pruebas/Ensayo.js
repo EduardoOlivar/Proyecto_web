@@ -214,9 +214,10 @@ function Ensayo(props) {
     console.log("hola")
     try {
       const response = await axios.post(UrlSubmitAnswers, {
-        answer_ids: respuestaId,
+        answer_ids: respuestaId, // [16,11,null,7,3]
         user_essay_id: essayId,
         time_essay: tiempoUser.toString()
+        //question_ids: preguntaId, [1,2,3,4,5]
       }, {
         headers: {
           Authorization: `Bearer ${token}`

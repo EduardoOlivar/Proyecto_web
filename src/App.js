@@ -72,7 +72,7 @@ function App() {
           <Route path="/Admin/EliminarNumeros" element={<EliminarNumeros />} />
         </Routes>
       </BrowserRouter>
-      <div className="footer d-flex justify-content-center align-items-center fixed-bottom"><Footer /></div>
+      <div className="footer d-flex justify-content-center align-items-center  mt-3"><Footer /></div>
       
     </div>
   );

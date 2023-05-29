@@ -44,6 +44,7 @@ export default function LinesChart() {
         .then(res => {
             const historialArray = Object.values(res.data);
             setHistorial(historialArray.reverse());
+            setStartDate(new Date(historialArray[historialArray.length - 1].date));
         })
         .catch(error => {
             console.log(error);
@@ -111,36 +112,35 @@ export default function LinesChart() {
     return (
         <div>
             {/* Componente de selección de fechas */}
-            <div className='row calendario'>
-                <div className='col ' >
+            <div className='calendario'>
+                <div className='date-picker'>
                     <p>Fecha inicial</p>
                     <DatePicker
-                        selected={startDate}
-                        onChange={handleStartDateChange}
-                        selectsStart
-                        startDate={labels}
-                        endDate={endDate}
-                    
-                        dateFormat="yyyy/MM/dd"
+                    selected={startDate}
+                    onChange={handleStartDateChange}
+                    selectsStart
+                    startDate={labels}
+                    endDate={endDate}
+                    dateFormat="yyyy/MM/dd"
                     />
                 </div>  
-                <div className='col '>
+                <div className='date-picker'>
                     <p>Fecha final</p>
                     <DatePicker
-                        selected={endDate}
-                        onChange={handleEndDateChange}
-                        selectsEnd
-                        startDate={startDate}
-                        endDate={endDate}
-                        minDate={startDate}
-                    
-                        dateFormat="yyyy/MM/dd"
+                    selected={endDate}
+                    onChange={handleEndDateChange}
+                    selectsEnd
+                    startDate={startDate}
+                    endDate={endDate}
+                    minDate={startDate}
+                    dateFormat="yyyy/MM/dd"
                     />
-            </div>  
-            </div>
+                </div>  
+                </div>
+
 
             {/* Gráfico de líneas */}
-            <Line data={data} options={options} />
+            <Line data={data} options={options} className='grafico' />
         </div>
     );
 }
