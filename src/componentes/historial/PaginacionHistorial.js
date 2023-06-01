@@ -26,7 +26,6 @@ function PaginacionHistorial() {
         .then(res => {
             const historialArray = Object.values(res.data);
             setHistorial(historialArray.reverse());
-            console.log(historial)
         })
         .catch(error => {
             console.log(error);
