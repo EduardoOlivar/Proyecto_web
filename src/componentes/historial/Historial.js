@@ -10,7 +10,7 @@ function Historial({items}) {
 
 
     const [search , setSearch] = React.useState('');
-    const [selectFiltro, setSelectFiltro] = React.useState('');
+    const [selectFiltro, setSelectFiltro] = React.useState('4');
     const [paginaActual, setPaginaActual] = React.useState(0);
     const itemsPorPagina = 4;
 
@@ -116,20 +116,18 @@ function Historial({items}) {
 
 
     
-    const fechaFormateada = (fecha) => {
-        const newFecha = moment(fecha).calendar(null, {
-            sameDay: '[hoy]',
-            lastDay: '[ayer]',
-            lastWeek: '[hace 1 semana] ',
-            sameElse: 'DD/MM/YYYY'
-          });
-        return newFecha;
-    }
+    // const fechaFormateada = (fecha) => {
+    //     const newFecha = moment(fecha).calendar(null, {
+    //         sameDay: '[hoy]',
+    //         lastDay: '[ayer]',
+    //         lastWeek: '[hace 1 semana] ',
+    //         sameElse: 'DD/MM/YYYY'
+    //       });
+    //     return newFecha;
+    // }
 
     return (
-
         <>
-
             <div className='contenedorPrincipal'>
                 
                 <div className='contenedorNav'>
@@ -147,7 +145,7 @@ function Historial({items}) {
                         aria-label=".form-select-sm example"
                         onChange={onSelectChange}                        
                     >
-                        <option selected value="" >Filtrar por:</option>
+                        <option selected value="4" >Filtrar por:</option>
                         <option className='optionFilter' value="1">Nombre</option>
                         <option className='optionFilter' value="2">Puntaje de menor a mayor</option>
                         <option className='optionFilter' value="3">Puntaje de mayor a menor</option>
@@ -174,7 +172,7 @@ function Historial({items}) {
                             <div className=''>{ensayo.name.charAt(7).toUpperCase() + ensayo.name.slice(8)}</div>
                             <div className=''>{ensayo.puntaje}</div>
                             <div className=''>{ensayo.is_custom }</div>
-                            <div className=''>{fechaFormateada(ensayo.date)}</div>
+                            <div className=''>{ensayo.date.slice(0,10)}</div>
 
                             <div className=''>{ensayo.questions}</div>
                             <div className='' style={{display:'flex', justifyContent:'center', alignContent:'center', alignItems:'center'}}><div className='accion'><SearchIcon></SearchIcon>Ver</div></div>
