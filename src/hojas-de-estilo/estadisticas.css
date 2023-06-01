@@ -1,0 +1,40 @@
+/* Estilos para el DatePicker */
+.react-datepicker {
+  font-family: Arial, sans-serif;
+  
+}
+
+.react-datepicker-wrapper {
+  display: flex !important;
+  flex-direction: column !important;
+  width: 30%;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.react-datepicker__input-container {
+  display: flex;
+  margin-left: 2rem;
+  width: 100%;
+}
+
+.react-datepicker__input-container input {
+    width: 100% !important;
+}
+.grafico{
+  width: 100% !important;
+  height: 40% !important;
+}
+.date-picker{
+  display: flex;
+  flex-direction: column;
+}
+.date-picker p{
+  position: absolute;
+  left: 850px;
+  margin-top: 0.5rem;
+  font-size: 20px;
+  
+  
+}

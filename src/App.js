@@ -21,11 +21,13 @@ import EliminarGeometria from "./componentes/eliminar/EliminarGeometria";
 import EliminarProbabilidades from "./componentes/eliminar/EliminarProbabilidades";
 import EliminarNumeros from "./componentes/eliminar/EliminarNumeros";
 import EnsayoCustom from "./componentes/pruebas/EnsayoCustom";
+import RenewTokenModal from "./componentes/RenewTokenModal";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
+     
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="Login" element={<LoginPro />} />
@@ -70,7 +72,7 @@ function App() {
           <Route path="/Admin/EliminarNumeros" element={<EliminarNumeros />} />
         </Routes>
       </BrowserRouter>
-      <div className="footer d-flex justify-content-center align-items-center fixed-bottom"><Footer /></div>
+      <div className="footer d-flex justify-content-center align-items-center  mt-3"><Footer /></div>
       
     </div>
   );

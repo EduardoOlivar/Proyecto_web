@@ -55,6 +55,7 @@ class LoginPro extends React.Component{
                 console.log(response);
                 localStorage.setItem("token", response.data.token.access);
                 localStorage.setItem("user_id", response.data.user_id);
+                localStorage.setItem("date_login", Date.now());
                 axios.defaults.headers.common["Authorization"] = `Bearer ${response.data.token.access}`;
                 cookies.set('token', response.data.token, {path: "/"});
                 cookies.set('username', this.state.form.email, {path: "/"});

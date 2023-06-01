@@ -6,6 +6,8 @@ import "../../hojas-de-estilo/historial.css"
 import moment from 'moment';
 import SearchIcon from '@mui/icons-material/Search';
 
+
+
 function Historial({items}) {
 
 
@@ -116,15 +118,16 @@ function Historial({items}) {
 
 
     
-    // const fechaFormateada = (fecha) => {
-    //     const newFecha = moment(fecha).calendar(null, {
-    //         sameDay: '[hoy]',
-    //         lastDay: '[ayer]',
-    //         lastWeek: '[hace 1 semana] ',
-    //         sameElse: 'DD/MM/YYYY'
-    //       });
-    //     return newFecha;
-    // }
+    const fechaFormateada = (fecha) => {
+        const newFecha = moment(fecha).calendar(null, {
+            sameDay: '[hoy]',
+            lastDay: '[ayer]',
+            lastWeek: '[hace 1 semana] ',
+            sameElse: 'DD/MM/YYYY'
+          });
+        return newFecha;
+    }
+    
 
     return (
         <>
@@ -180,6 +183,7 @@ function Historial({items}) {
                     }
                     
                 </div>
+         
                 <div className='Botones'>
                          <ul class="pagination">
                             <li onClick={previousPage} class="page-item"><a class="page-link" href="#">Retroceder</a></li>
