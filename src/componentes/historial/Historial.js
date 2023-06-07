@@ -138,7 +138,7 @@ function Historial({items}) {
                 <div className='contenedorNav'>
 
                     <input 
-                    class="form-control busqueda me-2" 
+                    className="form-control busqueda me-2" 
                     type="search" placeholder="Search" 
                     aria-label="Search"
                     onChange={onSearchChange}
@@ -146,11 +146,12 @@ function Historial({items}) {
                     </input>
 
                     <select 
-                        class="form-select form-select-sm" 
+                        className="form-select form-select-sm" 
                         aria-label=".form-select-sm example"
-                        onChange={onSelectChange}                        
+                        onChange={onSelectChange}   
+                        defaultValue =""                     
                     >
-                        <option selected value="" >Filtrar por:</option>
+                        <option  value="" >Filtrar por:</option>
                         <option className='optionFilter' value="1">Nombre</option>
                         <option className='optionFilter' value="2">Puntaje de menor a mayor</option>
                         <option className='optionFilter' value="3">Puntaje de mayor a menor</option>
@@ -187,10 +188,10 @@ function Historial({items}) {
                 </div>
          
                 <div className='Botones'>
-                         <ul class="pagination">
-                            <li onClick={previousPage} class="page-item"><a class="page-link" href="#">Retroceder</a></li>
-                            <li class="page-item"><a class="page-link" href="#">{paginaActual + 1}</a></li>
-                            <li onClick={nextPage} class="page-item"><a class="page-link" href="#">Avanzar</a></li>
+                         <ul className="pagination">
+                            <li onClick={previousPage} className="page-item"><a className="page-link" href="#">Retroceder</a></li>
+                            <li className="page-item"><a className="page-link" href="#">{paginaActual + 1}</a></li>
+                            <li onClick={nextPage} className="page-item"><a className="page-link" href="#">Avanzar</a></li>
                         </ul>
                     </div>
             </div>

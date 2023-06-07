@@ -117,90 +117,90 @@ function CrearEnsayo() {
                   <div className="cantidadPreguntas-container">
                     <p><ArrowForwardIcon className="arrow-forward-icon"/>Cantidad de preguntas y tiempo</p>
                   <div className="formCheck">
-                    <div class="checkbox-container">
+                    <div className="checkbox-container">
                       <input
-                        class="form-check-input cantidadPreguntasInput"
+                        className="form-check-input cantidadPreguntasInput"
                         type="radio"
                         id="20"
                         onChange={handleCantidadPreguntasChange}
                         name="20preguntas"
                         value={"20"}
                       ></input>
-                      <label class="form-check-label" for="20">
+                      <label className="form-check-label" htmlFor="20">
                       <ListIcon style={{color:"#a7a7a7", marginLeft:"10px", width:"30px", height:"30px", display:"flex",alignSelf:"center"}}/>
                       <div className="cantidadPreguntas">
                         
-                        <label class="form-check-label" for="20">
+                        <label className="form-check-label" htmlFor="20">
                           20</label>
-                          <label class="form-check-label" for="20">
+                          <label className="form-check-label" htmlFor="20">
                           Preguntas</label>
                       </div>
                       <div className="separator"></div>
                       <AccessTimeIcon style={{color:"#a7a7a7", marginLeft:"10px", width:"30px", height:"30px",display:"flex",alignSelf:"center"}}/>
                       <div className="cantidadPreguntas">
                         
-                        <label class="form-check-label" for="20">
+                        <label className="form-check-label" htmlFor="20">
                           40</label>
-                          <label class="form-check-label" for="20">
+                          <label className="form-check-label" htmlFor="20">
                           Minutos</label>
                       </div>
                       </label>
                     </div>
 
-                    <div class="checkbox-container">
+                    <div className="checkbox-container">
                       <input
-                        class="form-check-input cantidadPreguntasInput"
+                        className="form-check-input cantidadPreguntasInput"
                         type="radio"
                         id="16"
                         onChange={handleCantidadPreguntasChange}
                         name="16preguntas"
                         value={"16"}
                       ></input>
-                      <label class="form-check-label" for="16">
+                      <label className="form-check-label" htmlFor="16">
                       <ListIcon style={{color:"#a7a7a7", marginLeft:"10px", width:"30px", height:"30px", display:"flex",alignSelf:"center"}}/>
                       <div className="cantidadPreguntas">
                         
-                        <label class="form-check-label" for="16">
+                        <label className="form-check-label" htmlFor="16">
                           16</label>
-                          <label class="form-check-label" for="16">
+                          <label className="form-check-label" htmlFor="16">
                           Preguntas</label>
                       </div>
                       <div className="separator"></div>
                       <AccessTimeIcon style={{color:"#a7a7a7", marginLeft:"10px", width:"30px", height:"30px",display:"flex",alignSelf:"center"}}/>
                       <div className="cantidadPreguntas">
                         
-                        <label class="form-check-label" for="16">
+                        <label className="form-check-label" htmlFor="16">
                           32</label>
-                          <label class="form-check-label" for="16">
+                          <label className="form-check-label" htmlFor="16">
                           Minutos</label>
                       </div>
                       </label>
                     </div>
-                    <div class="checkbox-container">
+                    <div className="checkbox-container">
                       <input
-                        class="form-check-input cantidadPreguntasInput"
+                        className="form-check-input cantidadPreguntasInput"
                         type="radio"
                         id="12"
                         onChange={handleCantidadPreguntasChange}
                         name="12preguntas"
                         value={"12"}
                       ></input>
-                      <label class="form-check-label" for="12">
+                      <label className="form-check-label" htmlFor="12">
                       <ListIcon style={{color:"#a7a7a7", marginLeft:"10px", width:"30px", height:"30px", display:"flex",alignSelf:"center"}}/>
                       <div className="cantidadPreguntas">
                         
-                        <label class="form-check-label" for="12">
+                        <label className="form-check-label" htmlFor="12">
                           12</label>
-                          <label class="form-check-label" for="12">
+                          <label className="form-check-label" htmlFor="12">
                           Preguntas</label>
                       </div>
                       <div className="separator"></div>
                       <AccessTimeIcon style={{color:"#a7a7a7", marginLeft:"10px", width:"30px", height:"30px",display:"flex",alignSelf:"center"}}/>
                       <div className="cantidadPreguntas">
                         
-                        <label class="form-check-label" for="12">
+                        <label className="form-check-label" htmlFor="12">
                           24</label>
-                          <label class="form-check-label" for="12">
+                          <label className="form-check-label" htmlFor="12">
                           Minutos</label>
                       </div>
                       </label>
@@ -214,7 +214,7 @@ function CrearEnsayo() {
                 <div className="formulario1">
 
                         <form className="form">
-                            <p for="nombreEnsayo" className="mt-2">
+                            <p htmlFor="nombreEnsayo" className="mt-2">
                                 Nombre del ensayo
                             </p>
                             <input
@@ -242,35 +242,35 @@ function CrearEnsayo() {
                 <div className="Contenedor1">
                   <p><ArrowForwardIcon className="arrow-forward-icon"/>Elige eje PAES</p>
                   <div className="formCheck">
-                    <div class="checkbox-container checkbox-categoria">
+                    <div className="checkbox-container checkbox-categoria">
                       <input
-                        class="form-check-input categoria"
+                        className="form-check-input categoria"
                         type="checkbox"
                         id="1"
                         onChange={handleCheckBoxChange}
                         name="numeros"
                         value={"Numeros"}
                       ></input>
-                      <label class="form-check-label" for="1">
+                      <label className="form-check-label" htmlFor="1">
                         Numeros
                       </label>
                     </div>
-                    <div class="checkbox-container checkbox-categoria">
+                    <div className="checkbox-container checkbox-categoria">
                       <input
-                        class="form-check-input categoria"
+                        className="form-check-input categoria"
                         type="checkbox"
                         id="2"
                         onChange={handleCheckBoxChange}
                         name="Algebra"
                         value={"Algebra"}
                       ></input>
-                      <label class="form-check-label" for="2">
+                      <label className="form-check-label" htmlFor="2">
                         Algebra y funciones
                       </label>
                     </div>
-                    <div class="checkbox-container checkbox-categoria d-f">
+                    <div className="checkbox-container checkbox-categoria d-f">
                       <input
-                        class="form-check-input categoria"
+                        className="form-check-input categoria"
                         type="checkbox"
                         id="3"
                         onChange={handleCheckBoxChange}
@@ -278,20 +278,20 @@ function CrearEnsayo() {
                         value={"Geometria"}
                       
                       ></input>
-                      <label class="form-check-label" for="3">
+                      <label className="form-check-label" htmlFor="3">
                         Geometria
                       </label>
                     </div>
-                    <div class="checkbox-container checkbox-categoria">
+                    <div className="checkbox-container checkbox-categoria">
                       <input
-                        class="form-check-input categoria"
+                        className="form-check-input categoria"
                         type="checkbox"
                         id="4"
                         onChange={handleCheckBoxChange}
                         name="Probabilidades"
                         value={"Probabilidades"}
                       ></input>
-                      <label class="form-check-label" for="4">
+                      <label className="form-check-label" htmlFor="4">
                         Probabilidades y Estadistica
                       </label>
                     </div>

@@ -26,6 +26,7 @@ import regression from 'regression';
 import { parse } from "@fortawesome/fontawesome-svg-core";
 import StarIcon from '@mui/icons-material/Star';
 
+
 const UrlSubmitAnswers  = "http://127.0.0.1:8000/submit_answers/";
 
 const cookies = new Cookies();
@@ -354,7 +355,7 @@ function Ensayo(props) {
               </div>
             </div>
 
-            <div class="accordion mt-4" id="accordionExample">
+            <div className="accordion mt-4" id="accordionExample">
               <div>
                 {ensayo.map((item, j) => (
                   <Accordion
@@ -381,8 +382,8 @@ function Ensayo(props) {
                         <Typography {...markCorrectOrNot(item, i, j)}>
                           <label
                             className="contenedor-alternativa-pregunta-respuesta "
-                            disableRipple
-                            key={respuesta.label}
+                     
+                            key={respuesta.id}
                           >
                             <b>{String.fromCharCode(65 + i) + " . "}</b>
                            {replace((respuesta.label).replace('Â', ''), ecuacionRegex, (match, i) => {
@@ -410,8 +411,7 @@ function Ensayo(props) {
               </div>
             </div>
           </div>
-
-          
+         
         </main>
       </div>
     );
@@ -475,8 +475,8 @@ function Ensayo(props) {
             type="button"
             className={`contenedor-alternativa-pregunta ${respuesta.label === selectedAnswers[preguntaActual] ? 'selected' : ''}`}
             disabled={areDisabled}
-            disableRipple
-            key={<InlineMath math={respuesta.label} />}
+         
+            key={respuesta.id}
             onClick={(e) => {
               setSelectedAnswers(prevAnswers => ({
                 ...prevAnswers,
@@ -499,8 +499,8 @@ function Ensayo(props) {
           </button>
           ))}
           <div className="sumaResta">
-            <a class="arrow left" onClick={retrocederPregunta}></a>
-            <a class="arrow right" onClick={siguientePregunta}></a>
+            <a className="arrow left" onClick={retrocederPregunta}></a>
+            <a className="arrow right" onClick={siguientePregunta}></a>
             
   
      
@@ -523,7 +523,7 @@ function Ensayo(props) {
   <div className="navigation-container">
       <div className="navigation-items">
         {ensayo.map((item,j) => (
-          <div className= {`navigation-item ${j === preguntaActual ? 'selected-nav' : ''} ${selectedAnswers[j] ? 'answered' : ''} `} key={item}  onClick={() =>handleClickNav(j)}>
+          <div className= {`navigation-item ${j === preguntaActual ? 'selected-nav' : ''} ${selectedAnswers[j] ? 'answered' : ''} `} key={j}  onClick={() =>handleClickNav(j)}>
             {j+1}
           </div>
         ))}
