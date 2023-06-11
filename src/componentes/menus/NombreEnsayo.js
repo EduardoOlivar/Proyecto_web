@@ -7,18 +7,22 @@ import axios from "axios";
 
 
 const cookies = new Cookies();
-const ApiurlGetIdEssayUser = "http://127.0.0.1:8000/submit_essay_user/";
+const ApiurlGetIdEssayUser = "http://127.0.0.1:8000/custom_essays/";
 function NombreEnsayo(props) {
   const [showModal, setShowModal] = useState(false);
+  const [essay_ids, setEssay_ids] = useState([]);
 
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
   async function IniciarEnsayo(){
     const token = localStorage.getItem("token");
+    const essayId = parseInt(localStorage.getItem("user_id")) ;
+    setEssay_ids(props.idEnsayo)
     console.log("hola")
     try {
       const response = await axios.post(ApiurlGetIdEssayUser, {
-        essay_id: props.idEnsayo
+        essay_ids: essay_ids,
+        user: essayId,
       }, {
         headers: {
           Authorization: `Bearer ${token}`
