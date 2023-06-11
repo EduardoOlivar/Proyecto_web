@@ -248,8 +248,9 @@ function Menu() {
             </div>
             {showCrearEnsayo && (          
                 <div className="content" >
-               
-                  
+                  <div className="ml-3">
+                    <h2  style={{color:"#4e5457", fontWeight:"bold", marginLeft:"2rem"}}>Crear Ensayo</h2>
+                  </div>
                   <CrearEnsayo/>
                 </div>
             
