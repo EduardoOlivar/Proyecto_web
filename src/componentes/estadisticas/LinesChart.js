@@ -65,6 +65,7 @@ export default function LinesChart() {
     .map(item => item.date)
     .reverse();
 
+
     const puntaciones = filteredItems
     .filter(item => item.puntaje > 100) // Filtrar puntajes mayores a 100
     .map(item => item.puntaje)
@@ -75,7 +76,7 @@ export default function LinesChart() {
         datasets: [
             {
                 label: 'Puntuación',
-                data: puntaciones,
+                data:  puntaciones,
                 fill: true,
                 borderColor: 'rgb(236, 180, 27)',
                 pointRadius: 5,
