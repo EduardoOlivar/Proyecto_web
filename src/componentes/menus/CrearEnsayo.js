@@ -65,7 +65,7 @@ function CrearEnsayo() {
     // seteamos los datos en el ensayoSelected.
     setensayoSelected((current) => ({
       ...current,
-      [id]: { name, checked },
+      [id]: { id, name, checked },
     }));
   }
   const handleCantidadPreguntasChange = (e) => {
@@ -246,7 +246,7 @@ function CrearEnsayo() {
                       <input
                         className="form-check-input categoria"
                         type="checkbox"
-                        id="1"
+                        id="2"
                         onChange={handleCheckBoxChange}
                         name="numeros"
                         value={"Numeros"}
@@ -259,7 +259,7 @@ function CrearEnsayo() {
                       <input
                         className="form-check-input categoria"
                         type="checkbox"
-                        id="2"
+                        id="1"
                         onChange={handleCheckBoxChange}
                         name="Algebra"
                         value={"Algebra"}
@@ -272,7 +272,7 @@ function CrearEnsayo() {
                       <input
                         className="form-check-input categoria"
                         type="checkbox"
-                        id="3"
+                        id="4"
                         onChange={handleCheckBoxChange}
                         name="Geometria"
                         value={"Geometria"}
@@ -286,7 +286,7 @@ function CrearEnsayo() {
                       <input
                         className="form-check-input categoria"
                         type="checkbox"
-                        id="4"
+                        id="3"
                         onChange={handleCheckBoxChange}
                         name="Probabilidades"
                         value={"Probabilidades"}

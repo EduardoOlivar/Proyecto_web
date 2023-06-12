@@ -3,13 +3,19 @@ import React,{useState} from 'react';
 import Ensayo from './Ensayo';
 import axios from 'axios';
 import { useEffect } from 'react';
+import Swal from 'sweetalert2';
 function EnsayoCustom() {
+
+
+    const urlPost= `http://localhost:8000/custom_essays/`;
     const Apiurl = `http://127.0.0.1:8000/questions_alternative/?subject=`;
     const [ensayoSelected, setensayoSelected] = useState(JSON.parse(localStorage.getItem('formData')).ensayoSelected);
     const [post, setPost] = React.useState([]);
-    const [nombreEnsayo] = React.useState("ninguno");
+    const [nombreEnsayo] = React.useState("Ensayo Custom");
     const [iniciar, setIniciar] = React.useState(false);
-    
+    const [ensayosArray, setEnsayosArray] = React.useState([])
+
+
     function llamadoApi() {
 
         const ensayosSeleccionados = [];
@@ -43,7 +49,7 @@ function EnsayoCustom() {
                     // concatenamos todos los datos del arreglo para que quede como 1 arreglo.
                     setPost([].concat(...ensayosSeleccionados)); 
                     setIniciar(true);
-                   
+                    
     
                     // const Toast = Swal.mixin({
                     //     toast: true,
@@ -61,9 +67,13 @@ function EnsayoCustom() {
                     //     icon: 'success',
                     //     title: 'Ensayo creado correctamente!'
                     //   })
-    
-                    
-                        
+                    // Swal.fire(
+                    //   'Good job!',
+                    //   'You clicked the button!',
+                    //   'success',
+                    //   {
+                    //   timer:2000,}
+                    // )
                         
                     })
                     .catch((error) => {
@@ -79,7 +89,7 @@ function EnsayoCustom() {
         const cantidadPreguntas = parseInt(formData.cantidadPreguntas);
         
         const cantidadSubject = Math.round(cantidadPreguntas / Object.keys(ensayoSelected).length);
-        console.log(Object.keys(ensayoSelected).length);
+     
         array.forEach(item => {
           const { subject } = item;
           subjects[subject] = (subjects[subject] || 0) + 1; // Incrementar el contador para el tema actual
@@ -88,7 +98,7 @@ function EnsayoCustom() {
           }
         });
 
-        console.log(arrayFiltrada);
+        
         return shuffleArray(arrayFiltrada)
       }
       function shuffleArray(array) {
@@ -102,9 +112,31 @@ function EnsayoCustom() {
       for (let i = 0; i < post.length; i++) {
         post[i].answer = shuffleArray(post[i].answer);
       }
+      //setiamos los id de los ensayos
       useEffect(() => {
-        llamadoApi();
-      },[])
+        const updatedEnsayosArray = [];
+        for (let i in ensayoSelected) {
+          updatedEnsayosArray.push(ensayoSelected[i].id);
+        }
+        setEnsayosArray(updatedEnsayosArray);
+      }, [ensayoSelected]);
+      // enviamos los datos al backend
+      useEffect(() => {
+        
+        if (ensayosArray.length > 0) {
+
+          llamadoApi()
+          
+          const essayId = parseInt(localStorage.getItem("user_id"));
+          axios.post(urlPost, {
+            is_custom: true,
+            user: essayId,
+            name: nombreEnsayo,
+            essay_ids: ensayosArray
+          });
+        }
+      }, [ensayosArray]);
+  
     return(
         <div>
         {iniciar && (
