@@ -23,12 +23,13 @@ function NombreEnsayo(props) {
       const response = await axios.post(ApiurlGetIdEssayUser, {
         essay_ids: essay_ids,
         user: essayId,
+        name: props.temario, 
       }, {
         headers: {
           Authorization: `Bearer ${token}`
         }
       });
-      localStorage.setItem("new_id",response.data.new_id);
+      localStorage.setItem("new_id",response.data.id);
       console.log(response.data);
       window.location.href = "./Menu/" + props.urlEnsayo;
     } catch (error) {

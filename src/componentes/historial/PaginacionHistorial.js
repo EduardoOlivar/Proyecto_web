@@ -18,7 +18,7 @@ function PaginacionHistorial() {
     const user_id = localStorage.getItem('user_id');
     const token = localStorage.getItem("token");
     useEffect(() => {
-        axios.get("http://127.0.0.1:8000/history/" + user_id, {
+        axios.get("http://127.0.0.1:8000/history/" + user_id+ "/" , {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -26,6 +26,7 @@ function PaginacionHistorial() {
         .then(res => {
             const historialArray = Object.values(res.data);
             setHistorial(historialArray.reverse());
+            
         })
         .catch(error => {
             console.log(error);

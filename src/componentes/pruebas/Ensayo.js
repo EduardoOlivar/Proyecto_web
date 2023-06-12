@@ -69,6 +69,7 @@ function Ensayo(props) {
       props.ensayo.length * 60 * 2
   );
   const [areDisabled, setAreDisabled] = useState(false);
+  const [new_id, setNew_id] = useState(JSON.parse(localStorage.getItem("new_id")) ||[]);
   const [fechaActual, setFechaActual] = useState("")
   const [selectedAnswers, setSelectedAnswers] = useState(
   JSON.parse(localStorage.getItem("selectedAnswers"))||{});
@@ -209,14 +210,15 @@ function Ensayo(props) {
     let tiempoUser=props.ensayo.length * 60 * 2 - tiempoRestante;
     cambiarEstado();
     setIsFinished(true);
-    const essayId = parseInt(localStorage.getItem("new_id")) ; // Reemplaza con el ID del ensayo
-    console.log(essayId)
+ 
+    console.log(new_id)
+   
     const token = localStorage.getItem("token");
-    console.log("hola")
+    console.log(respuestaId)
     try {
       const response = await axios.post(UrlSubmitAnswers, {
         answer_ids: respuestaId, // [16,11,null,7,3]
-        user_essay_id: essayId,
+        user_essay_id: new_id,
         time_essay: tiempoUser.toString()
         //question_ids: preguntaId, [1,2,3,4,5]
       }, {
