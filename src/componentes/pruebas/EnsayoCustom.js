@@ -49,32 +49,7 @@ function EnsayoCustom() {
                     // concatenamos todos los datos del arreglo para que quede como 1 arreglo.
                     setPost([].concat(...ensayosSeleccionados)); 
                     setIniciar(true);
-                    
-    
-                    // const Toast = Swal.mixin({
-                    //     toast: true,
-                    //     // position: 'top-end',
-                    //     showConfirmButton: false,
-                    //     timer: 2000,
-                    //     timerProgressBar: true,
-                    //     didOpen: (toast) => {
-                    //       toast.addEventListener('mouseenter', Swal.stopTimer)
-                    //       toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    //     }
-                    //   })
-                      
-                    //   Toast.fire({
-                    //     icon: 'success',
-                    //     title: 'Ensayo creado correctamente!'
-                    //   })
-                    // Swal.fire(
-                    //   'Good job!',
-                    //   'You clicked the button!',
-                    //   'success',
-                    //   {
-                    //   timer:2000,}
-                    // )
-                        
+                  
                     })
                     .catch((error) => {
                     console.log(error);
@@ -126,13 +101,15 @@ function EnsayoCustom() {
         if (ensayosArray.length > 0) {
 
           llamadoApi()
-          
           const essayId = parseInt(localStorage.getItem("user_id"));
           axios.post(urlPost, {
             is_custom: true,
             user: essayId,
             name: nombreEnsayo,
             essay_ids: ensayosArray
+          }) .then(response => {
+              console.log(response.data.id)
+              localStorage.setItem('new_id', response.data.id);
           });
         }
       }, [ensayosArray]);
