@@ -25,12 +25,7 @@ function PaginacionHistorial() {
         })
         .then(res => {
             const historialArray = Object.values(res.data);
-            console.log(res.data)
-            const historialSinNull = historialArray.filter((element) => element !== null);
-            const historialReversado = historialSinNull.reverse();
-
-            setHistorial(historialReversado);
-            console.log(historialReversado)
+            setHistorial(historialArray.reverse());
             
         })
         .catch(error => {

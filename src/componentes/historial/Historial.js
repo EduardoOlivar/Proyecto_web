@@ -12,7 +12,7 @@ function Historial({items}) {
 
 
     const [search , setSearch] = React.useState('');
-    const [selectFiltro, setSelectFiltro] = React.useState('');
+    const [selectFiltro, setSelectFiltro] = React.useState('4');
     const [paginaActual, setPaginaActual] = React.useState(0);
     const itemsPorPagina = 4;
 
@@ -130,9 +130,7 @@ function Historial({items}) {
     
 
     return (
-
         <>
-
             <div className='contenedorPrincipal'>
                 
                 <div className='contenedorNav'>
