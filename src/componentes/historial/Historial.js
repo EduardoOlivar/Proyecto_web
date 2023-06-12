@@ -175,9 +175,9 @@ function Historial({items}) {
 
                     {BusquedaNombre().map((ensayo, index) => (
                         <div className='info' key={index}>
-                            <div className=''>{ensayo.name.charAt(7).toUpperCase() + ensayo.name.slice(8)}</div>
+                            <div className=''>{ensayo.name}</div>
                             <div className=''>{ensayo.puntaje}</div>
-                            <div className=''>{ensayo.is_custom }</div>
+                            <div className=''>{ensayo.is_custom ? 'Si' : 'No' }</div>
                             <div className=''>{fechaFormateada(ensayo.date)}</div>
 
                             <div className=''>{ensayo.questions}</div>
