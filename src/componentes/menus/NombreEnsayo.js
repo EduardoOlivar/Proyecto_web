@@ -19,11 +19,14 @@ function NombreEnsayo(props) {
     const essayId = parseInt(localStorage.getItem("user_id")) ;
     setEssay_ids(props.idEnsayo)
     console.log("hola")
+    console.log(essayId)
+    
     try {
       const response = await axios.post(ApiurlGetIdEssayUser, {
-        essay_ids: essay_ids,
+        essay_ids: [props.idEnsayo],
         user: essayId,
         name: props.temario, 
+        is_custom: false,
       }, {
         headers: {
           Authorization: `Bearer ${token}`

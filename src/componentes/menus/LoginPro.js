@@ -75,7 +75,7 @@ class LoginPro extends React.Component{
                 });
                 }
             }).catch(error =>{
-           
+         console.log(error.response.data.errors)
            
             if(error.response.data.errors.email){
                 if(error.response.data.errors.email[0] === 'Introduzca una dirección de correo electrónico válida.')
@@ -89,16 +89,21 @@ class LoginPro extends React.Component{
                     errorMsg : "Rellene todos los camhpos"
                 })
                 }    
-            else if(error.response.data.errors === 'Email o contraseña invalidos')
-            this.setState({
-                error : true,
-                errorMsg : "Email o contraseña invalidos"
-            })
-            else if( error.response.data.errors.password[0] === 'Este campo no puede estar en blanco.')
-            this.setState({
-                error : true,
-                errorMsg : "Rellene todos los camhpos"
-            })
+            else if(error.response.data.errors.error_de_campo){
+                if(error.response.data.errors.error_de_campo[0] === 'Email o contraseña invalidos')
+                    this.setState({
+                        error : true,
+                        errorMsg : "Email o contraseña invalidos"
+                    })
+            
+            }
+            else if(error.response.data.errors.password){
+                if(error.response.data.errors.password[0] === 'Este campo no puede estar en blanco.')
+                    this.setState({
+                        error : true,
+                        errorMsg : "Rellene todos los campos"
+                    })
+            }
             
             
         })
@@ -123,7 +128,7 @@ class LoginPro extends React.Component{
             
                             <div className="input-contenedor">
                                 <FontAwesomeIcon className='icon' icon={ faEnvelope} />
-                                <input name="email" id="emailL" type="text" onChange={this.manejadorChange} placeholder="Correo Electronico"/>
+                                <input name="email" id="emailL" type="text" onChange={this.manejadorChange} placeholder="Correo Electrónico"/>
             
                             </div>
             
@@ -132,7 +137,7 @@ class LoginPro extends React.Component{
                                 <input type="password" name="password" id="passwordL" onChange={this.manejadorChange} placeholder="Contraseña"/>
             
                             </div>
-                            <div className=" recaptcha m-3 ">
+                            <div className="d-flex justify-content-center recaptcha m-3 ">
                                 <ReCAPTCHA
                     
                                 sitekey="6LdKsC0jAAAAALU0pKS0cugXGAxqe4aX-RKs9Q-a"

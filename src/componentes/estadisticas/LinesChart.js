@@ -43,8 +43,11 @@ export default function LinesChart() {
         })
         .then(res => {
             const historialArray = Object.values(res.data);
-            setHistorial(historialArray.reverse());
-            setStartDate(new Date(historialArray[historialArray.length - 1].date));
+            console.log(historialArray);
+            const historialFiltrado = historialArray.filter((dato) =>dato != null);
+
+            setHistorial(historialFiltrado.reverse());
+            setStartDate(new Date(historialFiltrado[historialFiltrado.length - 1].date));
         })
         .catch(error => {
             console.log(error);

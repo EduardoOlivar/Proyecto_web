@@ -20,7 +20,7 @@ body {
 }
 .formulario{
     
-    background: whitesmoke;
+    background: white;
     position: relative;
     margin-top: 200px;
     padding: 3px;
@@ -80,16 +80,18 @@ input[type="password"]{
 {
     .formulario{
         margin: auto;
-        width: 400px;
+        width: 500px;
         margin-top: 75px;
         margin-bottom: 50px;
         border-radius: 2%;
+        padding: 32px;
     }
 
     input[type="text"],
 input[type="password"]{
     font-size: 20px;
-    width:84.3%;
+    width:87.7%;
+    
     padding: 10px;
     border: none;
 }
