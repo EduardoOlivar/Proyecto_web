@@ -70,7 +70,7 @@ export default function LinesChart() {
 
 
     const puntaciones = filteredItems
-    .filter(item => item.puntaje > 100) // Filtrar puntajes mayores a 100
+    .filter(item => item.puntaje > 100 && item.puntaje < 1000) // Filtrar puntajes mayores a 100
     .map(item => item.puntaje)
     .reverse();
 
