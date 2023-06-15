@@ -17,7 +17,6 @@ function Historial({items}) {
     const [paginaActual, setPaginaActual] = React.useState(0);
     const [filtrarPor, setFiltrarPor] = React.useState(true);
     const [focusFiltrar, setFocusFiltrar] = React.useState(false)
-    const [busquedaVacia, setBusquedaVacia] = React.useState(false)
     const itemsPorPagina = 4;
 
     // funcion que busca por nombre y envia los datos al historial filtrados por nombre.
@@ -27,6 +26,7 @@ function Historial({items}) {
         {   
             const datosHistorial = items;
             const indexInicio = paginaActual * itemsPorPagina
+            // setBusquedaVacia(false)
                 if(selectFiltro){
                     FiltroSelect(datosHistorial);
                 }
@@ -40,11 +40,8 @@ function Historial({items}) {
             
             if(selectFiltro){
                 FiltroSelect(filtrado);
-                if(filtrado.length === 0){
-                    console.log("hola")
-                    
-                }
             }
+            // setBusquedaVacia(false);
             const indexInicio = paginaActual * itemsPorPagina;
             const itemsPagina = filtrado.slice(indexInicio, indexInicio + itemsPorPagina);
 
@@ -132,7 +129,6 @@ function Historial({items}) {
       }
 
 
-
     
     const fechaFormateada = (fecha) => {
         const newFecha = moment(fecha).calendar(null, {
@@ -143,21 +139,27 @@ function Historial({items}) {
           });
         return newFecha;
     }
-    
-
+    // console.log(busquedaVacia)
     return (
         <>
             <div className='contenedorPrincipal'>
                 
                 <div className='contenedorNav'>
 
-                    <input 
-                    className="form-control busqueda me-2" 
-                    type="search" placeholder="Buscar Ensayo" 
-                    aria-label="Search"
-                    onChange={onSearchChange}
-                    >
-                    </input>
+                    <div className='busqueda'>
+                        <input 
+                            className="form-control busqueda me-2" 
+                            type="search" placeholder="Buscar Ensayo" 
+                            aria-label="Search"
+                            onChange={onSearchChange}
+                        >
+                        </input> 
+                            { BusquedaNombre().length === 0 && items.length > 0 &&(
+                            <p className="invalid-feedback d-block fallida">
+                              No se encontro ningun resultado!
+                              </p>)}
+                    </div>
+                    
 
                     <select 
                         className="form-select form-select-sm" 
