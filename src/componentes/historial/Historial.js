@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../../hojas-de-estilo/historial.css"
 import moment from 'moment';
 import SearchIcon from '@mui/icons-material/Search';
+import { StraightenTwoTone } from '@mui/icons-material';
 
 
 
@@ -14,6 +15,9 @@ function Historial({items}) {
     const [search , setSearch] = React.useState('');
     const [selectFiltro, setSelectFiltro] = React.useState('4');
     const [paginaActual, setPaginaActual] = React.useState(0);
+    const [filtrarPor, setFiltrarPor] = React.useState(true);
+    const [focusFiltrar, setFocusFiltrar] = React.useState(false)
+    const [busquedaVacia, setBusquedaVacia] = React.useState(false)
     const itemsPorPagina = 4;
 
     // funcion que busca por nombre y envia los datos al historial filtrados por nombre.
@@ -36,8 +40,11 @@ function Historial({items}) {
             
             if(selectFiltro){
                 FiltroSelect(filtrado);
+                if(filtrado.length === 0){
+                    console.log("hola")
+                    
+                }
             }
-
             const indexInicio = paginaActual * itemsPorPagina;
             const itemsPagina = filtrado.slice(indexInicio, indexInicio + itemsPorPagina);
 
@@ -98,6 +105,15 @@ function Historial({items}) {
     // guardamos valor del filtro select.
     const onSelectChange = ({target}) =>{
         setSelectFiltro(target.value);
+        if(target.value !=''){
+            setFiltrarPor(false)
+        }else{
+            setFiltrarPor(true)
+        }
+    }
+
+    const handleFocus = () =>{
+        setFocusFiltrar(true)
     }
 
     //funcion para avanzar de pagina.
@@ -137,7 +153,7 @@ function Historial({items}) {
 
                     <input 
                     className="form-control busqueda me-2" 
-                    type="search" placeholder="Search" 
+                    type="search" placeholder="Buscar Ensayo" 
                     aria-label="Search"
                     onChange={onSearchChange}
                     >
@@ -146,10 +162,11 @@ function Historial({items}) {
                     <select 
                         className="form-select form-select-sm" 
                         aria-label=".form-select-sm example"
-                        onChange={onSelectChange}   
+                        onChange={onSelectChange}
+                        onFocus={handleFocus}
                         defaultValue =""                     
                     >
-                        <option  value="" >Filtrar por:</option>
+                        { filtrarPor && !focusFiltrar && <option value="" >Filtrar por:</option>}
                         <option className='optionFilter' value="1">Nombre</option>
                         <option className='optionFilter' value="2">Puntaje de menor a mayor</option>
                         <option className='optionFilter' value="3">Puntaje de mayor a menor</option>
@@ -176,8 +193,7 @@ function Historial({items}) {
                             <div className=''>{ensayo.name}</div>
                             <div className=''>{ensayo.puntaje}</div>
                             <div className=''>{ensayo.is_custom ? 'Si' : 'No' }</div>
-                            <div className=''>{fechaFormateada(ensayo.date)}</div>
-
+                            <div className=''>{(ensayo.date)}</div>
                             <div className=''>{ensayo.questions}</div>
                             <div className='' style={{display:'flex', justifyContent:'center', alignContent:'center', alignItems:'center'}}><div className='accion'><SearchIcon></SearchIcon>Ver</div></div>
                         </div>))
@@ -198,95 +214,3 @@ function Historial({items}) {
 }
 
 export default Historial;
-
-
-//rfce
- {/* {Ensayos.map((ensayo, index) => (
-                    <div className='info' key={index}>
-                        <div className='informacion'>{ensayo.nombre}</div>
-                        <div className='informacion'>{ensayo.nombre}</div>
-                        <div className='informacion'>{ensayo.nombre}</div>
-                         </div>))} */}
-
-{/* <div className='informacion'>
-                    <div >
-                        <h5>Nombre</h5>
-                        <div className='info'>
-                            {Ensayos.map((ensayo, index)=>(
-                                <div key={index}>
-                                    {ensayo.nombre}
-                                </div>
-                            ))} 
-                        </div>
-                    </div>
-                    <div >
-                        <h5>Tema</h5>
-                        <div className='info'>
-                            {Ensayos.map((ensayo, index)=>(
-                                <div key={index}>
-                                    {ensayo.tema}
-                                </div>
-                            ))} 
-                        </div>
-                           
-                    </div>
-                    <div >
-                        <h5>Personalizado</h5> 
-                        <div className='info'>
-                            {Ensayos.map((ensayo, index)=>(
-                            <div key={index}>
-                                {ensayo.personalizado}
-                            </div>
-                            ))} 
-                        </div> 
-                                           
-                    </div>
-                    <div >
-                        <h5>Fecha</h5>
-                        <div className='info'>
-                            {Ensayos.map((ensayo, index)=>(
-                                <div key={index}>
-                                    {ensayo.fecha}
-                                </div>
-                            ))}  
-                        </div> 
-                                      
-                    </div>
-                    <div >
-                        <h5>Tiempo</h5>
-                        <div className='info'>
-                            {Ensayos.map((ensayo, index)=>(
-                                <div key={index}>
-                                    {ensayo.tiempo}
-                                </div>
-                            ))} 
-                        </div>
-                                             
-                    </div>
-                    <div >
-                        <h5>Puntaje</h5>
-                        <div className='info'>
-                            {Ensayos.map((ensayo, index)=>(
-                                <div key={index}>
-                                    {ensayo.puntaje}
-                                </div>
-                            ))} 
-                        </div>
-                                         
-                    </div>
-                    <div >
-                        <h5>N° preguntas</h5>
-                        <div className='info'>
-                            {Ensayos.map((ensayo, index)=>(
-                                <div key={index}>
-                                    {ensayo.preguntas}
-                                </div>
-                            ))}  
-                        </div>
-                                           
-                    </div>
-                    <div >
-                        <h5>Acciones</h5>                     
-                    </div>
-                </div> */}
-

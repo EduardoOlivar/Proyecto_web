@@ -304,7 +304,7 @@ function Menu() {
               {selectedButton === 'predeterminados' && (    
               <div className="container-ensayos">
                 
-                <NombreEnsayo
+                {/* <NombreEnsayo
                   temario="Eje general"
                   imagen={numeros}
                   urlEnsayo="Pregunta"
@@ -325,7 +325,7 @@ function Menu() {
        
                     </div>
                   )}
-                />
+                /> */}
                    
                 <NombreEnsayo
                   temario="Números"

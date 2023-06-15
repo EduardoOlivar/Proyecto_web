@@ -80,23 +80,37 @@ function CrearEnsayo() {
      });
   } 
   const mostrarData = (e) => {
-    e.preventDefault();
-    setFormData({ cantidadPreguntas, ensayoSelected });
-  
-    // Verificar si la información ya está guardada en el almacenamiento local
-    const formData = JSON.parse(localStorage.getItem('formData'));
-    if (formData && formData.cantidadPreguntas) {
-      // La información ya está disponible, redirigir a la URL deseada
-      window.location.href = "/Menu/EnsayoCustom";
-    } else {
-      // La información aún no está disponible, establecer una bandera y esperar
-      localStorage.setItem('dataReady', 'false');
-      // Aquí puedes mostrar algún indicador de carga para informar al usuario que la información se está procesando
-  
-      // Una vez que la información se haya guardado, establecer la bandera en true y redirigir
-      localStorage.setItem('dataReady', 'true');
-      window.location.href = "/Menu/EnsayoCustom";
-    }
+      e.preventDefault();
+      let seleccionados = 0;
+      if(Object.keys(ensayoSelected).length >1){
+        for(let i in ensayoSelected){
+          if(ensayoSelected[i].checked === true){
+            seleccionados++;
+          }}
+          if(cantidadPreguntas && seleccionados >1){
+            setFormData({ cantidadPreguntas, ensayoSelected });
+        
+            // Verificar si la información ya está guardada en el almacenamiento local
+            const formData = JSON.parse(localStorage.getItem('formData'));
+            if (formData && formData.cantidadPreguntas) {
+              // La información ya está disponible, redirigir a la URL deseada
+              window.location.href = "/Menu/EnsayoCustom";
+            } else {
+              // La información aún no está disponible, establecer una bandera y esperar
+              localStorage.setItem('dataReady', 'false');
+              // Aquí puedes mostrar algún indicador de carga para informar al usuario que la información se está procesando
+          
+              // Una vez que la información se haya guardado, establecer la bandera en true y redirigir
+              localStorage.setItem('dataReady', 'true');
+              window.location.href = "/Menu/EnsayoCustom";
+            }
+          }else{
+            alert("Debes seleccionar al menos dos tipos de ensayo, su tiempo y preguntas.")
+          }
+      }
+      else{
+        alert("Debes seleccionar al menos dos tipos de ensayo, su tiempo y preguntas.")
+      }   
   };
   
   return (
@@ -211,7 +225,7 @@ function CrearEnsayo() {
                     
                   </div>
                   
-                <div className="formulario1">
+                {/* <div className="formulario1">
 
                         <form className="form">
                             <p htmlFor="nombreEnsayo" className="mt-2">
@@ -229,7 +243,7 @@ function CrearEnsayo() {
                               </div>)}
                                   
                         </form>
-                  </div>
+                  </div> */}
                   
                   </div>
                   
@@ -310,9 +324,9 @@ function CrearEnsayo() {
             <button className="botonQ btn btn-outline-dark m-1 " onClick={mostrarData} style={{width:"20%", height:"50px"}}> 
                       Realizar
             </button>  
-            <button className="botonQ btn btn-warning m-1 " style={{width:"20%", height:"50px"}}> 
+            {/* <button className="botonQ btn btn-warning m-1 " style={{width:"20%", height:"50px"}}> 
                       Guardar
-            </button>  
+            </button>   */}
           </div>  
         </div>
       </div>

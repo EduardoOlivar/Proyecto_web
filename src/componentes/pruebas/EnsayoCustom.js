@@ -11,7 +11,7 @@ function EnsayoCustom() {
     const Apiurl = `http://127.0.0.1:8000/questions_alternative/?subject=`;
     const [ensayoSelected, setensayoSelected] = useState(JSON.parse(localStorage.getItem('formData')).ensayoSelected);
     const [post, setPost] = React.useState([]);
-    const [nombreEnsayo] = React.useState("Ensayo Custom");
+    const [nombreEnsayo] = React.useState("Ensayo Personalizado");
     const [iniciar, setIniciar] = React.useState(false);
     const [ensayosArray, setEnsayosArray] = React.useState([])
 
@@ -21,8 +21,6 @@ function EnsayoCustom() {
         const ensayosSeleccionados = [];
         const promesas = [];
         let checkBoxSeleccionados = 0;
-        
-    
         
           // recorremos el ensayoSelected
           for (let i in ensayoSelected) {
@@ -49,7 +47,6 @@ function EnsayoCustom() {
                     // concatenamos todos los datos del arreglo para que quede como 1 arreglo.
                     setPost([].concat(...ensayosSeleccionados)); 
                     setIniciar(true);
-                  
                     })
                     .catch((error) => {
                     console.log(error);
@@ -59,21 +56,28 @@ function EnsayoCustom() {
       }
       function filtrarArray(array){
         const subjects = {}; // Objeto para contar las ocurrencias de cada tema
-        const arrayFiltrada = []; // Array para almacenar los objetos filtrados
+        let arrayFiltrada = []; // Array para almacenar los objetos filtrados
         const formData = JSON.parse(localStorage.getItem('formData'));
         const cantidadPreguntas = parseInt(formData.cantidadPreguntas);
-        
-        const cantidadSubject = Math.round(cantidadPreguntas / Object.keys(ensayoSelected).length);
-     
-        array.forEach(item => {
-          const { subject } = item;
-          subjects[subject] = (subjects[subject] || 0) + 1; // Incrementar el contador para el tema actual
-          if (subjects[subject] <= cantidadSubject) {
-            arrayFiltrada.push(item); // Agregar el objeto al array filtrado
+        let ensayosSeleccionados = 0;
+        for(let i in ensayoSelected){
+          if(ensayoSelected[i].checked === true){
+            ensayosSeleccionados++;
           }
-        });
+        }
 
+        const cantidadSubject = Math.round(cantidadPreguntas / ensayosSeleccionados);
+
+        array.forEach(item => {
+            const { subject } = item;
+            subjects[subject] = (subjects[subject] || 0) + 1;// Incrementar el contador para el tema actual
+            if (subjects[subject] <= cantidadSubject) {
+              arrayFiltrada.push(item); // Agregar el objeto al array filtrado
+            } 
+        });
         
+        arrayFiltrada = arrayFiltrada.slice(0,cantidadPreguntas)
+       
         return shuffleArray(arrayFiltrada)
       }
       function shuffleArray(array) {
@@ -91,6 +95,7 @@ function EnsayoCustom() {
       useEffect(() => {
         const updatedEnsayosArray = [];
         for (let i in ensayoSelected) {
+          if(ensayoSelected[i].checked === true)
           updatedEnsayosArray.push(ensayoSelected[i].id);
         }
         setEnsayosArray(updatedEnsayosArray);
@@ -108,7 +113,6 @@ function EnsayoCustom() {
             name: nombreEnsayo,
             essay_ids: ensayosArray
           }) .then(response => {
-              console.log(response.data.id)
               localStorage.setItem('new_id', response.data.id);
           });
         }
