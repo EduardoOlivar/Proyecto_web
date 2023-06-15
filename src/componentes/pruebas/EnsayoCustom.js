@@ -10,6 +10,7 @@ function EnsayoCustom() {
     const urlPost= `http://localhost:8000/custom_essays/`;
     const Apiurl = `http://127.0.0.1:8000/questions_alternative/?subject=`;
     const [ensayoSelected, setensayoSelected] = useState(JSON.parse(localStorage.getItem('formData')).ensayoSelected);
+    const [current_questions] = useState(JSON.parse(localStorage.getItem('formData')).cantidadPreguntas);
     const [post, setPost] = React.useState([]);
     const [nombreEnsayo] = React.useState("Ensayo Personalizado");
     const [iniciar, setIniciar] = React.useState(false);
@@ -75,9 +76,8 @@ function EnsayoCustom() {
               arrayFiltrada.push(item); // Agregar el objeto al array filtrado
             } 
         });
+
         
-        arrayFiltrada = arrayFiltrada.slice(0,cantidadPreguntas)
-       
         return shuffleArray(arrayFiltrada)
       }
       function shuffleArray(array) {
@@ -111,9 +111,12 @@ function EnsayoCustom() {
             is_custom: true,
             user: essayId,
             name: nombreEnsayo,
-            essay_ids: ensayosArray
+            essay_ids: ensayosArray,
+            current_questions : current_questions
           }) .then(response => {
               localStorage.setItem('new_id', response.data.id);
+          }).catch(error => {
+            console.log(error)
           });
         }
       }, [ensayosArray]);

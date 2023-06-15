@@ -86,7 +86,7 @@ class LoginPro extends React.Component{
                     else if(error.response.data.errors.email[0] || error.response.data.password[0] === 'Este campo no puede estar en blanco.')
                 this.setState({
                     error : true,
-                    errorMsg : "Rellene todos los camhpos"
+                    errorMsg : "Rellene todos los campos"
                 })
                 }    
             else if(error.response.data.errors.error_de_campo){
@@ -122,7 +122,7 @@ class LoginPro extends React.Component{
                 <body className="cuerpoLogin">
                     <NavbarHome/> 
                     <form className="formulario" id="formularioL" >
-                        <h1 className="hero_register">Iniciar Sesión</h1>
+                        <h1 className='hero_register'><span>Iniciar</span> <span style={{ color: '#F0AD4E' }}>Sesión</span></h1>
                         <div className="contenedor ">
         
             

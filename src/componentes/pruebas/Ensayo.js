@@ -220,12 +220,15 @@ function Ensayo(props) {
         answer_ids: respuestaId, // [16,11,null,7,3]
         user_essay_id: new_id,
         time_essay: tiempoUser.toString()
+    
+
         //question_ids: preguntaId, [1,2,3,4,5]
       }, {
         headers: {
           Authorization: `Bearer ${token}`
         }
       });
+      console.log(props.ensayo.length)
       console.log(response.data);
     } catch (error) {
       console.log(error);

@@ -30,8 +30,11 @@ body {
 }
 .hero_register{
     text-align: center;
-    color: #1a2537;
+    color: #1a2537;;
     font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    
    
     
 }
@@ -83,7 +86,7 @@ input[type="password"]{
         width: 500px;
         margin-top: 75px;
         margin-bottom: 50px;
-        border-radius: 2%;
+        border-radius: 3px;
         padding: 32px;
     }
 

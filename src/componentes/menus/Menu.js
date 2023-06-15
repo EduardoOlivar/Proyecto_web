@@ -52,14 +52,14 @@ function Menu() {
   const [tourSteps, setTourSteps] = useState([
     {
       target: ".sidebar ul li:nth-of-type(1)",
-      content: "Creación de un ensayo personalizado, tú eliges como quieres practicar",
+      content: "En esta sección puedes realizar los ensayos predeterminados que entrega Pre-PAES.",
       placement: "right",
       offset: [0, 10],
       disableBeacon: true,
     },
     {
       target: ".sidebar ul li:nth-of-type(2)",
-      content: "Historial de ensayos realizados",
+      content: "Acá puedes crear de forma personalizada tus ensayos.",
       placement: "right",
       offset: [0, 10],
       disableBeacon: true,
@@ -67,8 +67,15 @@ function Menu() {
     
    
     {
-      target: ".categories .card:nth-of-type(1)",
-      content: "haz clic en Iniciar para emepezar un ensayo",
+      target: ".sidebar ul li:nth-of-type(3)",
+      content: "Historial de ensayos realizados, además podrás ver la evolución de tu progreso en el apartado de estadísticas",
+      disableBeacon: true,
+      placement: "right",
+      offset: [0, 10],
+    },
+    {
+      target: ".sidebar ul li:nth-of-type(5)",
+      content: "Puntajes de los últimos seleccionados en cada carrera.",
       disableBeacon: true,
       placement: "right",
       offset: [0, 10],
@@ -160,7 +167,7 @@ function Menu() {
         disableOverlayClose={true}
         disableCloseOnEsc={true}
         scrollDuration= {1000000000}
-        locale={{ close: 'Next' }}
+        locale={{ close: 'siguiente', back: 'anterior', last: 'finalizar'  }}
         styles={{
           options: {
             arrowColor: '#fff',
@@ -305,6 +312,8 @@ function Menu() {
               <div className="container-ensayos">
                 
                 {/* <NombreEnsayo
+                {/* 
+                <NombreEnsayo
                   temario="Eje general"
                   imagen={numeros}
                   urlEnsayo="Pregunta"
@@ -344,20 +353,7 @@ function Menu() {
                   urlEnsayo="PruebaAlgebra"
                   score="error"
                   puntosTotal="5"
-                  contentBody = {(
-                    <div>
-                      <h3>Ensayo Álgebra y Funciones</h3>
-                      <ul>
-                        <li> Tendrá a su disposición 20 minutos para contestar el ensayo, podrá navegar entre preguntas y/o omitirlas.</li>
-                      
-      
-                      </ul>
-                      
-      
-       
-       
-                    </div>
-                  )}
+                  contentBody="Tendrá a su disposición 20 minutos para contestar el ensayo, podrá navegar entre preguntas y/o omitirlas."
                   idEnsayo= {1}
                 />
       
@@ -367,15 +363,8 @@ function Menu() {
                   urlEnsayo="PruebaGeometria"
                   score="error"
                   puntosTotal="10"
-                  contentBody = {(
-                    <div>
-                      <h3>Ensayo Geometría</h3>
-                      <ul>
-                        <li> Tendrá a su disposición 20 minutos para contestar el ensayo, podrá navegar entre preguntas y/o omitirlas.</li>
-                      </ul>
-                    </div>
-                  )}
-                  idEnsayo= {4}
+                  contentBody="Tendrá a su disposición 20 minutos para contestar el ensayo, podrá navegar entre preguntas y/o omitirlas."
+                  idEnsayo= {3}
                 />
                 
       
@@ -385,11 +374,11 @@ function Menu() {
                   urlEnsayo="PruebaProbabilidades"
                   score="error"
                   puntosTotal="5"
-                  idEnsayo= {3}
-                  
+                  idEnsayo= {4}
+                  contentBody="Tendrá a su disposición 20 minutos para contestar el ensayo, podrá navegar entre preguntas y/o omitirlas."
                 />
                 
-                <div className="cardGame p-3 mb-2" onClick={handleGame}> </div> 
+                {/*<div className="cardGame p-3 mb-2" onClick={handleGame}> </div>*/} 
               </div>
               )}
               {selectedButton === 'personalizados' && (
