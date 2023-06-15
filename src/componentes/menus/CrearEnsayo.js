@@ -135,17 +135,17 @@ function CrearEnsayo() {
                       <input
                         className="form-check-input cantidadPreguntasInput"
                         type="radio"
-                        id="20"
+                        id="36"
                         onChange={handleCantidadPreguntasChange}
-                        name="20preguntas"
-                        value={"20"}
+                        name="36preguntas"
+                        value={"36"}
                       ></input>
                       <label className="form-check-label" htmlFor="20">
                       <ListIcon style={{color:"#a7a7a7", marginLeft:"10px", width:"30px", height:"30px", display:"flex",alignSelf:"center"}}/>
                       <div className="cantidadPreguntas">
                         
                         <label className="form-check-label" htmlFor="20">
-                          20</label>
+                          36</label>
                           <label className="form-check-label" htmlFor="20">
                           Preguntas</label>
                       </div>
@@ -154,7 +154,7 @@ function CrearEnsayo() {
                       <div className="cantidadPreguntas">
                         
                         <label className="form-check-label" htmlFor="20">
-                          40</label>
+                          72</label>
                           <label className="form-check-label" htmlFor="20">
                           Minutos</label>
                       </div>
@@ -165,17 +165,17 @@ function CrearEnsayo() {
                       <input
                         className="form-check-input cantidadPreguntasInput"
                         type="radio"
-                        id="16"
+                        id="24"
                         onChange={handleCantidadPreguntasChange}
-                        name="16preguntas"
-                        value={"16"}
+                        name="24preguntas"
+                        value={"24"}
                       ></input>
                       <label className="form-check-label" htmlFor="16">
                       <ListIcon style={{color:"#a7a7a7", marginLeft:"10px", width:"30px", height:"30px", display:"flex",alignSelf:"center"}}/>
                       <div className="cantidadPreguntas">
                         
                         <label className="form-check-label" htmlFor="16">
-                          16</label>
+                          24</label>
                           <label className="form-check-label" htmlFor="16">
                           Preguntas</label>
                       </div>
@@ -184,7 +184,7 @@ function CrearEnsayo() {
                       <div className="cantidadPreguntas">
                         
                         <label className="form-check-label" htmlFor="16">
-                          32</label>
+                          48</label>
                           <label className="form-check-label" htmlFor="16">
                           Minutos</label>
                       </div>

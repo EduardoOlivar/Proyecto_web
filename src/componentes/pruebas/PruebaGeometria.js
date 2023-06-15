@@ -29,7 +29,7 @@ function PruebaGeometria() {
   return (
     <div>
       <Ensayo
-        ensayo={shuffleArray(post)}
+        ensayo={shuffleArray(post).slice(0,10)}
         urlEnsayo="PruebaGeometria"
         titleEnsayo="Geometría"
         paragraphEnsayo="Matemática(M1)"

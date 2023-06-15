@@ -28,7 +28,7 @@ function PruebaAlgebra() {
   return (
     <div>
       <Ensayo
-        ensayo={shuffleArray(post)}
+        ensayo={shuffleArray(post).slice(0,10)}
         urlEnsayo="PruebaAlgebra"
         titleEnsayo="Álgebra y Funciones"
         paragraphEnsayo="Matemática(M1)"

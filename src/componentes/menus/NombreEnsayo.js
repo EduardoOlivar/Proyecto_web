@@ -27,7 +27,7 @@ function NombreEnsayo(props) {
         user: essayId,
         name: props.temario, 
         is_custom: false,
-        current_questions : 5
+        current_questions : 10
       }, {
         headers: {
           Authorization: `Bearer ${token}`
