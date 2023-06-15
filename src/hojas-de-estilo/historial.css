@@ -170,3 +170,16 @@ select.form-select:focus{
 
     outline: 0 none;
 }
+
+
+.busqueda{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+}
+
+.fallida{
+    margin:0;
+    justify-content: flex-start !important;
+    margin-left: 50px;
+}
