@@ -32,7 +32,7 @@ function PruebaNumeros() {
   return (
     <div>
       <Ensayo
-        ensayo={shuffleArray(post).slice(0, 5)}
+        ensayo={shuffleArray(post)}
         urlEnsayo="PruebaNumeros"
         titleEnsayo="Números"
         paragraphEnsayo="Matemática(M1)"

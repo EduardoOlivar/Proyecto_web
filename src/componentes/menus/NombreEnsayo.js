@@ -27,6 +27,7 @@ function NombreEnsayo(props) {
         user: essayId,
         name: props.temario, 
         is_custom: false,
+        current_questions : 5
       }, {
         headers: {
           Authorization: `Bearer ${token}`
@@ -80,7 +81,7 @@ function NombreEnsayo(props) {
         
         </Modal.Header>
         <Modal.Body  >
-        <h2>{props.contentTitulo}</h2>
+        <h2>{props.temario}</h2>
               
                 <p className="modal-bodyText">{props.contentBody}</p>
         

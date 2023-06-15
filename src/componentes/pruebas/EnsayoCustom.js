@@ -10,6 +10,7 @@ function EnsayoCustom() {
     const urlPost= `http://localhost:8000/custom_essays/`;
     const Apiurl = `http://127.0.0.1:8000/questions_alternative/?subject=`;
     const [ensayoSelected, setensayoSelected] = useState(JSON.parse(localStorage.getItem('formData')).ensayoSelected);
+    const [current_questions] = useState(JSON.parse(localStorage.getItem('formData')).cantidadPreguntas);
     const [post, setPost] = React.useState([]);
     const [nombreEnsayo] = React.useState("Ensayo Custom");
     const [iniciar, setIniciar] = React.useState(false);
@@ -58,12 +59,19 @@ function EnsayoCustom() {
             }      
       }
       function filtrarArray(array){
-        const subjects = {}; // Objeto para contar las ocurrencias de cada tema
-        const arrayFiltrada = []; // Array para almacenar los objetos filtrados
+        let subjects = {}; // Objeto para contar las ocurrencias de cada tema
+        let arrayFiltrada = []; // Array para almacenar los objetos filtrados
         const formData = JSON.parse(localStorage.getItem('formData'));
         const cantidadPreguntas = parseInt(formData.cantidadPreguntas);
         
-        const cantidadSubject = Math.round(cantidadPreguntas / Object.keys(ensayoSelected).length);
+        let ensayosSeleccionados = 0;
+        for(let i in ensayoSelected){
+          if(ensayoSelected[i].checked === true){
+            ensayosSeleccionados++;
+          }
+        }
+
+        const cantidadSubject = Math.round(cantidadPreguntas / ensayosSeleccionados);
      
         array.forEach(item => {
           const { subject } = item;
@@ -72,7 +80,9 @@ function EnsayoCustom() {
             arrayFiltrada.push(item); // Agregar el objeto al array filtrado
           }
         });
-
+         
+        arrayFiltrada = arrayFiltrada.slice(0, cantidadPreguntas);
+        console.log(shuffleArray(arrayFiltrada))
         
         return shuffleArray(arrayFiltrada)
       }
@@ -91,6 +101,7 @@ function EnsayoCustom() {
       useEffect(() => {
         const updatedEnsayosArray = [];
         for (let i in ensayoSelected) {
+          if(ensayoSelected[i].checked === true)
           updatedEnsayosArray.push(ensayoSelected[i].id);
         }
         setEnsayosArray(updatedEnsayosArray);
@@ -106,10 +117,13 @@ function EnsayoCustom() {
             is_custom: true,
             user: essayId,
             name: nombreEnsayo,
-            essay_ids: ensayosArray
+            essay_ids: ensayosArray,
+            current_questions : current_questions
           }) .then(response => {
               console.log(response.data.id)
               localStorage.setItem('new_id', response.data.id);
+          }).catch(error => {
+            console.log(error)
           });
         }
       }, [ensayosArray]);
