@@ -140,22 +140,22 @@ function CrearEnsayo() {
                         name="36preguntas"
                         value={"36"}
                       ></input>
-                      <label className="form-check-label" htmlFor="20">
+                      <label className="form-check-label" htmlFor="36">
                       <ListIcon style={{color:"#a7a7a7", marginLeft:"10px", width:"30px", height:"30px", display:"flex",alignSelf:"center"}}/>
                       <div className="cantidadPreguntas">
                         
-                        <label className="form-check-label" htmlFor="20">
+                        <label className="form-check-label" htmlFor="36">
                           36</label>
-                          <label className="form-check-label" htmlFor="20">
+                          <label className="form-check-label" htmlFor="36">
                           Preguntas</label>
                       </div>
                       <div className="separator"></div>
                       <AccessTimeIcon style={{color:"#a7a7a7", marginLeft:"10px", width:"30px", height:"30px",display:"flex",alignSelf:"center"}}/>
                       <div className="cantidadPreguntas">
                         
-                        <label className="form-check-label" htmlFor="20">
+                        <label className="form-check-label" htmlFor="36">
                           72</label>
-                          <label className="form-check-label" htmlFor="20">
+                          <label className="form-check-label" htmlFor="36">
                           Minutos</label>
                       </div>
                       </label>
@@ -170,22 +170,22 @@ function CrearEnsayo() {
                         name="24preguntas"
                         value={"24"}
                       ></input>
-                      <label className="form-check-label" htmlFor="16">
+                      <label className="form-check-label" htmlFor="24">
                       <ListIcon style={{color:"#a7a7a7", marginLeft:"10px", width:"30px", height:"30px", display:"flex",alignSelf:"center"}}/>
                       <div className="cantidadPreguntas">
                         
-                        <label className="form-check-label" htmlFor="16">
+                        <label className="form-check-label" htmlFor="24">
                           24</label>
-                          <label className="form-check-label" htmlFor="16">
+                          <label className="form-check-label" htmlFor="24">
                           Preguntas</label>
                       </div>
                       <div className="separator"></div>
                       <AccessTimeIcon style={{color:"#a7a7a7", marginLeft:"10px", width:"30px", height:"30px",display:"flex",alignSelf:"center"}}/>
                       <div className="cantidadPreguntas">
                         
-                        <label className="form-check-label" htmlFor="16">
+                        <label className="form-check-label" htmlFor="24">
                           48</label>
-                          <label className="form-check-label" htmlFor="16">
+                          <label className="form-check-label" htmlFor="24">
                           Minutos</label>
                       </div>
                       </label>
