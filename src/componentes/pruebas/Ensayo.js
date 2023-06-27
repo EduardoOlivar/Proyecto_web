@@ -433,27 +433,33 @@ function Ensayo(props) {
   */}
       
       <div className="contenedor-principal position-relative ">
-      <h3  className="titleEnsayo" style={{color:"#4e5457", fontWeight:"500",marginTop:"2rem"}}>{props.titleEnsayo}</h3>
+      <div className="row">
+        <div className="col ">
+          <h3  className="titleEnsayo" style={{color:"#4e5457", fontWeight:"500",marginTop:"2rem"}}>{props.titleEnsayo}</h3>
+        </div>
+        <div
+        className={`timer-container col-3-md m-3  ${isHidden ? 'hide' : ''}`}
+        onClick={handleClick}
+      >
+        {isHidden ? (
+          <AccessTimeIcon  fontSize="large" style={{color:"white"}}/>
+        ) : (
+          <h3 className="tiempo text-center mt-2">
+          {getFormatedTime(tiempoRestante)}
+        </h3>
+        )}
+      </div>
+      </div>
+      
       {preguntaActual  < (props.ensayo.length)  && (
         <div className="contenedor-pregunta">
           <div className="row ">
             <div className="col-md mt-3">
-              <h2>
+              <h3>
                 Pregunta {preguntaActual + 1} de {props.ensayo.length}
-              </h2>
+              </h3>
             </div>
-            <div
-      className={`timer-container col-7-md m-3  ${isHidden ? 'hide' : ''}`}
-      onClick={handleClick}
-    >
-      {isHidden ? (
-        <AccessTimeIcon  fontSize="large" style={{color:"white"}}/>
-      ) : (
-         <h3 className="tiempo text-center mt-2">
-        {getFormatedTime(tiempoRestante)}
-      </h3>
-      )}
-    </div>
+            
            
           </div>
           

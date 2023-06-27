@@ -195,7 +195,7 @@ function Historial({items}) {
                             <div className=''>{ensayo.name}</div>
                             <div className=''>{ensayo.puntaje}</div>
                             <div className=''>{ensayo.is_custom ? 'Si' : 'No' }</div>
-                            <div className=''>{fechaFormateada(ensayo.date)}</div>
+                            <div className=''>{ensayo.date}</div>
 
                             <div className=''>{ensayo.current_questions}</div>
                             <div className='' style={{display:'flex', justifyContent:'center', alignContent:'center', alignItems:'center'}}><div className='accion'><SearchIcon></SearchIcon>Ver</div></div>

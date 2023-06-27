@@ -1,4 +1,4 @@
-import { Line } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
@@ -9,7 +9,7 @@ import {
     CategoryScale,
     LinearScale,
     PointElement,
-    LineElement,
+    BarElement,
     Title,
     Tooltip,
     Legend,
@@ -21,7 +21,7 @@ ChartJS.register(
     CategoryScale,
     LinearScale,
     PointElement,
-    LineElement,
+    BarElement,
     Title,
     Tooltip,
     Legend,
@@ -55,41 +55,51 @@ export default function LinesChart() {
     }, []);
 
     // Filtrar los datos basados en el rango de fechas seleccionado
-    const filteredItems = items.filter(item => {
-        if (startDate && endDate) {
-            const itemDate = new Date(item.date);
-            return itemDate >= startDate && itemDate <= endDate;
-        }
-        return true; // Si no se ha seleccionado un rango, mostrar todos los datos
+
+
+  
+
+   // Filtrar los nombres que coinciden con las categorías y obtener sus puntuaciones
+   const matchingNames = [...new Set(items
+    .filter(item => {
+        const name = item.name.toLowerCase();
+        return name.includes("números") || name.includes("álgebra") || name.includes("geometría") || name.includes("probabilidad");
+    })
+    .map(item => item.name))];
+
+
+
+    const matchingScores = items
+    .filter(item => matchingNames.includes(item.name))
+    .map(item => item.puntaje);
+    
+
+    const categoryAverages = matchingNames.map(category => {
+        const categoryItems = items.filter(item => item.name === category);
+        const categoryScores = categoryItems.map(item => item.puntaje);
+        const filteredScores = categoryScores.filter(score => score > 100 && score <= 1000); // Filtrar puntajes mayores a 100 y menores o iguales a 1000
+        const sum = filteredScores.reduce((total, score) => total + score, 0);
+        const average = sum / filteredScores.length;
+        return average;
     });
-
-    const labels = filteredItems
-    .filter(item => item.puntaje > 100) // Filtrar puntajes mayores a 100
-    .map(item => item.date)
-    .reverse();
-
-
-    const puntaciones = filteredItems
-    .filter(item => item.puntaje > 100 && item.puntaje < 1000) // Filtrar puntajes mayores a 100
-    .map(item => item.puntaje)
-    .reverse();
-
-    const data = {
-        labels: labels,
+    const colors = ['RGBA(236, 180, 27, 0.5)', 'RGBA(255, 0, 0, 0.5)', 'RGBA(0, 255, 0, 0.5)', 'RGBA(0, 0, 255, 0.5)']; // Array de colores
+    const colorFuerte = ['rgb(236, 180, 27)', 'rgb(255, 0, 0)', 'rgb(0, 255, 0)', 'rgb(0, 0, 255)'];
+    console.log(categoryAverages)
+      const data = {
+        labels: matchingNames,
         datasets: [
-            {
-                label: 'Puntuación',
-                data:  puntaciones,
-                fill: true,
-                borderColor: 'rgb(236, 180, 27)',
-                pointRadius: 5,
-                pointBorderColor: 'rgb(236, 180, 27)',
-                pointBackgroundColor: 'rgb(236, 180, 27)',
-            }
+          {
+            label: 'Promedio',
+            data: categoryAverages,
+            backgroundColor: colors.slice(0, matchingNames.length), // Asignar colores diferentes a cada categoría
+            borderColor: colorFuerte.slice(0, matchingNames.length),
+            borderWidth: 1,
+          },
+          
         ],
-    };
+      };
 
-    const options = {
+      const options = {
         responsive : true,
         plugins:{
             legend : {
@@ -97,13 +107,14 @@ export default function LinesChart() {
             }
         },
         scales: {
-            y: {
-                min: 0,
-                max: 1000
+          y: {
+            beginAtZero: true,
+            ticks: {
+              stepSize: 100,
             },
-            x: {}
-        }
-    };
+          },
+        },
+      };
 
      // Obtener la fecha actual y la fecha anterior
      const currentDate = new Date();
@@ -150,9 +161,8 @@ export default function LinesChart() {
                 </div>
             */}
 
-
             {/* Gráfico de líneas */}
-            <Line data={data} options={options} className='grafico' />
+            <Bar data={data} options={options} className='grafico' />
         </div>
     );
 }
