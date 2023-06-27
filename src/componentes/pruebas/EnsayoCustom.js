@@ -77,7 +77,6 @@ function EnsayoCustom() {
             } 
         });
 
-        
         return shuffleArray(arrayFiltrada)
       }
       function shuffleArray(array) {
