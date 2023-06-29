@@ -49,7 +49,7 @@ function Navbar() {
                 className="nav-link active "
                 aria-current="page"
                 href="#"
-                onClick={() => (window.location.href = "/Menu",localStorage.removeItem("ensayo"),localStorage.removeItem("selectedAnswers"),localStorage.removeItem("preguntaActual"))}
+                onClick={() => (window.location.href = "/Menu",localStorage.removeItem("ensayo"),localStorage.removeItem("puntajeFinal"),localStorage.removeItem("puntuacion"),localStorage.removeItem("puntajeFinal"),localStorage.removeItem("puntajeFinal"),localStorage.removeItem("puntajeFinal"),localStorage.removeItem("puntajeFinal"),localStorage.removeItem("puntajeFinal"),localStorage.removeItem("selectedAnswers"),localStorage.removeItem("preguntaActual"),localStorage.removeItem("respuesta"),localStorage.removeItem("tituloPregunta"), localStorage.removeItem("tiempoRestante"))}
               >
                 Inicio
               </a>

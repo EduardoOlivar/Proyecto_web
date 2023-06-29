@@ -77,7 +77,7 @@ function Ensayo(props) {
   const textoDesdeDB = "Cuanto es [\\frac{1}{2}], y ademas [\\int_{0}^{\\infty} e^{-x^2} dx = \\frac{\\sqrt{\\pi}}{2}\]";
   const ecuacionRegex = /\[(.*?)\]/g; // Expresión regular para detectar partes de la cadena que contienen ecuaciones
   const [tiempoUsuario, setTiempoUsuario] = useState(0);
-
+  const [showPopup, setShowPopup] = useState(false);
 
 
   const [respuestaId, setRespuestaId] = useState([]);
@@ -205,6 +205,12 @@ function Ensayo(props) {
   }
   
   async function finalizarEnsayo(){
+    const allQuestionsAnswered = Object.keys(selectedAnswers).length === ensayo.length;
+  if (!allQuestionsAnswered) {
+    setShowPopup(true);
+  } else {
+    // Aquí va el código para manejar el envío del formulario cuando todas las preguntas han sido respondidas
+  
     setTiempoUsuario(getFormatedTime(props.ensayo.length * 60 * 2 - tiempoRestante));
   
     let tiempoUser=props.ensayo.length * 60 * 2 - tiempoRestante;
@@ -233,7 +239,7 @@ function Ensayo(props) {
     } catch (error) {
       console.log(error);
     }
-    
+  } 
   }
   function handleClickNav(j){
     setPreguntaActual(j);
@@ -528,6 +534,16 @@ function Ensayo(props) {
       <div className="contenedor-preguntaVolverTerminar  ">
         <button onClick={volverAlEnsayo} className="btnVolverTerminar btn btn-lg btn-warning">No, quiero volver</button>
         <button onClick={finalizarEnsayo}className="btnVolverTerminar btn btn-lg btn-dark">Si, quiero terminar el ensayo</button>
+      </div>
+    </div>
+    
+  )}
+  {showPopup && (
+    <div className="popup">
+      <div className="popup-content">
+        <h1 style={{fontWeight:"bold"}}>Ups!! </h1>
+        <p>Debe responder a todas las preguntas para terminar el ensayo.</p>
+        <button className="btn btn-lg btn-warning" onClick={() => setShowPopup(false)}>Cerrar</button>
       </div>
     </div>
   )}
