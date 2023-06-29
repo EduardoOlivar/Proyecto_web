@@ -6,8 +6,7 @@ import "../../hojas-de-estilo/historial.css"
 import moment from 'moment';
 import SearchIcon from '@mui/icons-material/Search';
 import { StraightenTwoTone } from '@mui/icons-material';
-
-
+import VerDatosHistorial from './VerDatosHistorial';
 
 function Historial({items}) {
 
@@ -18,6 +17,26 @@ function Historial({items}) {
     const [filtrarPor, setFiltrarPor] = React.useState(true);
     const [focusFiltrar, setFocusFiltrar] = React.useState(false)
     const itemsPorPagina = 4;
+    const [idVermas, setIdVerMas] = React.useState({})
+    const [verMasConfirmado, setVerMasConfirmado] = React.useState(false);
+
+
+    const verMas = (id, name, puntaje, date, cantidadPreguntas) =>{
+        setIdVerMas(
+            {   
+                id: id,
+                nombre:name,
+                puntaje:puntaje,
+                date:date,
+                cantidadPreguntas: cantidadPreguntas
+            }
+        )
+        setVerMasConfirmado(true);
+    }
+
+    function removeAccents(str) {
+        return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      }
 
     // funcion que busca por nombre y envia los datos al historial filtrados por nombre.
     const BusquedaNombre = () =>{
@@ -34,14 +53,16 @@ function Historial({items}) {
         }
             // creamos una variable y pasamos la busqueda a minusculas
             const minusculas = search.toLowerCase();
+
             const filtrado = items.filter(ensayo =>
-              ensayo.name.toLowerCase().includes(minusculas)
+                ensayo.name.toLowerCase().includes(minusculas)
             )
             
             if(selectFiltro){
                 FiltroSelect(filtrado);
             }
             // setBusquedaVacia(false);
+
             const indexInicio = paginaActual * itemsPorPagina;
             const itemsPagina = filtrado.slice(indexInicio, indexInicio + itemsPorPagina);
 
@@ -49,12 +70,15 @@ function Historial({items}) {
     }
 
     const FiltroSelect = (ensayo) =>{
+
+        // const filtradoSinTilde = ensayo.map(ensayo => ({
+        //     ...ensayo,
+        //     name:removeAccents(ensayo.name)
+        // })) 
         // ordena nombre ascendentemente.
-        if (selectFiltro === '1') {
-            return ensayo = ensayo.sort((a, b) => a.name.charAt(7).localeCompare(b.name.charAt(7)));
-          }
+       
           // ordena puntaje de menor a mayor
-          else if (selectFiltro === '2'){
+            if (selectFiltro === '2'){
             return ensayo = ensayo.sort((a, b) => a.puntaje - b.puntaje);
           }
           // ordena puntaje de mayor a menor
@@ -75,11 +99,11 @@ function Historial({items}) {
           }
           // ordena las preguntas de menor a mayor
           else if (selectFiltro === '6') {
-            return ensayo = ensayo.sort((a, b) => a.questions - b.questions);
+            return ensayo = ensayo.sort((a, b) => a.current_questions - b.current_questions);
           }
           // ordena preguntas de mayor a menor.
           else if (selectFiltro === '7') {
-            return ensayo = ensayo.sort((a, b) => b.questions - a.questions);
+            return ensayo = ensayo.sort((a, b) => b.current_questions - a.current_questions);
           }
     }
 
@@ -140,6 +164,19 @@ function Historial({items}) {
         return newFecha;
     }
     // console.log(busquedaVacia)
+
+    if(verMasConfirmado){
+        return(
+            <div>
+                <main className="contenedor-principal min-vh-100">
+                <VerDatosHistorial datosEnsayo = {idVermas} >  
+                    </VerDatosHistorial>
+                    <button className='botonQ btn btn-warning btn-lg m-2  ' onClick={() => setVerMasConfirmado(false)}>Retroceder</button> 
+                </main>   
+            </div>     
+                )
+    }
+
     return (
         <>
             <div className='contenedorPrincipal'>
@@ -198,7 +235,13 @@ function Historial({items}) {
                             <div className=''>{ensayo.date}</div>
 
                             <div className=''>{ensayo.current_questions}</div>
-                            <div className='' style={{display:'flex', justifyContent:'center', alignContent:'center', alignItems:'center'}}><div className='accion'><SearchIcon></SearchIcon>Ver</div></div>
+                            <div className='' onClick={() => verMas(ensayo.id, ensayo.name, ensayo.puntaje,ensayo.date, ensayo.current_questions)} style={{display:'flex', justifyContent:'center', alignContent:'center', alignItems:'center'}}>
+                                <div className='accion'>
+
+                                    <SearchIcon></SearchIcon>
+                                    Ver
+                                </div>
+                            </div>
                         </div>))
                     }
                     
