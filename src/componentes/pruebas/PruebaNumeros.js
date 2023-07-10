@@ -6,13 +6,14 @@ import "katex/dist/katex.min.css";
 import axios from "axios";
 import Ensayo from "./Ensayo";
 import { useState, useEffect } from "react";
+import { Apiurl } from "../../Services/apirest";
 
-const Apiurl = "http://127.0.0.1:8000/questions_alternative/?subject=numeros";
+const ApiUrl = Apiurl + "questions_alternative/?subject=numeros";
 function PruebaNumeros() {
   const [post, setPost] = React.useState(null);
 
   React.useEffect(() => {
-    axios.get(Apiurl).then((response) => {
+    axios.get(ApiUrl).then((response) => {
       setPost(response.data);
     });
   }, []);

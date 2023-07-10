@@ -4,10 +4,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Cookies from "universal-cookie";
 import TipsPAES from "./TipsPAES";
 import axios from "axios";
+import { Apiurl } from "../../Services/apirest";
 
 
 const cookies = new Cookies();
-const ApiurlGetIdEssayUser = "http://127.0.0.1:8000/custom_essays/";
+const ApiurlGetIdEssayUser = Apiurl + "custom_essays/";
 function NombreEnsayo(props) {
   const [showModal, setShowModal] = useState(false);
   const [essay_ids, setEssay_ids] = useState([]);

@@ -64,6 +64,14 @@
 .form-control{
     width: 100%;
     padding: 10px;
+  
+}
+
+td{
+  cursor: pointer;
+}
+textarea{
+  height: 150px;
 }
 
 .form{

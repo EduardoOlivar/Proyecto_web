@@ -16,6 +16,7 @@ import {
     Filler,
 } from 'chart.js';
 import { max } from 'moment';
+import { Apiurl } from '../../Services/apirest';
 
 ChartJS.register(
     CategoryScale,
@@ -36,7 +37,7 @@ export default function LinesChart() {
     const token = localStorage.getItem("token");
 
     useEffect(() => {
-        axios.get("http://127.0.0.1:8000/history/" + user_id, {
+        axios.get(Apiurl + "history/" + user_id, {
             headers: {
                 Authorization: `Bearer ${token}`
             }

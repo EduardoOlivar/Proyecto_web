@@ -206,7 +206,6 @@ function Historial({items}) {
                         defaultValue =""                     
                     >
                         { filtrarPor && !focusFiltrar && <option value="" >Filtrar por:</option>}
-                        <option className='optionFilter' value="1">Nombre</option>
                         <option className='optionFilter' value="2">Puntaje de menor a mayor</option>
                         <option className='optionFilter' value="3">Puntaje de mayor a menor</option>
                         <option className='optionFilter' value="4">Fechas mas recientes</option>

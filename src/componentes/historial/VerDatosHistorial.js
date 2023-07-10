@@ -10,6 +10,8 @@ import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import ExpandCircleDownIcon from "@mui/icons-material/ExpandCircleDown";
 import { red, green } from "@mui/material/colors";
 import "../../hojas-de-estilo/Pregunta.css";
+import { Apiurl } from '../../Services/apirest';
+
 function VerDatosHistorial(props) {
 
 
@@ -23,18 +25,23 @@ function VerDatosHistorial(props) {
     const [response, setResponse] = React.useState({});
     const [ensayo, setEnsayo] = React.useState([]);
     const [answered, setAnswered] = React.useState();
+    const [tituloPregunta, setTituloPregunta] = React.useState([]);
 
-      /*const preguntaCorrectaOrNot = (qna, j) => {
+
+      const preguntaCorrectaOrNot = (qna, j) => {
           if (qna.question === tituloPregunta[j]) {
             return { sx: { color: green[500] } };
           } else {
             return { sx: { color: red[500] } };
           }
-        };*/
+        };
+    
         
+
     const markCorrectOrNot = (qna, idx, j) => {
 
         if (qna.answer[idx].right === 1) {
+         
           return { sx: { color: green[500] } };
         } else {
           if (qna.answer[idx].answer_id === answered[j]) {
@@ -42,8 +49,12 @@ function VerDatosHistorial(props) {
           }
         }
       };
+    
+      
+
+
     useEffect(() => {
-        axios.get("http://127.0.0.1:8000/custom_essay_view/" + props.datosEnsayo.id+ "/" , {
+        axios.get(Apiurl + "custom_essay_view/" + props.datosEnsayo.id+ "/" , {
 
         })
         .then(res => {
@@ -56,7 +67,19 @@ function VerDatosHistorial(props) {
         .catch(error => {
             console.log(error);
         });
-      }, []);  
+      }, []); 
+      useEffect(() => {
+        const newTituloPregunta = [];
+        ensayo.forEach((item, j) => {
+          item.answer.forEach((respuesta, i) => {
+            if (respuesta.right === 1 && respuesta.answer_id === answered[j]) {
+              newTituloPregunta[j] = item.question;
+            }
+          });
+        });
+        setTituloPregunta(newTituloPregunta);
+        console.log(tituloPregunta)
+      }, [ensayo, answered]);
       
       
 return (
@@ -78,9 +101,7 @@ return (
                     <li>
                         <p>Realizado el {props.datosEnsayo.date}</p>
                     </li>
-                        <li>    
-                            <p >{response.score} respuestas correctas</p>
-                        </li>
+                 
                         <li>
                         
                             <p >{response.current_questions} ejercicios en total</p>
@@ -105,7 +126,7 @@ return (
                     <AccordionSummary
                       expandIcon={
                         <ExpandCircleDownIcon
-                        //   {...preguntaCorrectaOrNot(item, j)}
+                           {...preguntaCorrectaOrNot(item, j)}
                         />
                       }
                     >

@@ -4,6 +4,7 @@ import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../../hojas-de-estilo/estadisticas.css';
+import { Apiurl } from '../../Services/apirest';
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -36,7 +37,7 @@ export default function LinesChart() {
     const token = localStorage.getItem("token");
 
     useEffect(() => {
-        axios.get("http://127.0.0.1:8000/history/" + user_id, {
+        axios.get(Apiurl + "history/" + user_id, {
             headers: {
                 Authorization: `Bearer ${token}`
             }

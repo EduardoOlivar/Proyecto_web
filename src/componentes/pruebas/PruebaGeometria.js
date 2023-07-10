@@ -5,14 +5,15 @@ import "bootstrap/dist/js/bootstrap.bundle.js";
 import "katex/dist/katex.min.css";
 import axios from "axios";
 import Ensayo from "./Ensayo";
+import { Apiurl } from "../../Services/apirest";
 
 
-const Apiurl = "http://127.0.0.1:8000/questions_alternative/?subject=Geometria";
+const ApiUrl = Apiurl+"questions_alternative/?subject=Geometria";
 function PruebaGeometria() {
   const [post, setPost] = React.useState(null);
 
   React.useEffect(() => {
-    axios.get(Apiurl).then((response) => {
+    axios.get(ApiUrl).then((response) => {
       setPost(response.data);
     });
   }, []);

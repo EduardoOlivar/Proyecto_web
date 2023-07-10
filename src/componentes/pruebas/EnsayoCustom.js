@@ -4,11 +4,12 @@ import Ensayo from './Ensayo';
 import axios from 'axios';
 import { useEffect } from 'react';
 import Swal from 'sweetalert2';
+import {Apiurl} from '../../Services/apirest'
 function EnsayoCustom() {
 
 
-    const urlPost= `http://localhost:8000/custom_essays/`;
-    const Apiurl = `http://127.0.0.1:8000/questions_alternative/?subject=`;
+    const urlPost= Apiurl +`custom_essays/`;
+    const ApiUrl = Apiurl +`questions_alternative/?subject=`;
     const [ensayoSelected, setensayoSelected] = useState(JSON.parse(localStorage.getItem('formData')).ensayoSelected);
     const [current_questions] = useState(JSON.parse(localStorage.getItem('formData')).cantidadPreguntas);
     const [post, setPost] = React.useState([]);
@@ -28,7 +29,7 @@ function EnsayoCustom() {
             // revisamos si el checkbox es true, con esto sabemos cual fue marcada y cual no.
             if (ensayoSelected[i].checked === true) {
               // inicializamos la la url agregando name al final que sera (numeros,geometria...)
-                const ensayoUrl = `${Apiurl}${ensayoSelected[i].name}`;
+                const ensayoUrl = `${ApiUrl}${ensayoSelected[i].name}`;
                 checkBoxSeleccionados++; 
               // almacenamos las promesas en un arreglo, el cual son los datos de la api, aun no cargados.
               //las promesas pueden tener tres estados: pendiente (pending), resuelta (fulfilled) y rechazada (rejected).

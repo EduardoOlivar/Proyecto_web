@@ -3,6 +3,7 @@ import axios from 'axios';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../../hojas-de-estilo/estadisticas.css';
 import DashboardCard from './Dashboard';
+import { Apiurl } from '../../Services/apirest';
 
 export default function ResumenEstadisticas() {
     const [items, setHistorial] = useState([]);
@@ -12,14 +13,14 @@ export default function ResumenEstadisticas() {
     const token = localStorage.getItem("token");
 
     useEffect(() => {
-        axios.get("http://127.0.0.1:8000/history/" + user_id, {
+        axios.get(Apiurl + "history/" + user_id, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         })
         .then(res => {
             const historialArray = Object.values(res.data);
-            
+            console.log(historialArray);
             const historialFiltrado = historialArray.filter((dato) =>dato != null);
             setHistorial(historialFiltrado.reverse());
          

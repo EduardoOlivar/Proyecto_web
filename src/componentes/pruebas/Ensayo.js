@@ -25,9 +25,10 @@ import axios from "axios";
 import regression from 'regression';
 import { parse } from "@fortawesome/fontawesome-svg-core";
 import StarIcon from '@mui/icons-material/Star';
+import { Apiurl } from "../../Services/apirest";
 
 
-const UrlSubmitAnswers  = "http://127.0.0.1:8000/submit_answers/";
+const UrlSubmitAnswers  = Apiurl +"submit_answers/";
 
 const cookies = new Cookies();
 function Ensayo(props) {
@@ -346,7 +347,7 @@ function Ensayo(props) {
                   <button
                     onClick={() => (window.location.href = "/menu",localStorage.removeItem("ensayo"),localStorage.removeItem("puntajeFinal"),localStorage.removeItem("puntuacion"),localStorage.removeItem("puntajeFinal"),localStorage.removeItem("puntajeFinal"),localStorage.removeItem("puntajeFinal"),localStorage.removeItem("puntajeFinal"),localStorage.removeItem("puntajeFinal"),localStorage.removeItem("selectedAnswers"),localStorage.removeItem("preguntaActual"),localStorage.removeItem("respuesta"),localStorage.removeItem("tituloPregunta"), localStorage.removeItem("tiempoRestante") )}
                     type="button"
-                    className="botonQ btn btn-outline-dark btn-lg m-2"
+                    className="btn btn-outline-dark btn-lg m-2"
                     id="bot"
                   >
                     Continuar
@@ -460,10 +461,15 @@ function Ensayo(props) {
       {preguntaActual  < (props.ensayo.length)  && (
         <div className="contenedor-pregunta">
           <div className="row ">
-            <div className="col-md mt-3">
+            <div className="col-md-11 mt-3">
               <h3>
                 Pregunta {preguntaActual + 1} de {props.ensayo.length}
               </h3>
+            </div>
+            <div className="col-md-1">
+              <h6 style={{color:"rgb(78, 84, 87)"}}>
+                #{ensayo[preguntaActual].id}
+              </h6>
             </div>
             
            

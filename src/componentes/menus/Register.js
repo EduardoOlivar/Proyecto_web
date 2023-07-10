@@ -5,8 +5,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faKey, faEnvelope, faUser } from '@fortawesome/free-solid-svg-icons';
 import NavbarHome from '../navbar/NavbarHome';
 import axios from 'axios';
+import {Apiurl} from '../../Services/apirest'
 const tokenName = 'user_uaeh_token';
-const baseUrl="http://127.0.0.1:8000/api/";
+const baseUrl= Apiurl+"api/";
 
 class Register extends Component {
   state = {

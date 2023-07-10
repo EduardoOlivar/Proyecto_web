@@ -348,6 +348,7 @@
   top: 0;
   left: 0;
   width: 100%;
+ 
   height: 100%;
   background: rgba(0, 0, 0, 0.7);
   display: flex;
@@ -356,10 +357,52 @@
   z-index: 1000;
 }
 
+
 .popup-content {
-  background: white;
+  background: #F1F5F8;
   padding: 20px;
   border-radius: 5px;
   text-align: center;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.alternative-form {
+  margin-top: 20px;
+  width: 50%;
+}
+
+.alternative-form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+.true {
+ color: green !important;  /* Color de fondo verde pastel para Verdadera */
+}
+
+.false {
+  color: red !important; /* Color de fondo rojo pastel para Falsa */
+}
+
+.alternative-form textarea,
+.alternative-form select {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+.alternative-form .button-container {
+  margin-top: 20px;
+  text-align: right;
+}
+
+.alternative-form .btn {
+  margin-left: 10px;
 }
 
